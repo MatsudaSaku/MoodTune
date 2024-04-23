@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-04-23T04:44:50.758Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="1vsy-97ov-xkHfP7Z-Yi" version="24.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-23T04:46:48.300Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="Yd3FOorDb3dfi8VIg-O8" version="24.2.7" type="github">
   <diagram name="Page-1" id="74e2e168-ea6b-b213-b513-2b3c1d86103e">
     <mxGraphModel dx="1434" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="850" background="none" math="0" shadow="0">
       <root>
@@ -164,7 +164,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="IDSXPjZ3ct8S7cFOssJs-45" value="&lt;p style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;color: rgb(74, 74, 74); font-family: &amp;quot;Noto Sans JP&amp;quot;, &amp;quot;ヒラギノ角ゴ Pro W3&amp;quot;, &amp;quot;Hiragino Kaku Gothic Pro&amp;quot;, メイリオ, Meiryo, YuGothic, 游ゴシック, &amp;quot;ＭＳ Ｐゴシック&amp;quot;, &amp;quot;MS PGothic&amp;quot;, arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;業務や処理の流れ、&lt;/span&gt;データの流れを表現&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="IDSXPjZ3ct8S7cFOssJs-45" value="&lt;p style=&quot;&quot;&gt;&lt;span style=&quot;color: rgb(74, 74, 74); font-family: &amp;quot;Noto Sans JP&amp;quot;, &amp;quot;ヒラギノ角ゴ Pro W3&amp;quot;, &amp;quot;Hiragino Kaku Gothic Pro&amp;quot;, メイリオ, Meiryo, YuGothic, 游ゴシック, &amp;quot;ＭＳ Ｐゴシック&amp;quot;, &amp;quot;MS PGothic&amp;quot;, arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;業務や処理の流れ、&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;&quot;&gt;データの流れを表現&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="180" y="70" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="IDSXPjZ3ct8S7cFOssJs-46" value="&lt;span style=&quot;color: rgb(74, 74, 74); font-family: &amp;quot;Noto Sans JP&amp;quot;, &amp;quot;ヒラギノ角ゴ Pro W3&amp;quot;, &amp;quot;Hiragino Kaku Gothic Pro&amp;quot;, メイリオ, Meiryo, YuGothic, 游ゴシック, &amp;quot;ＭＳ Ｐゴシック&amp;quot;, &amp;quot;MS PGothic&amp;quot;, arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;開始・終了位置に配置&lt;/font&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -202,6 +202,9 @@
         </mxCell>
         <mxCell id="IDSXPjZ3ct8S7cFOssJs-57" value="繰り返し処理&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;開始と終了記号内にそれぞれ繰り返しの開始条件、終了条件を記述する&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="190" y="580" width="120" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="IDSXPjZ3ct8S7cFOssJs-58" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;凡例&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="30" width="160" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
