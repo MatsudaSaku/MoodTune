@@ -10,13 +10,9 @@ export default function RecommendList({ mood, genres }) {
     const [modalBackground, setModalBackground] = useState(null);
     const [gradientAngle, setGradientAngle] = useState(45);
     const [isLoading, setIsLoading] = useState(true);
-    //const accessToken = "ご自身のトークンを入力";
-    const accessToken =
-        "BQCMSlO--Ic6cHzBmLtl6LwkMOfXaBBJ2T3m1E4h38R4afFQ9-tJavvd671GLv0KeR9m3QCHnlufVfervjwa1dVwS3patnPzu87KxKKpksuLHBYmkLwQHUAlc9mfjZNufHXzx3Kf8EcLSNbh_RDezPI92qWmsmvTJZR6Juvh_sfB0ViDLQYw53qXEjYuQphzG7oG7lN74rCKs0r5iaZe8_8NJ0Y0cdHnhB3sGdEWVReofeG0L8l42nZv4eMXQ9ofLDO3GmwO6JCtS5WNdddC1ms_";
-    /*const searchParams = useSearchParams();
-    const mood = searchParams.get("mood");
-    const genre = searchParams.get("genre");
-*/
+
+    const accessToken = "ご自身のトークンを入力";
+
     let navigate = useNavigate();
 
     let url = `https://api.spotify.com/v1/recommendations?limit=12&seed_genres=${genres}`;
@@ -61,7 +57,7 @@ export default function RecommendList({ mood, genres }) {
     useEffect(() => {
         if (accessToken) {
             const fetchTracks = async () => {
-                setIsLoading(true); // データの取得前にローディング状態をtrueに設定
+                setIsLoading(true);
 
                 try {
                     const response = await fetch(url, {
@@ -73,7 +69,7 @@ export default function RecommendList({ mood, genres }) {
                     const data = await response.json();
                     setTracks(data.tracks);
 
-                    setIsLoading(false); // データの取得後にローディング状態をfalseに設定
+                    setIsLoading(false);
                 } catch (error) {
                     console.error("Error fetching tracks", error);
                 }
@@ -83,19 +79,18 @@ export default function RecommendList({ mood, genres }) {
         }
     }, [accessToken, url]);
 
-    // 角度を更新するための useEffect
     useEffect(() => {
         const intervalId = setInterval(() => {
             setGradientAngle((prevAngle) => (prevAngle + 2) % 360);
         }, 100);
 
-        return () => clearInterval(intervalId); // コンポーネントがアンマウントされた時にクリア
+        return () => clearInterval(intervalId);
     }, []);
 
     const openModal = (track) => {
         setActiveTrack(track);
         setShowModal(true);
-        setModalBackground(null); // モーダルを開くたびに背景色をリセット
+        setModalBackground(null);
     };
 
     if (isLoading) {
@@ -160,11 +155,10 @@ export default function RecommendList({ mood, genres }) {
                     >
                         {({ data, loading }) => {
                             if (!loading && data) {
-                                // グラデーション文字列を生成
                                 const gradient = `linear-gradient(${gradientAngle}deg, ${data.join(
                                     ","
                                 )})`;
-                                // 背景色をセット
+
                                 setModalBackground(gradient);
                             }
                             return null;

@@ -9,5 +9,3 @@ Route::get('/', function () {
 Route::get('/chatgpt', function () {
     return view('chatgpt');
 });
-
-//Route::post('/api/chat', [App\Http\Controllers\ChatController::class, 'sendMessage']);
