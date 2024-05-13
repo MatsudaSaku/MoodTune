@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
     }
 
     return (
-        <body>
+        <div>
             <header>
                 {/* FOT-UD角ゴ_ラージ Pr6N Adobe font */}
                 <script
@@ -103,6 +103,6 @@ export default function RootLayout({ children }) {
             <footer className={styles.footer}>
                 <p>Created by アプレンティス音楽隊</p>
             </footer>
-        </body>
+        </div>
     );
 }
