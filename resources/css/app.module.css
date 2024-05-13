@@ -19,6 +19,8 @@
 
 .navTitle {
     display: flex;
+    background-color: #fff;
+    border-style: none;
 }
 
 .navInner {

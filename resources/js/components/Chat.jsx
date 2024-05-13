@@ -1,6 +1,6 @@
-// Chat.js
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
+import styles from "../../css/chat.module.css";
 
 function Chat() {
     const [messageInput, setMessageInput] = useState("");
@@ -60,7 +60,6 @@ function Chat() {
             };
             const updatedHistory = [...messages, newMessage];
             setConversationHistory(updatedHistory);
-            //console.log("Current conversation history:", conversationHistory);
             updateChatDisplay(newMessage.content);
         } catch (error) {
             console.error("Error:", error);
@@ -83,14 +82,24 @@ function Chat() {
     };
 
     const updateChatDisplay = (message) => {
-        setChatDisplay([...chatDisplay, { message }]);
+        const messageElements = message
+            .split(/(?<=[。？！])/)
+            .map((line, index) => (
+                <React.Fragment key={index < message.length - 1 && <br />}>
+                    <div className="fadeInUp">{line}</div>
+                    <br />
+                </React.Fragment>
+            ));
+
+        setChatDisplay([...chatDisplay, { message: messageElements }]);
     };
 
     return (
         <Layout>
-            <div className="chat-container">
+            <div className={styles.chat_container}>
                 {chatDisplay.map((item, index) => (
                     <div
+                        className={styles.api_message}
                         key={index}
                         style={{
                             marginBottom: "10px",
@@ -102,15 +111,15 @@ function Chat() {
                     </div>
                 ))}
                 {isLoading && <div>Loading...</div>}
-                <form onSubmit={handleSubmit}>
+                <form className={styles.form} onSubmit={handleSubmit}>
                     <input
                         type="text"
                         value={messageInput}
                         onChange={handleInputChange}
                         placeholder="Type your message here..."
-                        className="chat-input"
+                        className={styles.chat_input}
                     />
-                    <button type="submit" className="chat-button">
+                    <button type="submit" className={styles.chat_button}>
                         Send
                     </button>
                 </form>

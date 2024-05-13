@@ -1,10 +1,8 @@
-// import { Inter } from "next/font/google";
 import styles from "../../css/app.module.css";
 import React, { useState } from "react";
-// const inter = Inter({ subsets: ["latin"] });
 import Chat from "./Chat";
-import Layout from "./Layout";
 import { MoodGenreList } from "./MoodGenreList";
+import { Journaling } from "./Journaling";
 
 export const metadata = {
     title: "Mood Tune",
@@ -15,6 +13,7 @@ export default function RootLayout({ children }) {
     const [isOpen, setIsOpen] = useState(false);
     const [showChat, setShowChat] = useState(false);
     const [showMusic, setShowMusic] = useState(false);
+    const [showJournaling, setShowJournaling] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -28,12 +27,20 @@ export default function RootLayout({ children }) {
         setShowMusic(true);
     };
 
+    const toggleJournaling = () => {
+        setShowJournaling(true);
+    };
+
     if (showChat) {
         return <Chat />;
     }
 
     if (showMusic) {
         return <MoodGenreList />;
+    }
+
+    if (showJournaling) {
+        return <Journaling />;
     }
 
     return (
@@ -61,7 +68,10 @@ export default function RootLayout({ children }) {
                 <div className={styles.navInner}>
                     {/* <div></div> 左端の空の要素 */}
                     <h1 className={styles.navTitle}>
-                        <a href="/" className={styles.navTitle}>
+                        <button
+                            onClick={toggleJournaling}
+                            className={styles.navTitle}
+                        >
                             <img
                                 src={"/logo_dev2.png"}
                                 width={250}
@@ -69,7 +79,7 @@ export default function RootLayout({ children }) {
                                 alt="Icon"
                                 className="plusIcon"
                             />
-                        </a>
+                        </button>
                     </h1>
                     <div className={styles.toggleWrapper}>
                         <button className={styles.toggle} onClick={toggleMenu}>
@@ -77,10 +87,12 @@ export default function RootLayout({ children }) {
                         </button>
                         {isOpen && (
                             <div className="menu">
+                                <button onClick={toggleJournaling}>
+                                    Journaling
+                                </button>
                                 <button onClick={toggleChat}>Chat</button>
                                 <button onClick={toggleMusic}>Music</button>
-                                <a href="/services">Services</a>
-                                <a href="/contact">Contact</a>
+                                <a href="/contact">Log out</a>
                             </div>
                         )}
                     </div>
