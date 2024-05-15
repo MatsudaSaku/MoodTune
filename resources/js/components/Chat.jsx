@@ -85,7 +85,7 @@ function Chat() {
         const messageElements = message
             .split(/(?<=[。？！])/)
             .map((line, index) => (
-                <React.Fragment key={index < message.length - 1 && <br />}>
+                <React.Fragment key={index}>
                     <div className="fadeInUp">{line}</div>
                     <br />
                 </React.Fragment>

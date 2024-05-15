@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 
-class ChatController extends Controller
+class AnalysisController extends Controller
 {
 
-    public function sendMessage(Request $request)
+    public function analysisMessage(Request $request)
     {
+        
         $userMessage = ['role' => 'user', 'content' => $request->input('message')];
         $messages[] = $userMessage;
 
