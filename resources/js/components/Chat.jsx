@@ -111,19 +111,19 @@ function Chat() {
                     </div>
                 ))}
                 {isLoading && <div>Loading...</div>}
-                <form className={styles.form} onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        value={messageInput}
-                        onChange={handleInputChange}
-                        placeholder="Type your message here..."
-                        className={styles.chat_input}
-                    />
-                    <button type="submit" className={styles.chat_button}>
-                        Send
-                    </button>
-                </form>
             </div>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    value={messageInput}
+                    onChange={handleInputChange}
+                    placeholder="Type your message here..."
+                    className={styles.chat_input}
+                />
+                <button type="submit" className={styles.chat_button}>
+                    Send
+                </button>
+            </form>
         </Layout>
     );
 }

@@ -1,6 +1,6 @@
 import Layout from "./Layout";
 import styles from "../../css/journaling.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function Journaling() {
     const [messageInput, setMessageInput] = useState("");
@@ -9,6 +9,22 @@ export function Journaling() {
     const [isLoading, setIsLoading] = useState(false);
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
+    const [backgroundImage, setBackgroundImage] = useState("");
+    const [animationClass, setAnimationClass] = useState("");
+
+    useEffect(() => {
+        if (backgroundImage) {
+            setAnimationClass("fadeInUpAnimation");
+            const timer = setTimeout(() => {
+                setAnimationClass("");
+            }, 500);
+            return () => clearTimeout(timer);
+        }
+    }, [backgroundImage]);
+
+    const handleBackgroundChange = (event) => {
+        setBackgroundImage(event.target.value);
+    };
 
     const updateChatDisplay = (message) => {
         const messageElements = message
@@ -74,7 +90,14 @@ export function Journaling() {
 
     return (
         <Layout>
-            <div className={styles.journaling_container}>
+            <div
+                className={`${styles.journaling_container} ${animationClass}`}
+                style={{
+                    backgroundImage: backgroundImage,
+                    backgroundSize: "cover",
+                }}
+            >
+                <div className="background-overlay"></div>
                 <div className={styles.form_container}>
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <input
@@ -82,23 +105,42 @@ export function Journaling() {
                             name="title"
                             value={title}
                             onChange={handleInputChange}
-                            placeholder="Type your title"
-                            className={styles.jounaling_title}
+                            placeholder="TITLE"
+                            className={styles.journaling_title}
                         />
-                        <input
+                        <textarea
                             type="text"
                             name="text"
                             value={text}
                             onChange={handleInputChange}
-                            placeholder="Type jounaling"
-                            className={styles.jounaling_text}
+                            placeholder="気持ちのままに書いてみてください"
+                            className={styles.journaling_text}
                         />
-                        <button type="submit" className={styles.save_button}>
-                            保存して解析
-                        </button>
+                        <div className={styles.button_container}>
+                            <button
+                                type="submit"
+                                className={styles.save_button}
+                            >
+                                保存して解析
+                            </button>
+                            <button
+                                type="submit"
+                                className={styles.analysis_button}
+                            >
+                                気分解析のみ
+                            </button>
+                        </div>
                     </form>
                 </div>
                 <button className={styles.history}>履歴</button>
+                <select
+                    className={styles.select_background}
+                    onChange={handleBackgroundChange}
+                >
+                    <option value="">シンプル</option>
+                    <option value="url('/background1.jpg')">opera</option>
+                    <option value="url('/background2.jpg')">空</option>
+                </select>
             </div>
         </Layout>
     );

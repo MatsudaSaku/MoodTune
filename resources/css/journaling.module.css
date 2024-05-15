@@ -1,42 +1,111 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .journaling_container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow-y: auto; /* 垂直方向のスクロールを有効にする */
-    width: 100%; /* コンテナの幅を調整 */
-    border: 1px solid #ccc; /* 境界線で視覚的に区別 */
+    height: 87vh;
+    width: 100%;
+    animation: fadeInUp 0.8s ease-out forwards;
+    position: relative;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .form_container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    min-height: 100vh;
 }
 
 .form {
-    width: 90%;
-    max-width: 500px;
     display: flex;
     flex-direction: column;
-    margin: auto;
+    align-items: center;
+    width: 280%;
+    padding: 20px;
+}
+.journaling_title {
+    height: 40px;
 }
 
 .journaling_title,
 .journaling_text {
-    width: 50%;
-    margin: auto;
-    padding: 20px;
+    width: 500px;
+    margin: 30px 0;
+    font-size: large;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+    border: none;
 }
 
-.save_button:hover {
-    background-color: #0056b3;
+.journaling_text {
+    height: 500px;
+    resize: none;
+}
+
+.journaling_title::placeholder {
+    text-align: center;
+}
+
+.journaling_text::placeholder {
+    text-align: center;
+    padding: 50px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.save_button,
+.analysis_button {
+    padding: 10px 20px;
+    margin: 20px;
+    opacity: 0.5;
+}
+
+.save_button:hover,
+.analysis_button:hover {
+    background-color: #aff3be;
+    opacity: 1;
 }
 
 .history {
     position: fixed;
     bottom: 70px;
     right: 10%;
+}
+
+.select_background {
+    position: fixed;
+    bottom: 72px;
+    right: 19%;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeInUpAnimation {
+    animation: fadeInUp 0.5s ease-out forwards;
 }
