@@ -6,11 +6,14 @@ import RecommendList from "./RecommendList";
 import styles from "../../css/app.module.css";
 import Layout from "./Layout";
 import { BrowserRouter as Router } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function MoodGenreList() {
     const [selectedMood, setSelectedMood] = useState("");
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [showResults, setShowResults] = useState(false);
+    const navigate = useNavigate();
+
     let genresQueryParam = "";
 
     const handleDecisionClick = () => {
@@ -21,6 +24,9 @@ export function MoodGenreList() {
     };
 
     if (showResults) {
+        /*navigate("/recommend", {
+            state: { mood: selectedMood, genres: selectedGenres },
+        });*/
         return (
             <Layout>
                 <RecommendList mood={selectedMood} genres={selectedGenres} />

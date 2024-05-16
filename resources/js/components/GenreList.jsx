@@ -184,4 +184,3 @@ export function GenreList({ onGenreSelect }) {
         </div>
     );
 }
-//return <h1>genreList</h1>;
