@@ -4,6 +4,8 @@ import styles from "../../css/journaling.module.css";
 import { useState, useEffect } from "react";
 import "../../css/modal.css";
 import "../../css/loading_Modal.css";
+import RecommendList from "./RecommendList";
+import { useNavigate } from "react-router-dom";
 
 export function Journaling() {
     const [messageInput, setMessageInput] = useState("");
@@ -22,7 +24,9 @@ export function Journaling() {
     const [modalMessage, setModalMessage] = useState("");
     const [selectedMood, setSelectedMood] = useState("");
     const [selectedGenres, setSelectedGenres] = useState([]);
-    const [showResults, setShowResults] = useState(false);
+    const [showRecommend, setShowRecommend] = useState(true);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         sendJournalingMessage();
@@ -84,14 +88,20 @@ export function Journaling() {
             );
         }
 
-        const getMessage = () => {
-            if (message) return message;
-            if (scores.joy > 50) return "あなたはとても楽しんでいます！";
-            if (scores.sadness > 50) return "あなたは悲しんでいます。";
-            if (scores.anxiety > 50) return "あなたは不安を感じています。";
-            if (scores.excitement > 50) return "あなたは興奮しています！";
-            return "感情のバランスが取れています。";
-        };
+        const mood = scores.anxiety - scores.excitement;
+        if (mood <= -80) {
+            setSelectedMood("うれしい");
+        } else {
+            setSelectedMood("元気");
+        }
+
+        const genres = scores.sadness - scores.joy;
+
+        if (genres <= -80) {
+            setSelectedGenres("rock");
+        } else {
+            setSelectedGenres("pop");
+        }
 
         return (
             <div className="modal">
@@ -99,15 +109,28 @@ export function Journaling() {
                     <span className="close" onClick={handleCloseModal}>
                         &times;
                     </span>
-                    <h2>解析結果</h2>
+                    <h2>あなたの気分は…</h2>
                     <p>興奮: {scores.excitement}</p>
                     <p>不安: {scores.anxiety}</p>
                     <p>悲しみ: {scores.sadness}</p>
                     <p>楽しみ: {scores.joy}</p>
-                    <p>あなたにおススメの音楽は{getMessage()}です。</p>
+                    <h3>という解析をしました！</h3>
+                    <button className="recommend" onClick={handleClick}>
+                        今のあなたにおススメの音楽は　「{selectedMood}、
+                        {selectedGenres}
+                        　」です。
+                    </button>
                 </div>
             </div>
         );
+    };
+
+    const handleClick = () => {
+        setIsModalOpen(false);
+        setShowRecommend(false);
+        /*navigate("/recommend", {
+            state: { mood: selectedMood, genres: selectedGenres },
+        });*/
     };
 
     const LoadingModal = ({ isOpen }) => {
@@ -128,7 +151,7 @@ export function Journaling() {
         setEmotionScores(scores);
         setIsModalOpen(true);
 
-        const messageElements = message
+        /*const messageElements = message
             .split(/(?<=[。？！])/)
             .map((line, index) => (
                 <React.Fragment key={index}>
@@ -136,6 +159,8 @@ export function Journaling() {
                     <br />
                 </React.Fragment>
             ));
+
+        setChatDisplay([...chatDisplay, { message: messageElements }]);*/
     };
 
     const sendJournalingMessage = async () => {
@@ -242,82 +267,86 @@ export function Journaling() {
 
     return (
         <Layout>
-            <div
-                className={`${styles.journaling_container} ${animationClass}`}
-                style={{
-                    backgroundImage: backgroundImage,
-                    backgroundSize: "cover",
-                }}
-            >
-                <div className="background-overlay"></div>
-                <div className={styles.form_container}>
-                    <form className={styles.form} onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            name="title"
-                            value={title}
-                            onChange={handleInputChange}
-                            placeholder={placeholder_Title}
-                            className={styles.journaling_title}
-                            onFocus={handleFocus_title}
-                            onBlur={handleBlur}
-                        />
-                        <textarea
-                            type="text"
-                            name="text"
-                            value={text}
-                            onChange={handleInputChange}
-                            placeholder={placeholder_Text}
-                            className={styles.journaling_text}
-                            onFocus={handleFocus_text}
-                            onBlur={handleBlur}
-                        />
-                        <div className={styles.button_container}>
-                            <button
-                                type="submit"
-                                className={styles.save_button}
-                            >
-                                保存して解析
-                            </button>
-                            <button
-                                type="submit"
-                                className={styles.analysis_button}
-                            >
-                                気分解析のみ
-                            </button>
-                        </div>
-                    </form>
-                    {chatDisplay.map((item, index) => (
-                        <div
-                            className={styles.api_message}
-                            key={index}
-                            style={{
-                                marginBottom: "10px",
-                                padding: "5px",
-                                borderBottom: "1px solid #ccc",
-                            }}
-                        >
-                            {item.message}
-                        </div>
-                    ))}
-                </div>
-                <button className={styles.history}>履歴</button>
-                <select
-                    className={styles.select_background}
-                    onChange={handleBackgroundChange}
+            {showRecommend ? (
+                <div
+                    className={`${styles.journaling_container} ${animationClass}`}
+                    style={{
+                        backgroundImage: backgroundImage,
+                        backgroundSize: "cover",
+                    }}
                 >
-                    <option value="">シンプル</option>
-                    <option value="url('/background1.jpg')">opera</option>
-                    <option value="url('/background2.jpg')">空</option>
-                </select>
-                <Modal
-                    isOpen={isModalOpen}
-                    onClose={handleCloseModal}
-                    scores={emotionScores}
-                    message={modalMessage}
-                />
-                <LoadingModal isOpen={isLoading} />
-            </div>
+                    <div className="background-overlay"></div>
+                    <div className={styles.form_container}>
+                        <form className={styles.form} onSubmit={handleSubmit}>
+                            <input
+                                type="text"
+                                name="title"
+                                value={title}
+                                onChange={handleInputChange}
+                                placeholder={placeholder_Title}
+                                className={styles.journaling_title}
+                                onFocus={handleFocus_title}
+                                onBlur={handleBlur}
+                            />
+                            <textarea
+                                type="text"
+                                name="text"
+                                value={text}
+                                onChange={handleInputChange}
+                                placeholder={placeholder_Text}
+                                className={styles.journaling_text}
+                                onFocus={handleFocus_text}
+                                onBlur={handleBlur}
+                            />
+                            <div className={styles.button_container}>
+                                <button
+                                    type="submit"
+                                    className={styles.save_button}
+                                >
+                                    保存して解析
+                                </button>
+                                <button
+                                    type="submit"
+                                    className={styles.analysis_button}
+                                >
+                                    気分解析のみ
+                                </button>
+                            </div>
+                        </form>
+                        {chatDisplay.map((item, index) => (
+                            <div
+                                className={styles.api_message}
+                                key={index}
+                                style={{
+                                    marginBottom: "10px",
+                                    padding: "5px",
+                                    borderBottom: "1px solid #ccc",
+                                }}
+                            >
+                                {item.message}
+                            </div>
+                        ))}
+                    </div>
+                    <button className={styles.history}>履歴</button>
+                    <select
+                        className={styles.select_background}
+                        onChange={handleBackgroundChange}
+                    >
+                        <option value="">シンプル</option>
+                        <option value="url('/background1.jpg')">opera</option>
+                        <option value="url('/background2.jpg')">空</option>
+                    </select>
+                    <Modal
+                        isOpen={isModalOpen}
+                        onClose={handleCloseModal}
+                        scores={emotionScores}
+                        message={modalMessage}
+                    />
+                    <LoadingModal isOpen={isLoading} />
+                </div>
+            ) : (
+                <RecommendList mood={selectedMood} genres={selectedGenres} />
+            )}
         </Layout>
     );
 }

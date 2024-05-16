@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../css/recommendList.module.css";
 import Color, { Palette } from "color-thief-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import Layout from "./Layout";
 
 export default function RecommendList({ mood, genres }) {
     const [tracks, setTracks] = useState([]);
@@ -10,10 +11,20 @@ export default function RecommendList({ mood, genres }) {
     const [modalBackground, setModalBackground] = useState(null);
     const [gradientAngle, setGradientAngle] = useState(45);
     const [isLoading, setIsLoading] = useState(true);
+    const location = useLocation();
+    //const { mood = "", genres = [] } = location.state || {};
 
-    const accessToken = "ご自身のトークンを入力";
+    const accessToken =
+        "BQDhA5KxdnMlRkqE3PpN6ee3DpJQnR1BAHDlHI23BwEyRHeTBqfaFhs3LvGmCFjfmx7sK3fTXWhT38CR5Z9B5CE-ANiGJTVL7NGoBW9R4yMrmwjvtjuC6Rd1dNW4X_GVboUbfuSVc9dZ1LR8JsQEpuXPuv9EP6tqSFB_-OKfLHDrxDfII0IXwZdo1mv1n1PcBN7zl9jtxy1_OOlq2rPWJbarASw7DdgutUXevbebGKUPiTXcqBe85nc1U5blGSLdzBxgrt_0JZqLdk-p-b0kpLrU";
 
     let navigate = useNavigate();
+
+    /*useEffect(() => {
+        if (!location.state) {
+            // location.state が存在しない場合（リロード時など）、トップページにリダイレクト
+            navigate("/", { replace: true });
+        }
+    }, [location, navigate]);*/
 
     let url = `https://api.spotify.com/v1/recommendations?limit=12&seed_genres=${genres}`;
 
