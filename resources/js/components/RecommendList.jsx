@@ -15,7 +15,7 @@ export default function RecommendList({ mood, genres }) {
     //const { mood = "", genres = [] } = location.state || {};
 
     const accessToken =
-        "BQDhA5KxdnMlRkqE3PpN6ee3DpJQnR1BAHDlHI23BwEyRHeTBqfaFhs3LvGmCFjfmx7sK3fTXWhT38CR5Z9B5CE-ANiGJTVL7NGoBW9R4yMrmwjvtjuC6Rd1dNW4X_GVboUbfuSVc9dZ1LR8JsQEpuXPuv9EP6tqSFB_-OKfLHDrxDfII0IXwZdo1mv1n1PcBN7zl9jtxy1_OOlq2rPWJbarASw7DdgutUXevbebGKUPiTXcqBe85nc1U5blGSLdzBxgrt_0JZqLdk-p-b0kpLrU";
+        "BQDj9KVhIOzTiLCa31r1TmNUhtOcgU-vgAx1cNcJQiW9zmU_eyQ0K8izvOHIimpZ9FYkHfcuCRhYzn3qeR5z2kYDM_QKkQvzx_BDGPf9V2mfe72gDID5vuYKpKY6YQDttuaY6T6G9l5D-MtkJEKiffrvGqBYfYaJjBiAlFSKuw8wQQI8JL0Gh7GA0TX5SnvYIqyYNRxfJWHwF_Oz0bq4q6tnrP4xNbv1VJKJNagimmy1J-XaOVgiNIRiGjYMJVPz4W8yGFinon44PSN9b2ij6pcE";
 
     let navigate = useNavigate();
 
