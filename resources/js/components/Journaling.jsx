@@ -69,6 +69,17 @@ export function Journaling() {
         setEmotionScores(null);
         resetScores();
         setModalMessage("");
+        setPlaceholder_Text("気持ちのままに書いてみてください");
+        setPlaceholder_Title("No Title");
+    };
+
+    const handleCloseModal2 = () => {
+        setIsModalOpen(false);
+        setEmotionScores(null);
+        resetScores();
+        setModalMessage("");
+        setPlaceholder_Text("今の気持ちすべて書き出せましたか？");
+        setPlaceholder_Title("No Title");
     };
 
     const Modal = ({ isOpen, onClose, scores, message }) => {
@@ -106,7 +117,7 @@ export function Journaling() {
         return (
             <div className="modal">
                 <div className="modal-content">
-                    <span className="close" onClick={handleCloseModal}>
+                    <span className="close" onClick={handleCloseModal2}>
                         &times;
                     </span>
                     <h2>あなたの気分は…</h2>
@@ -233,6 +244,7 @@ export function Journaling() {
         setConversationHistory(updatedHistory);
         await sendMessageToAPI(updatedHistory);
         setText("");
+        setTitle("");
     };
 
     const handleInputChange = (event) => {
