@@ -41,5 +41,13 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div id="app"></div>
+
+    <script>
+        const spotifyAccessToken = "{{ session('spotify_access_token') }}";
+        if (spotifyAccessToken) {
+            sessionStorage.setItem('spotify_access_token', spotifyAccessToken);
+        }
+    </script>
+
     </body>
 </html>

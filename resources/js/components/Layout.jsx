@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Chat from "./Chat";
 import { MoodGenreList } from "./MoodGenreList";
 import { Journaling } from "./Journaling";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const metadata = {
     title: "Mood Tune",
@@ -14,6 +16,7 @@ export default function RootLayout({ children }) {
     const [showChat, setShowChat] = useState(false);
     const [showMusic, setShowMusic] = useState(false);
     const [showJournaling, setShowJournaling] = useState(false);
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -29,6 +32,15 @@ export default function RootLayout({ children }) {
 
     const toggleJournaling = () => {
         setShowJournaling(true);
+    };
+
+    const toggleLogout = async () => {
+        try {
+            await axios.post("/logout");
+            navigate("/");
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
     };
 
     if (showChat) {
@@ -92,7 +104,7 @@ export default function RootLayout({ children }) {
                                 </button>
                                 <button onClick={toggleChat}>Chat</button>
                                 <button onClick={toggleMusic}>Music</button>
-                                <a href="/contact">Log out</a>
+                                <button onClick={toggleLogout}>Log out</button>
                             </div>
                         )}
                     </div>
