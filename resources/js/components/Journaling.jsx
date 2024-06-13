@@ -8,7 +8,6 @@ import RecommendList from "./RecommendList";
 import { useNavigate } from "react-router-dom";
 
 export function Journaling() {
-    const [messageInput, setMessageInput] = useState("");
     const [conversationHistory, setConversationHistory] = useState([]);
     const [chatDisplay, setChatDisplay] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -25,8 +24,15 @@ export function Journaling() {
     const [selectedMood, setSelectedMood] = useState("");
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [showRecommend, setShowRecommend] = useState(true);
+    const [isConversationHistoryUpdated, setIsConversationHistoryUpdated] =
+        useState(false);
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        if (isConversationHistoryUpdated) {
+            sendJournalingMessage();
+            setIsConversationHistoryUpdated(false);
+        }
+    }, [isConversationHistoryUpdated]);
 
     useEffect(() => {
         sendJournalingMessage();
@@ -71,6 +77,8 @@ export function Journaling() {
         setModalMessage("");
         setPlaceholder_Text("気持ちのままに書いてみてください");
         setPlaceholder_Title("No Title");
+        setConversationHistory([]);
+        setIsConversationHistoryUpdated(true);
     };
 
     const handleCloseModal2 = () => {
@@ -80,6 +88,8 @@ export function Journaling() {
         setModalMessage("");
         setPlaceholder_Text("今の気持ちすべて書き出せましたか？");
         setPlaceholder_Title("No Title");
+        setConversationHistory([]);
+        setIsConversationHistoryUpdated(true);
     };
 
     const Modal = ({ isOpen, onClose, scores, message }) => {
@@ -89,7 +99,7 @@ export function Journaling() {
             return (
                 <div className="modal">
                     <div className="modal-content">
-                        <span className="close" onClick={onClose}>
+                        <span className="close" onClick={handleCloseModal}>
                             &times;
                         </span>
                         <h2>申し訳ありません！</h2>
@@ -97,21 +107,6 @@ export function Journaling() {
                     </div>
                 </div>
             );
-        }
-
-        const mood = scores.anxiety - scores.excitement;
-        if (mood <= -80) {
-            setSelectedMood("うれしい");
-        } else {
-            setSelectedMood("元気");
-        }
-
-        const genres = scores.sadness - scores.joy;
-
-        if (genres <= -80) {
-            setSelectedGenres("rock");
-        } else {
-            setSelectedGenres("pop");
         }
 
         return (
@@ -139,9 +134,6 @@ export function Journaling() {
     const handleClick = () => {
         setIsModalOpen(false);
         setShowRecommend(false);
-        /*navigate("/recommend", {
-            state: { mood: selectedMood, genres: selectedGenres },
-        });*/
     };
 
     const LoadingModal = ({ isOpen }) => {
@@ -160,18 +152,23 @@ export function Journaling() {
     const updateChatDisplay = (message) => {
         const scores = parseEmotionScores(message);
         setEmotionScores(scores);
+
+        const mood = scores.anxiety - scores.excitement;
+        if (mood <= -80) {
+            setSelectedMood("うれしい");
+        } else {
+            setSelectedMood("元気");
+        }
+
+        const genres = scores.sadness - scores.joy;
+
+        if (genres <= -80) {
+            setSelectedGenres("rock");
+        } else {
+            setSelectedGenres("pop");
+        }
+
         setIsModalOpen(true);
-
-        /*const messageElements = message
-            .split(/(?<=[。？！])/)
-            .map((line, index) => (
-                <React.Fragment key={index}>
-                    <div className="fadeInUp">{line}</div>
-                    <br />
-                </React.Fragment>
-            ));
-
-        setChatDisplay([...chatDisplay, { message: messageElements }]);*/
     };
 
     const sendJournalingMessage = async () => {
@@ -236,7 +233,6 @@ export function Journaling() {
         if (text.trim() === "") {
             setModalMessage("申し訳ありません！解析できなかったようです…");
             setIsModalOpen(true);
-            console.error("User input is empty.");
             return;
         }
         const userMessage = { role: "user", content: text };
