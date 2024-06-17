@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 export function Journaling() {
     const [conversationHistory, setConversationHistory] = useState([]);
-    const [chatDisplay, setChatDisplay] = useState([]);
+    const [chatDisplay] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [title, setTitle] = useState("");
-    const [text, setText] = useState("");
+    const [content, setContent] = useState("");
     const [placeholder_Text, setPlaceholder_Text] =
         useState("気持ちのままに書いてみてください");
     const [placeholder_Title, setPlaceholder_Title] = useState("No Title");
@@ -36,6 +36,17 @@ export function Journaling() {
 
     useEffect(() => {
         sendJournalingMessage();
+        const spotifyAccessToken = sessionStorage.getItem(
+            "spotify_access_token"
+        );
+        const laravelToken = sessionStorage.getItem("token");
+
+        if (spotifyAccessToken) {
+            console.log("Spotify Access Token:", spotifyAccessToken);
+        }
+        if (laravelToken) {
+            console.log("Laravel Token:", laravelToken);
+        }
     }, []);
 
     useEffect(() => {
@@ -57,7 +68,8 @@ export function Journaling() {
     };
 
     const parseEmotionScores = (responseText) => {
-        const regex = /興奮: (\d+) 不安: (\d+) 悲しみ: (\d+) 楽しみ: (\d+)/;
+        const regex =
+            /興奮:\s*(\d+)\s*.*?\s*不安:\s*(\d+)\s*.*?\s*悲しみ:\s*(\d+)\s*.*?\s*楽しみ:\s*(\d+)/;
         const match = responseText.match(regex);
         if (match) {
             return {
@@ -92,7 +104,7 @@ export function Journaling() {
         setIsConversationHistoryUpdated(true);
     };
 
-    const Modal = ({ isOpen, onClose, scores, message }) => {
+    const Modal = ({ isOpen, scores, message }) => {
         if (!isOpen) return null;
 
         if (!scores || message) {
@@ -151,6 +163,12 @@ export function Journaling() {
 
     const updateChatDisplay = (message) => {
         const scores = parseEmotionScores(message);
+
+        if (!scores) {
+            setIsModalOpen(true);
+            return;
+        }
+
         setEmotionScores(scores);
 
         const mood = scores.anxiety - scores.excitement;
@@ -197,11 +215,12 @@ export function Journaling() {
             const validMessages = messages.filter(
                 (msg) => msg.content !== null && msg.content !== undefined
             );
-
+            //const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
             const response = await fetch("/api/journaling", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    //Authorization: `Bearer ${apiKey}`,
                 },
                 body: JSON.stringify({ messages: validMessages }),
             });
@@ -228,27 +247,65 @@ export function Journaling() {
         }
     };
 
-    const handleSubmit = async (event) => {
+    const handleSaveAnalyze = async (event) => {
         event.preventDefault();
-        if (text.trim() === "") {
+        if (content.trim() === "") {
             setModalMessage("申し訳ありません！解析できなかったようです…");
             setIsModalOpen(true);
             return;
         }
-        const userMessage = { role: "user", content: text };
+        const userMessage = { role: "user", content: content };
+        const updatedHistory = [...conversationHistory, userMessage];
+        setConversationHistory(updatedHistory);
+        await saveJournaling(title, content);
+        await sendMessageToAPI(updatedHistory);
+        setContent("");
+        setTitle("");
+    };
+
+    const handleAnalyzeOnly = async (event) => {
+        event.preventDefault();
+        if (content.trim() === "") {
+            setModalMessage("申し訳ありません！解析できなかったようです…");
+            setIsModalOpen(true);
+            return;
+        }
+        const userMessage = { role: "user", content: content };
         const updatedHistory = [...conversationHistory, userMessage];
         setConversationHistory(updatedHistory);
         await sendMessageToAPI(updatedHistory);
-        setText("");
+        setContent("");
         setTitle("");
+    };
+
+    const saveJournaling = async (title, content) => {
+        try {
+            const token = sessionStorage.getItem("token");
+            console.log("Token:", token);
+            const response = await fetch("/api/saveJournaling", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ title, content }),
+            });
+
+            if (!response.ok) {
+                throw new Error("レスポンス取得失敗");
+            }
+            console.log("レスポンス取得成功");
+        } catch (error) {
+            console.error("saveJournaling失敗:", error);
+        }
     };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         if (name === "title") {
             setTitle(value);
-        } else if (name === "text") {
-            setText(value);
+        } else if (name === "content") {
+            setContent(value);
         }
     };
 
@@ -261,7 +318,7 @@ export function Journaling() {
     };
 
     const handleBlur = () => {
-        if (text === "") {
+        if (content === "") {
             setPlaceholder_Text("気持ちのままに書いてみてください");
         }
         if (title === "") {
@@ -285,7 +342,7 @@ export function Journaling() {
                 >
                     <div className="background-overlay"></div>
                     <div className={styles.form_container}>
-                        <form className={styles.form} onSubmit={handleSubmit}>
+                        <form className={styles.form}>
                             <input
                                 type="text"
                                 name="title"
@@ -298,8 +355,8 @@ export function Journaling() {
                             />
                             <textarea
                                 type="text"
-                                name="text"
-                                value={text}
+                                name="content"
+                                value={content}
                                 onChange={handleInputChange}
                                 placeholder={placeholder_Text}
                                 className={styles.journaling_text}
@@ -308,14 +365,16 @@ export function Journaling() {
                             />
                             <div className={styles.button_container}>
                                 <button
-                                    type="submit"
+                                    type="button"
                                     className={styles.save_button}
+                                    onClick={handleSaveAnalyze}
                                 >
                                     保存して解析
                                 </button>
                                 <button
-                                    type="submit"
+                                    type="button"
                                     className={styles.analysis_button}
+                                    onClick={handleAnalyzeOnly}
                                 >
                                     気分解析のみ
                                 </button>
@@ -335,7 +394,9 @@ export function Journaling() {
                             </div>
                         ))}
                     </div>
-                    <button className={styles.history}>履歴</button>
+                    <select className={styles.history}>
+                        <option>履歴</option>
+                    </select>
                     <select
                         className={styles.select_background}
                         onChange={handleBackgroundChange}

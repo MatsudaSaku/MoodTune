@@ -47,6 +47,10 @@
         if (spotifyAccessToken) {
             sessionStorage.setItem('spotify_access_token', spotifyAccessToken);
         }
+        const laravelToken = "{{ session('token') }}";
+        if (laravelToken) {
+            sessionStorage.setItem('token', laravelToken);
+        }
     </script>
 
     </body>

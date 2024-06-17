@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Log;
 
 class ChatController extends Controller
 {
@@ -14,8 +14,11 @@ class ChatController extends Controller
         $userMessage = ['role' => 'user', 'content' => $request->input('message')];
         $messages[] = $userMessage;
 
+        $apiKey = env('OPENAI_API_KEY');
+        Log::info('API Key: ' . $apiKey);
+
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+            'Authorization' => 'Bearer ' . $apiKey,
             'Content-Type' => 'application/json'
 
         ])->post('https://api.openai.com/v1/chat/completions', [
