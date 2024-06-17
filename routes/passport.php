@@ -8,7 +8,7 @@ use Laravel\Passport\Http\Controllers\ScopeController;
 use Laravel\Passport\Http\Controllers\TransientTokenController;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 
-Route::group(['middleware' => ['web', 'auth']], function () {
+Route::group(['middleware' => ['api','auth']], function () {
     Route::get('/oauth/authorize', [AuthorizationController::class, 'authorize'])->name('passport.authorizations.authorize');
     Route::post('/oauth/authorize', [AuthorizationController::class, 'approve'])->name('passport.authorizations.approve');
     Route::delete('/oauth/authorize', [AuthorizationController::class, 'deny'])->name('passport.authorizations.deny');
