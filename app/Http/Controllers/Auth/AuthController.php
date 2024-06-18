@@ -45,6 +45,8 @@ class AuthController extends Controller
             Log::info('Before Auth::login: ', ['user' => $user]);
             Auth::login($user, true);
 
+            $userId = $user->id;
+            Log::info('User ID ', [$userId]);
             $tokenResult = $user->createToken('Laravel Token');
             $token = $tokenResult->accessToken;
             
@@ -53,16 +55,14 @@ class AuthController extends Controller
 
             session(['spotify_access_token' => $spotifyUser->token]);
 
-            //$token = $user->createToken('Laravel Token')->plainTextToken;
             $tokenResult = $user->createToken('Laravel Token');
             $token = $tokenResult->accessToken;
-            //$plainTextToken = $tokenResult->plainTextToken ?? null;
 
 
             return redirect('/Top')->with([
                 'access_token' => $spotifyUser->token,
                 'token' => $token,
-                //'plain_text_token' => $plainTextToken,
+                'user_id' => $userId,
             ]);
 
 

@@ -46,4 +46,21 @@ class JournalingController extends Controller
             return response()->json(["error" => $e->getMessage()], 500);
         }
     }
+
+    public function show($id)
+    {
+        $journaling = Journaling::find($id);
+        if ($journaling) {
+            return response()->json($journaling);
+        } else {
+            return response()->json(['message' => 'Journaling not found'], 404);
+        }
+    }
+
+    public function index()
+    {
+        $userId = Auth::id();
+        $journalings = Journaling::where('user_id', $userId)->get(['id', 'title', 'created_at']);
+        return response()->json($journalings);
+    }
 }

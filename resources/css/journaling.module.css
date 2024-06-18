@@ -97,12 +97,15 @@ body {
     position: fixed;
     bottom: 50px;
     right: 10%;
+    width: 200px;
+    text-align: right;
 }
 
 .select_background {
     position: fixed;
     bottom: 52px;
-    right: 19%;
+    right: 25%;
+    text-align: right;
 }
 
 @keyframes fadeInUp {
