@@ -6,9 +6,6 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\JournalingController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\AnalysisController;
-//Route::get('/auth/spotify/redirect', [AuthController::class, 'redirectToSpotify'])->name('spotify.redirect');
-//Route::get('/api/callback', [AuthController::class, 'handleSpotifyCallback'])->name('spotify.callback');
-//Route::get('/callback', [AuthController::class, 'handleSpotifyCallback'])->name('spotify.callback');
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -33,8 +30,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/logout', [AuthController::class, 'logout']);
 
-//Route::post('/saveJournaling',[JournalingController::class, 'store']);
-
 Route::middleware('auth:api')->group(function () {
     Route::post('/saveJournaling', [JournalingController::class, 'store']);
+    Route::get('/showJournaling/{id}', [JournalingController::class, 'show']);
+    Route::get('/showJournaling', [JournalingController::class, 'index']);
 });

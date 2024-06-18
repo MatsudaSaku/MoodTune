@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import styles from "../../css/chat.module.css";
+//import "../../css/modal.css";
 
 function Chat() {
     const [messageInput, setMessageInput] = useState("");
@@ -95,6 +96,19 @@ function Chat() {
         setChatDisplay([...chatDisplay, { message: messageElements }]);
     };
 
+    /*const LoadingModal = ({ isOpen }) => {
+        if (!isOpen) return null;
+
+        return (
+            <div className="modal_loading">
+                <div className="modal_content_loading">
+                    <div className="loader"></div>
+                    <h2>解析中...</h2>
+                </div>
+            </div>
+        );
+    };*/
+
     return (
         <Layout>
             <div className={styles.chat_container}>
@@ -113,6 +127,7 @@ function Chat() {
                 ))}
                 {isLoading && <div>Loading...</div>}
             </div>
+
             <form className={styles.form} onSubmit={handleSubmit}>
                 <input
                     type="text"

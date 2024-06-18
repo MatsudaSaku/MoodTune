@@ -51,6 +51,10 @@
         if (laravelToken) {
             sessionStorage.setItem('token', laravelToken);
         }
+        const userId = "{{ session('user_id')}}";
+        if (userId){
+            sessionStorage.setItem('user_id', userId);
+        }
     </script>
 
     </body>

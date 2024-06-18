@@ -11,6 +11,7 @@ export function Journaling() {
     const [conversationHistory, setConversationHistory] = useState([]);
     const [chatDisplay] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingHistory, setIsLoadingHistory] = useState(false);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [placeholder_Text, setPlaceholder_Text] =
@@ -26,6 +27,13 @@ export function Journaling() {
     const [showRecommend, setShowRecommend] = useState(true);
     const [isConversationHistoryUpdated, setIsConversationHistoryUpdated] =
         useState(false);
+    const [journalingTitles, setJournalingTitles] = useState([]);
+    const [selectedJournalingContent, setSelectedJournalingContent] =
+        useState("");
+    const [isTitleModalOpen, setIsTitleModalOpen] = useState(false);
+    const [selectedJournalingTitle, setSelectedJournalingTitle] = useState("");
+    const [selectedJournalingCreatedAt, setSelectedJournalingCreatedAt] =
+        useState("");
 
     useEffect(() => {
         if (isConversationHistoryUpdated) {
@@ -40,6 +48,7 @@ export function Journaling() {
             "spotify_access_token"
         );
         const laravelToken = sessionStorage.getItem("token");
+        const userId = sessionStorage.getItem("user_id");
 
         if (spotifyAccessToken) {
             console.log("Spotify Access Token:", spotifyAccessToken);
@@ -47,6 +56,10 @@ export function Journaling() {
         if (laravelToken) {
             console.log("Laravel Token:", laravelToken);
         }
+        if (userId) {
+            console.log("User ID:", userId);
+        }
+        handleHistoryClick();
     }, []);
 
     useEffect(() => {
@@ -161,6 +174,19 @@ export function Journaling() {
         );
     };
 
+    const LoadingModalHistory = ({ isOpen }) => {
+        if (!isOpen) return null;
+
+        return (
+            <div className="modal_loading">
+                <div className="modal_content_loading">
+                    <div className="loader"></div>
+                    <h2>ジャーナルを表示します...</h2>
+                </div>
+            </div>
+        );
+    };
+
     const updateChatDisplay = (message) => {
         const scores = parseEmotionScores(message);
 
@@ -215,12 +241,14 @@ export function Journaling() {
             const validMessages = messages.filter(
                 (msg) => msg.content !== null && msg.content !== undefined
             );
-            //const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+
             const response = await fetch("/api/journaling", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    //Authorization: `Bearer ${apiKey}`,
+                    "Cache-Control": "no-cache, no-store, must-revalidate",
+                    Pragma: "no-cache",
+                    Expires: "0",
                 },
                 body: JSON.stringify({ messages: validMessages }),
             });
@@ -261,6 +289,8 @@ export function Journaling() {
         await sendMessageToAPI(updatedHistory);
         setContent("");
         setTitle("");
+        handleFocus_title();
+        handleFocus_text();
     };
 
     const handleAnalyzeOnly = async (event) => {
@@ -276,6 +306,8 @@ export function Journaling() {
         await sendMessageToAPI(updatedHistory);
         setContent("");
         setTitle("");
+        handleFocus_title();
+        handleFocus_text();
     };
 
     const saveJournaling = async (title, content) => {
@@ -298,6 +330,110 @@ export function Journaling() {
         } catch (error) {
             console.error("saveJournaling失敗:", error);
         }
+    };
+
+    const fetchJournalingTitles = async () => {
+        try {
+            const token = sessionStorage.getItem("token");
+
+            const response = await fetch(`/api/showJournaling`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error("Failed to fetch journaling titles");
+            }
+
+            const data = await response.json();
+            setJournalingTitles(data);
+        } catch (error) {
+            console.error("Error fetching journaling titles:", error);
+        }
+    };
+
+    const fetchJournalingContent = async (id) => {
+        try {
+            const token = sessionStorage.getItem("token");
+            const response = await fetch(`/api/showJournaling/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error("Failed to fetch journaling content");
+            }
+            handleFocus_title();
+            handleFocus_text();
+
+            const data = await response.json();
+            setSelectedJournalingContent(data.content);
+            setSelectedJournalingTitle(data.title);
+            setSelectedJournalingCreatedAt(data.created_at);
+            setIsTitleModalOpen(true);
+        } catch (error) {
+            console.error("Error fetching journaling content:", error);
+        } finally {
+            setIsLoadingHistory(false);
+        }
+    };
+
+    const handleHistoryClick = () => {
+        fetchJournalingTitles();
+    };
+
+    const handleTitleChange = (event) => {
+        const journalingId = event.target.value;
+        if (journalingId) {
+            setIsLoadingHistory(true);
+            fetchJournalingContent(journalingId);
+        }
+    };
+
+    const truncateTitle = (title, maxLength) => {
+        if (title.length > maxLength) {
+            return title.substring(0, maxLength) + "...";
+        }
+        return title;
+    };
+
+    const handleCloseModal3 = () => {
+        setIsTitleModalOpen(false);
+        setPlaceholder_Text("気持ちのままに書いてみてください");
+        setPlaceholder_Title("No Title");
+    };
+
+    const convertNewlinesToBreaks = (text) => {
+        return text.split("\n").map((item, index) => (
+            <React.Fragment key={index}>
+                {item}
+                <br />
+            </React.Fragment>
+        ));
+    };
+
+    const TitleModal = ({ isOpen, onClose, content, createdAt, title }) => {
+        if (!isOpen) return null;
+        return (
+            <div className="titlemodal">
+                <div className="titlemodal-content">
+                    <span className="close" onClick={handleCloseModal3}>
+                        &times;
+                    </span>
+                    <p>{title}</p>
+                    <p>
+                        {new Date(createdAt).toLocaleDateString("ja-JP", {
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit",
+                        })}
+                    </p>
+                    <div className="content">
+                        {convertNewlinesToBreaks(content)}
+                    </div>
+                </div>
+            </div>
+        );
     };
 
     const handleInputChange = (event) => {
@@ -394,8 +530,24 @@ export function Journaling() {
                             </div>
                         ))}
                     </div>
-                    <select className={styles.history}>
-                        <option>履歴</option>
+                    <select
+                        className={styles.history}
+                        onClick={handleHistoryClick}
+                        onChange={handleTitleChange}
+                    >
+                        <option value="">Journaling History</option>
+                        {journalingTitles.map((journaling) => (
+                            <option key={journaling.id} value={journaling.id}>
+                                {truncateTitle(journaling.title, 7)} |{" "}
+                                {new Date(
+                                    journaling.created_at
+                                ).toLocaleDateString("ja-JP", {
+                                    year: "numeric",
+                                    month: "2-digit",
+                                    day: "2-digit",
+                                })}
+                            </option>
+                        ))}
                     </select>
                     <select
                         className={styles.select_background}
@@ -412,6 +564,14 @@ export function Journaling() {
                         message={modalMessage}
                     />
                     <LoadingModal isOpen={isLoading} />
+                    <LoadingModalHistory isOpen={isLoadingHistory} />
+                    <TitleModal
+                        isOpen={isTitleModalOpen}
+                        onClose={() => setIsTitleModalOpen(false)}
+                        content={selectedJournalingContent}
+                        createdAt={selectedJournalingCreatedAt}
+                        title={selectedJournalingTitle}
+                    />
                 </div>
             ) : (
                 <RecommendList mood={selectedMood} genres={selectedGenres} />
