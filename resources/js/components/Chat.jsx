@@ -42,10 +42,12 @@ function Chat() {
     const sendMessageToAPI = async (messages) => {
         setIsLoading(true);
         try {
+		const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const response = await fetch("/api/chat", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+			"X-CSRF-TOKEN": csrfToken,
                 },
                 body: JSON.stringify({ messages }),
             });
@@ -129,7 +131,8 @@ function Chat() {
             </div>
 
             <form className={styles.form} onSubmit={handleSubmit}>
-                <input
+                @csrf 
+		<input
                     type="text"
                     value={messageInput}
                     onChange={handleInputChange}

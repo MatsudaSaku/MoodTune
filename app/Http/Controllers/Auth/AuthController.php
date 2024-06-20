@@ -49,11 +49,13 @@ class AuthController extends Controller
             Log::info('User ID ', [$userId]);
             $tokenResult = $user->createToken('Laravel Token');
             $token = $tokenResult->accessToken;
-            
+            Log::info('Generated Laravel Token: ' . $token);
             Log::info('User authenticated: ' . Auth::check());
             Log::info('Authenticated User: ', ['user' => Auth::user()]);
 
-            session(['spotify_access_token' => $spotifyUser->token]);
+            session(['spotify_access_token' => $spotifyUser->token,
+			'token' => $tokenResult->accessToken,
+           		'user_id' => $user->id]);
 
             $tokenResult = $user->createToken('Laravel Token');
             $token = $tokenResult->accessToken;

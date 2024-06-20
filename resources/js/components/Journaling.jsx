@@ -479,6 +479,7 @@ export function Journaling() {
                     <div className="background-overlay"></div>
                     <div className={styles.form_container}>
                         <form className={styles.form}>
+			@csrf
                             <input
                                 type="text"
                                 name="title"
@@ -536,7 +537,8 @@ export function Journaling() {
                         onChange={handleTitleChange}
                     >
                         <option value="">Journaling History</option>
-                        {journalingTitles.map((journaling) => (
+			{journalingTitles && journalingTitles.length > 0 && 
+                        journalingTitles.map((journaling) => (
                             <option key={journaling.id} value={journaling.id}>
                                 {truncateTitle(journaling.title, 7)} |{" "}
                                 {new Date(
