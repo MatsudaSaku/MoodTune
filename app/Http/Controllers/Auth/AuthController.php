@@ -57,15 +57,14 @@ class AuthController extends Controller
 			'token' => $tokenResult->accessToken,
            		'user_id' => $user->id]);
 
-            $tokenResult = $user->createToken('Laravel Token');
             $token = $tokenResult->accessToken;
 
 
-            return redirect('/Top')->with([
+            return redirect('/Top')/*->with([
                 'access_token' => $spotifyUser->token,
                 'token' => $token,
                 'user_id' => $userId,
-            ]);
+            ])*/;
 
 
         } catch (\Exception $e) {

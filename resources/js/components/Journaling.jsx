@@ -238,6 +238,8 @@ export function Journaling() {
     const sendMessageToAPI = async (messages) => {
         setIsLoading(true);
         try {
+	 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
             const validMessages = messages.filter(
                 (msg) => msg.content !== null && msg.content !== undefined
             );
@@ -246,9 +248,7 @@ export function Journaling() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Cache-Control": "no-cache, no-store, must-revalidate",
-                    Pragma: "no-cache",
-                    Expires: "0",
+                    "X-CSRF-TOKEN": csrfToken,
                 },
                 body: JSON.stringify({ messages: validMessages }),
             });
@@ -259,6 +259,9 @@ export function Journaling() {
             }
 
             const data = await response.json();
+
+	console.log("API Response:", data);
+
             const newMessage = {
                 role: "assistant",
                 content: data.choices[0].message.content,
@@ -313,12 +316,16 @@ export function Journaling() {
     const saveJournaling = async (title, content) => {
         try {
             const token = sessionStorage.getItem("token");
+
+	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
             console.log("Token:", token);
             const response = await fetch("/api/saveJournaling", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
+		"X-CSRF-TOKEN": csrfToken,
                 },
                 body: JSON.stringify({ title, content }),
             });
@@ -335,10 +342,11 @@ export function Journaling() {
     const fetchJournalingTitles = async () => {
         try {
             const token = sessionStorage.getItem("token");
-
+	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const response = await fetch(`/api/showJournaling`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
+		"X-CSRF-TOKEN": csrfToken,
                 },
             });
             if (!response.ok) {
@@ -355,9 +363,11 @@ export function Journaling() {
     const fetchJournalingContent = async (id) => {
         try {
             const token = sessionStorage.getItem("token");
+	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const response = await fetch(`/api/showJournaling/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
+		"X-CSRF-TOKEN": csrfToken,
                 },
             });
             if (!response.ok) {
@@ -479,7 +489,6 @@ export function Journaling() {
                     <div className="background-overlay"></div>
                     <div className={styles.form_container}>
                         <form className={styles.form}>
-			@csrf
                             <input
                                 type="text"
                                 name="title"

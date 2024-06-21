@@ -6,6 +6,9 @@
 
         <title>MoodTune</title>
 
+ <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
 	@if (app()->environment('local'))
         <!-- 開発環境用 -->
 

@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/refresh-token', [AuthController::class, 'refreshToken']);
+//Route::post('/refresh-token', [AuthController::class, 'refreshToken']);
 
 /*Route::middleware('auth')->group(function () {
     Route::post('/refresh-token', [AuthController::class, 'refreshToken']);
