@@ -7,7 +7,7 @@ const SpotifyLogin = () => {
 
     return (
         <div>
-            <h1>Login with Spotify 1a</h1>
+            <h1>Login with Spotify</h1>
             <button onClick={handleSpotifyLogin}>Login with Spotify</button>
         </div>
     );

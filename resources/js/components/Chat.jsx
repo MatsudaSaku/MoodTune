@@ -73,7 +73,7 @@ function Chat() {
         console.log("Response Text:", responseBody);
 
             if (!response.ok) {
-                console.error("Response Error:", await response.text());
+                console.error("Response Error:", await responseBody);
                 throw new Error("Network response was not ok");
             }
 
