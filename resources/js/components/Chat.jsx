@@ -41,25 +41,53 @@ function Chat() {
 
     const sendMessageToAPI = async (messages) => {
         setIsLoading(true);
+
+	console.log("sendMessageToAPI called with messages:", messages);
+
         try {
+/*		const csrfTokenElement = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        if (!csrfTokenElement) {
+            throw new Error("CSRF token element not found");
+        }
+
+        const csrfToken = csrfTokenElement.getAttribute('content');
+        if (!csrfToken) {
+            throw new Error("CSRF token not found");
+        }*/
+
+		const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const response = await fetch("/api/chat", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+			"X-CSRF-TOKEN": csrfToken,
                 },
                 body: JSON.stringify({ messages }),
             });
 
+	console.log("Response Status:", response.status);
+        console.log("Response Headers:", response.headers);
+        
+        const responseBody = await response.text();
+
+        console.log("Response Text:", responseBody);
+
             if (!response.ok) {
-                console.error("Response Error:", await response.text());
+                console.error("Response Error:", await responseBody);
                 throw new Error("Network response was not ok");
             }
 
-            const data = await response.json();
+		const data = JSON.parse(responseBody);
+        const newMessage = {
+            role: "assistant",
+            content: data.choices[0].message.content,
+        };
+
+/*            const data = await response.json();
             const newMessage = {
                 role: "assistant",
                 content: data.choices[0].message.content,
-            };
+            };*/
             const updatedHistory = [...messages, newMessage];
             setConversationHistory(updatedHistory);
             updateChatDisplay(newMessage.content);
@@ -129,7 +157,7 @@ function Chat() {
             </div>
 
             <form className={styles.form} onSubmit={handleSubmit}>
-                <input
+		<input
                     type="text"
                     value={messageInput}
                     onChange={handleInputChange}

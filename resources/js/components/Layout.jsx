@@ -113,7 +113,7 @@ export default function RootLayout({ children }) {
 
             <main className={styles.mainWrapper}>{children}</main>
             <footer className={styles.footer}>
-                <p>1a Created by アプレンティス音楽隊</p>
+                <p> © 2024 MoodTune All Rights Reserved.</p>
             </footer>
         </div>
     );

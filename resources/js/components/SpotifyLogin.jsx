@@ -2,7 +2,7 @@ import React from "react";
 
 const SpotifyLogin = () => {
     const handleSpotifyLogin = () => {
-        window.location.href = "/auth/spotify/redirect";
+        window.location.href = "https://mood-tune.com/auth/spotify/redirect";
     };
 
     return (
