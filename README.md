@@ -1,4 +1,4 @@
-# ジャーナリング音楽提供アプリMoodTune
+# ジャーナリング解析音楽推薦アプリ MoodTune
 「**書く瞑想**」と呼ばれるジャーナリングを用いて、
 
 **楽しみながら自身の目標や不安を言語化できる**。というコンセプトを掲げたアプリです。
@@ -76,3 +76,4 @@ URL: https://mood-tune.com/
   - AWS(RDS、Route53、ALB、ACM)
   - 外部API(ChatGPT、Spotify)
 ## ER図
+![DB drawio](https://github.com/MatsudaSaku/MoodTune/assets/149235059/83fce149-9991-4468-8c54-a75b9382f81d)
