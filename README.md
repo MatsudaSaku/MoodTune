@@ -44,10 +44,10 @@ URL: https://mood-tune.com/
 
 - 5.ジャーナリング画面の履歴で今までの文章を読み返し、自分自身を振り返る
 ![moodtune9](https://github.com/MatsudaSaku/MoodTune/assets/149235059/ba7e8ca7-4378-4aaa-9471-88af96620df9)
-＊ChatGPTから質問に答え、ストレスなどの解析をしてもらいながら、自身の答えを振り返る。
+＊ChatGPTからの質問に答え、ストレスなどの解析をしてもらいながら、自身の答えを振り返る。
 
 ![moodtune8](https://github.com/MatsudaSaku/MoodTune/assets/149235059/a6832424-cbd0-45be-bafa-c2d0087505a8)
-気分とジャンルを選択して音楽の推薦だけを手早く受ける。などもできます。
+＊気分とジャンルを選択して音楽の推薦だけを手早く受ける。などもできます。
 
 ![moodtune4](https://github.com/MatsudaSaku/MoodTune/assets/149235059/2f433f01-7bf4-4503-ad49-8c7ee1e94629)
 ## 機能一覧
