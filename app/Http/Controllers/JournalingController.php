@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Crypt;
 
 class JournalingController extends Controller
 {
@@ -20,19 +21,15 @@ class JournalingController extends Controller
             return response()->json(['error' => 'User is not authenticated'], 401);
         }
 
-        $title = $request->title ?? "無題";
         $userId = Auth::id();
         Log::info('Authenticated User ID: ' . $userId);
-        /*$request->validate([
-            "title" => "required|string",
-            "content" => "required|string",
-        ]);*/
 
         try {
+	$title = trim($request->title) ?: "無題";
             $journal = new Journaling();
             $journal->user_id = Auth::id();
-            $journal->title = $title;
-            $journal->content = $request->content;
+            $journal->title = Crypt::encryptString($title);
+            $journal->content = Crypt::encryptString($request->content);
             $journal->created_at = Carbon::now();
             $journal->updated_at = Carbon::now();
             $journal->save();
@@ -50,17 +47,24 @@ class JournalingController extends Controller
     public function show($id)
     {
         $journaling = Journaling::find($id);
-        if ($journaling) {
-            return response()->json($journaling);
-        } else {
-            return response()->json(['message' => 'Journaling not found'], 404);
-        }
+    if ($journaling) {
+        $journaling->title = Crypt::decryptString($journaling->title);
+        $journaling->content = Crypt::decryptString($journaling->content);
+        return response()->json($journaling);
+    } else {
+        return response()->json(['message' => 'Journaling not found'], 404);
+    }
     }
 
     public function index()
     {
         $userId = Auth::id();
         $journalings = Journaling::where('user_id', $userId)->get(['id', 'title', 'created_at']);
+
+	foreach ($journalings as $journaling) {
+            $journaling->title = Crypt::decryptString($journaling->title);
+        }
+
         return response()->json($journalings);
     }
 }

@@ -2,6 +2,7 @@
 「**書く瞑想**」と呼ばれるジャーナリングを用いて、
 
 **楽しみながら自身の目標や不安を言語化できる**。というコンセプトを掲げたアプリです。
+![moodtune1](https://github.com/MatsudaSaku/MoodTune/assets/149235059/265f42cb-1361-4d16-bfa0-cad1506e7507)
 
 URL: https://mood-tune.com/
  (ログインにはSpotifyアカウントが必要です)
@@ -30,8 +31,12 @@ URL: https://mood-tune.com/
 ## 使用方法
 
 - 1.好きな背景を設定し、ジャーナリングをする
+  ![moodtune2](https://github.com/MatsudaSaku/MoodTune/assets/149235059/ad7901bd-aa55-4f06-b955-fe116fe40de8)
+
 - 2.「保存して解析」をクリック。保存したくない場合は「解析のみ」をクリック
 - 3.現在の気分が数値化される。そこからおススメされる文字をクリック
+ ![moodtune3](https://github.com/MatsudaSaku/MoodTune/assets/149235059/36745f87-274c-4d98-be7d-bb1e767b40af)
+  
 - 4.レコメンド画面が表示される。「更新」をクリックで同じおススメで別の曲が表示。音楽の視聴
 - 5.ジャーナリング画面の履歴で今までの文章を読み返す
 
