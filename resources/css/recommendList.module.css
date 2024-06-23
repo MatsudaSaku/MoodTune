@@ -15,6 +15,8 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px 10px;
     margin: 0 auto;
+    list-style-type: disc;
+    list-style-position: inside;
 }
 
 .recommendList li {
@@ -27,6 +29,10 @@
 
 .recommendList li:hover {
     cursor: pointer;
+}
+
+.recommendList li::marker {
+    color: rgb(250, 204, 120);
 }
 
 .recommendList li h2 {
@@ -49,6 +55,7 @@
 
 .recommendList li img {
     border-radius: 5px;
+    max-width: 170px;
 }
 
 .modal {
