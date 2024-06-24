@@ -600,7 +600,12 @@ export function Journaling() {
                     >
                         <option value="">シンプル</option>
                         <option value="url('/background1.jpg')">opera</option>
-                        <option value="url('/background2.jpg')">空</option>
+			<option value="url('/hydrangea.jpg')">紫陽花</option>
+                        <option value="url('/background2.jpg')">薄明</option>
+			<option value="url('/summer_night.jpg')">夏の夜</option>
+			<option value="url('/firework.jpg')">花火</option>
+			<option value="url('/building.jpg')">ビル</option>
+			<option value="url('/summer_night.jpg')">夏の夜</option>
                     </select>
                     <Modal
                         isOpen={isModalOpen}
