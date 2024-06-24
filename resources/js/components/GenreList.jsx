@@ -79,35 +79,35 @@ export function GenreList({ onGenreSelect }) {
             />
             <GenreButton
                 onClick={handleGenreSelect}
-                isSelected={selectedGenres.includes("alternative")}
+                isSelected={selectedGenres.includes("classical")}
                 defaultClass={styles.moodListPurple}
                 selectedClass={styles.selectedMoodListPurple}
-                label="alternative"
-                value="alternative"
+                label="classical"
+                value="classical"
             />
             <GenreButton
                 onClick={handleGenreSelect}
-                isSelected={selectedGenres.includes("anime")}
+                isSelected={selectedGenres.includes("romance")}
                 defaultClass={styles.moodListPink}
                 selectedClass={styles.selectedMoodListPink}
-                label="anime"
-                value="anime"
+                label="romance"
+                value="romance"
             />
             <GenreButton
                 onClick={handleGenreSelect}
-                isSelected={selectedGenres.includes("chill")}
+                isSelected={selectedGenres.includes("world-music")}
                 defaultClass={styles.moodListGreen}
                 selectedClass={styles.selectedMoodListGreen}
-                label="chill"
-                value="chill"
+                label="world-music"
+                value="world-music"
             />
             <GenreButton
                 onClick={handleGenreSelect}
-                isSelected={selectedGenres.includes("club")}
+                isSelected={selectedGenres.includes("movies")}
                 defaultClass={styles.moodListOrange}
                 selectedClass={styles.selectedMoodListOrange}
-                label="club"
-                value="club"
+                label="movies"
+                value="movies"
             />
             <GenreButton
                 onClick={handleGenreSelect}
@@ -135,19 +135,19 @@ export function GenreList({ onGenreSelect }) {
             />
             <GenreButton
                 onClick={handleGenreSelect}
-                isSelected={selectedGenres.includes("hip-hop")}
+                isSelected={selectedGenres.includes("summer")}
                 defaultClass={styles.moodListGreen}
                 selectedClass={styles.selectedMoodListGreen}
-                label="hip-hop"
-                value="hip-hop"
+                label="summer"
+                value="summer"
             />
             <GenreButton
                 onClick={handleGenreSelect}
-                isSelected={selectedGenres.includes("heavy-metal")}
+                isSelected={selectedGenres.includes("sleep")}
                 defaultClass={styles.moodListPurple}
                 selectedClass={styles.selectedMoodListPurple}
-                label="heavy-metal"
-                value="heavy-metal"
+                label="sleep"
+                value="sleep"
             />
             <GenreButton
                 onClick={handleGenreSelect}
@@ -159,19 +159,19 @@ export function GenreList({ onGenreSelect }) {
             />
             <GenreButton
                 onClick={handleGenreSelect}
-                isSelected={selectedGenres.includes("j-rock")}
+                isSelected={selectedGenres.includes("k-pop")}
                 defaultClass={styles.moodListPurple}
                 selectedClass={styles.selectedMoodListPurple}
-                label="j-rock"
-                value="j-rock"
+                label="k-pop"
+                value="k-pop"
             />
             <GenreButton
                 onClick={handleGenreSelect}
-                isSelected={selectedGenres.includes("k-pop")}
+                isSelected={selectedGenres.includes("study")}
                 defaultClass={styles.moodListPink}
                 selectedClass={styles.selectedMoodListPink}
-                label="k-pop"
-                value="k-pop"
+                label="study"
+                value="study"
             />
             <GenreButton
                 onClick={handleGenreSelect}

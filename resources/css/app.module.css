@@ -4,10 +4,6 @@ body {
     padding: 0;
 }
 
-/* サイト全体 */
-.mainWrapper {
-    padding: 80px 0 0;
-}
 
 /* ナビゲーション */
 .navWrapper {
@@ -66,9 +62,10 @@ body {
     position: relative;
     max-width: 850px;
     margin: 0 auto;
-    height: 75vh;
+    height: 78vh;
     text-align: center;
     justify-content: center;
+    padding-top: 120px;
 }
 
 .headline {

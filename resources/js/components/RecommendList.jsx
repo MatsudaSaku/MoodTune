@@ -4,6 +4,7 @@ import Color, { Palette } from "color-thief-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Layout from "./Layout";
 import axios from "axios";
+import { MoodGenreList } from "./MoodGenreList";
 
 export default function RecommendList({ mood, genres }) {
     const [tracks, setTracks] = useState([]);
@@ -12,6 +13,7 @@ export default function RecommendList({ mood, genres }) {
     const [modalBackground, setModalBackground] = useState(null);
     const [gradientAngle, setGradientAngle] = useState(45);
     const [isLoading, setIsLoading] = useState(true);
+    const [backToMusic, setBackToMusic] = useState(false);
     const location = useLocation();
     let navigate = useNavigate();
 
@@ -34,40 +36,6 @@ export default function RecommendList({ mood, genres }) {
             return null;
         }
     };
-
-    /*const getRefreshToken = async () => {
-        try {
-            const response = await axios.post("/api/refresh-token");
-            const newAccessToken = response.data.access_token;
-            sessionStorage.setItem("spotify_access_token", newAccessToken);
-            return newAccessToken;
-        } catch (error) {
-            console.error("Error refreshing access token");
-            try {
-                await axios.post("/logout");
-                navigate("/");
-            } catch (error) {
-                console.error("Logout failed:", error);
-            }
-            return null;
-        }
-    };
-
-    const refreshAccessToken = async () => {
-        const newAccessToken = await getRefreshToken();
-        if (newAccessToken) {
-            return newAccessToken;
-        } else {
-            console.error("Error refreshing access token");
-            try {
-                await axios.post("/logout");
-                navigate("/");
-            } catch (error) {
-                console.error("Logout failed:", error);
-            }
-            return null;
-        }
-    };*/
 
     let url = `https://api.spotify.com/v1/recommendations?limit=12&seed_genres=${genres}`;
 
@@ -187,6 +155,12 @@ export default function RecommendList({ mood, genres }) {
     }
 
     return (
+       <>
+            {backToMusic ? (
+                <Layout>
+                    <MoodGenreList />
+                </Layout>
+            ) : (
         <div className={styles.recommend}>
             <h2 className={styles.heading}>レコメンド一覧</h2>
             <ul className={styles.recommendList}>
@@ -205,7 +179,7 @@ export default function RecommendList({ mood, genres }) {
                 ))}
             </ul>
             <div className={styles.buttonLinks}>
-                <button onClick={() => navigate(-1)}>戻る</button>
+                <button onClick={() => setBackToMusic(true)}>戻る</button>
 
                 <button onClick={fetchTracks}>更新</button>
             </div>
@@ -252,5 +226,7 @@ export default function RecommendList({ mood, genres }) {
                 </>
             )}
         </div>
+	)}
+      </>
     );
 }

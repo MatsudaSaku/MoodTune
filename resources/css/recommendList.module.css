@@ -7,14 +7,17 @@
 
 .recommend {
     margin-bottom: 80px;
+    padding-top: 80px;
 }
 
 .recommendList {
-    max-width: 814px;
+    max-width: 1064px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px 10px;
     margin: 0 auto;
+    list-style-type: disc;
+    list-style-position: inside;
 }
 
 .recommendList li {
@@ -27,6 +30,10 @@
 
 .recommendList li:hover {
     cursor: pointer;
+}
+
+.recommendList li::marker {
+    color: rgb(250, 204, 120);
 }
 
 .recommendList li h2 {
@@ -49,6 +56,7 @@
 
 .recommendList li img {
     border-radius: 5px;
+    max-width: 170px;
 }
 
 .modal {
@@ -104,9 +112,14 @@
     padding: 10px 30px;
 }
 
+.buttonLinks button:hover {
+    cursor: pointer;
+}
+
 .load {
     margin: 300px auto 0;
     text-align: center;
+    padding-top: 130px;
     font-size: 50px;
 }
 

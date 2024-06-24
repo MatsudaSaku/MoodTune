@@ -13,6 +13,7 @@ body {
     animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
     overflow: hidden;
+    padding-top: 80px;
 }
 
 .background-overlay {
