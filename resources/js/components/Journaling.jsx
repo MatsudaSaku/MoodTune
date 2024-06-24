@@ -198,18 +198,52 @@ export function Journaling() {
         setEmotionScores(scores);
 
         const mood = scores.anxiety - scores.excitement;
-        if (mood <= -80) {
-            setSelectedMood("うれしい");
-        } else {
+        if (mood >= 80) {
+            setSelectedMood("落ち着く");
+        } else if (mood >= 60) {
+            setSelectedMood("ノスタルジック");
+        } else if (mood >= 40) {
+            setSelectedMood("泣ける");
+        } else if (mood >= 20) {
+            setSelectedMood("おだやか");
+        } else if (mood >= 0) {
+            setSelectedMood("しみじみ");
+        } else if (mood >= -20) {
+            setSelectedMood("前向き");
+        } else if (mood >= -40) {
             setSelectedMood("元気");
+        } else if (mood >= -60) {
+            setSelectedMood("ダンス");
+        } else if (mood >= -80) {
+            setSelectedMood("ワクワク");
+        } else {
+            setSelectedMood("うれしい");
         }
 
         const genres = scores.sadness - scores.joy;
 
-        if (genres <= -80) {
-            setSelectedGenres("rock");
+        if (genres >= 80) {
+            setSelectedGenres("j-pop,k-pop,happy,comedy");
+        } else if (genres >= 60) {
+            setSelectedGenres("sleep,movie,soundtracks");
+        } else if (genres >= 40) {
+            setSelectedGenres("jazz,classical,ambient");
+        } else if (genres >= 20) {
+            setSelectedGenres("country,anime,chill");
+        } else if (genres >= 0) {
+            setSelectedGenres("study,folk,emo");
+        } else if (genres >= -20) {
+            setSelectedGenres("rock,soul,rainy-day");
+        } else if (genres >= -40) {
+            setSelectedGenres("pop,work-out,romance");
+        } else if (genres >= -60) {
+            setSelectedGenres("world-music,swedish,tango");
+        } else if (genres >= -60) {
+            setSelectedGenres("summer,movies,party");
+        } else if (genres >= -80) {
+            setSelectedGenres("dance,gospel,groove");
         } else {
-            setSelectedGenres("pop");
+            setSelectedGenres("romance,punk,party");
         }
 
         setIsModalOpen(true);
