@@ -90,8 +90,8 @@ body {
 
 .save_button:hover,
 .analysis_button:hover {
-    background-color: #aff3be;
-    opacity: 1;
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 .history {
