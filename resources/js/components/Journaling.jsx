@@ -274,6 +274,8 @@ export function Journaling() {
     const sendMessageToAPI = async (messages) => {
         setIsLoading(true);
         try {
+	 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
             const validMessages = messages.filter(
                 (msg) => msg.content !== null && msg.content !== undefined
             );
@@ -282,9 +284,7 @@ export function Journaling() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Cache-Control": "no-cache, no-store, must-revalidate",
-                    Pragma: "no-cache",
-                    Expires: "0",
+                     "X-CSRF-TOKEN": csrfToken,
                 },
                 body: JSON.stringify({ messages: validMessages }),
             });
