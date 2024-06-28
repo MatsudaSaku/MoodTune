@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 import Layout from "./Layout";
 import styles from "../../css/chat.module.css";
-//import "../../css/modal.css";
+
 
 function Chat() {
     const [messageInput, setMessageInput] = useState("");
     const [conversationHistory, setConversationHistory] = useState([]);
-    const [chatDisplay, setChatDisplay] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const messagesEndRef = useRef(null);
 
     useEffect(() => {
         sendInitialMessage();
@@ -15,6 +16,7 @@ function Chat() {
 
     useEffect(() => {
         console.log("Updated conversation history:", conversationHistory);
+        scrollToBottom();
     }, [conversationHistory]);
 
     const sendInitialMessage = async () => {
@@ -23,8 +25,7 @@ function Chat() {
             const initialSystemMessage = {
                 role: "system",
                 content:
-                    "あなたがユーザーに対して五つの質問を一つ一つしてください。あなたが五つ質問をしてユーザーが五つ回答したら、それまでのユーザーの回答を振り返り解析して、四つの感情である、ポジティブ、ネガティブ、ストレス、リラックスを四つ全部で100としてそれぞれの現在の感情を数値で表してください。侍口調で会話してください。ユーザーの答えに対してはコメントしてください。質問はある程度の長さで、一つずつおこなってください",
-                //"あなたがユーザーに対して五つの質問を一つ一つしてください。あなたが五つ質問をしてユーザーが五つ回答したら、それまでのユーザーの回答を振り返り解析して、四つの感情である、興奮、不安、悲しみ、楽しみ、を四つ全部で100としてそれぞれの現在の感情を数値で表してください。侍口調で会話してください",
+                    "あなたがユーザーに対して五つの質問を一つ一つしてください。あなたが五つ質問をしてユーザーが五つ回答したら、それまでのユーザーの回答を振り返り解析して、四つの感情である、ストレス、リラックス、ポジティブ、ネガティブ、をそれぞれ最大で100として現在の感情を数値で表してください。侍口調で会話してください。ユーザーの答えに対してはコメントしてください。質問はある程度の長さで、一つずつおこなってください",
             };
             const updatedHistory = [
                 ...conversationHistory,
@@ -41,56 +42,28 @@ function Chat() {
 
     const sendMessageToAPI = async (messages) => {
         setIsLoading(true);
-
-	console.log("sendMessageToAPI called with messages:", messages);
-
         try {
-/*		const csrfTokenElement = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        if (!csrfTokenElement) {
-            throw new Error("CSRF token element not found");
-        }
-
-        const csrfToken = csrfTokenElement.getAttribute('content');
-        if (!csrfToken) {
-            throw new Error("CSRF token not found");
-        }*/
-
-		const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const response = await fetch("/api/chat", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-			"X-CSRF-TOKEN": csrfToken,
+		"X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
                 body: JSON.stringify({ messages }),
             });
 
-	console.log("Response Status:", response.status);
-        console.log("Response Headers:", response.headers);
-        
-        const responseBody = await response.text();
-
-        console.log("Response Text:", responseBody);
-
             if (!response.ok) {
-                console.error("Response Error:", await responseBody);
+                console.error("Response Error:", await response.text());
                 throw new Error("Network response was not ok");
             }
 
-		const data = JSON.parse(responseBody);
-        const newMessage = {
-            role: "assistant",
-            content: data.choices[0].message.content,
-        };
-
-/*            const data = await response.json();
+            const data = await response.json();
             const newMessage = {
                 role: "assistant",
                 content: data.choices[0].message.content,
-            };*/
+            };
             const updatedHistory = [...messages, newMessage];
             setConversationHistory(updatedHistory);
-            updateChatDisplay(newMessage.content);
         } catch (error) {
             console.error("Error:", error);
         } finally {
@@ -107,69 +80,62 @@ function Chat() {
         const userMessage = { role: "user", content: messageInput };
         const updatedHistory = [...conversationHistory, userMessage];
         setConversationHistory(updatedHistory);
-        await sendMessageToAPI(updatedHistory);
         setMessageInput("");
+        await sendMessageToAPI(updatedHistory);
     };
 
-    const updateChatDisplay = (message) => {
-        const messageElements = message
-            .split(/(?<=[。？！])/)
-            .map((line, index) => (
-                <React.Fragment key={index}>
-                    <div className="fadeInUp">{line}</div>
-                    <br />
-                </React.Fragment>
-            ));
-
-        setChatDisplay([...chatDisplay, { message: messageElements }]);
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
-
-    /*const LoadingModal = ({ isOpen }) => {
-        if (!isOpen) return null;
-
-        return (
-            <div className="modal_loading">
-                <div className="modal_content_loading">
-                    <div className="loader"></div>
-                    <h2>解析中...</h2>
-                </div>
-            </div>
-        );
-    };*/
 
     return (
         <Layout>
             <div className={styles.chat_container}>
-                {chatDisplay.map((item, index) => (
-                    <div
-                        className={styles.api_message}
-                        key={index}
-                        style={{
-                            marginBottom: "10px",
-                            padding: "5px",
-                            borderBottom: "1px solid #ccc",
-                        }}
-                    >
-                        {item.message}
-                    </div>
-                ))}
-                {isLoading && <div>Loading...</div>}
+                <h3 className={styles.explanation}>
+                    五つの質問の答えから「ストレス」「リラックス」「ポジティブ」「ネガティブ」の計測をします。
+                </h3>
+                {conversationHistory
+                    .filter((item) => item.role !== "system")
+                    .map((item, index) => (
+                        <div
+                            key={index}
+                            className={
+                                item.role === "user"
+                                    ? styles.user_message
+                                    : styles.api_message
+                            }
+                            style={{
+                                marginBottom: "10px",
+                                padding: "5px",
+                                borderBottom: "1px solid #ccc",
+                            }}
+                        >
+                            {item.content
+                                .split(/(?<=[。？！])/)
+                                .map((line, index) => (
+                                    <React.Fragment key={index}>
+                                        <div className="fadeInUp">{line}</div>
+                                        <br />
+                                    </React.Fragment>
+                                ))}
+                        </div>
+                    ))}
+                {isLoading && <div className={styles.loading}>Loading...</div>}
+                <div ref={messagesEndRef} />
             </div>
 
             <form className={styles.form} onSubmit={handleSubmit}>
-		<input
+                <input
                     type="text"
                     value={messageInput}
                     onChange={handleInputChange}
                     placeholder="Type your message here..."
                     className={styles.chat_input}
                 />
-                <button type="submit" className={styles.chat_button}>
-                    Send
-                </button>
             </form>
         </Layout>
     );
 }
 
 export default Chat;
+
