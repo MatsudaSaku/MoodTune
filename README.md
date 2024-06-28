@@ -83,7 +83,8 @@ URL: https://mood-tune.com/
   - PHP 8.2
   - Laravel 11.10
   - MySQL(データベース)
-  - Laravel Passport(OAuth認証)
+  - Laravel Passport
+  - Laravel socialite(OAuth認証)
 - インフラ・開発環境
   - AWS(RDS、Route53、ALB、ACM)
   - 外部API(ChatGPT、Spotify)
