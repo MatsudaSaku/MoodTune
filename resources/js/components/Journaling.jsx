@@ -349,12 +349,16 @@ export function Journaling() {
     const saveJournaling = async (title, content) => {
         try {
             const token = sessionStorage.getItem("token");
+
+	 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
             console.log("Token:", token);
             const response = await fetch("/api/saveJournaling", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
+		 "X-CSRF-TOKEN": csrfToken,
                 },
                 body: JSON.stringify({ title, content }),
             });
@@ -525,10 +529,12 @@ export function Journaling() {
     const handleDeleteJournaling = async (id) => {
         try {
             const token = sessionStorage.getItem("token");
+	  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const response = await fetch(`/api/deleteJournaling/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
+		 "X-CSRF-TOKEN": csrfToken,
                 },
             });
 
