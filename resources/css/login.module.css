@@ -25,6 +25,13 @@ body {
     margin-bottom: 15%;
 }
 
+
+.login_display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .login_button {
     background-color: rgb(255, 255, 255);
     border: none;

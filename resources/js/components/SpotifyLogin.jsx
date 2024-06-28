@@ -165,7 +165,7 @@ const SpotifyLogin = () => {
     return (
         <div className={styles.login_container}>
             <div className={styles.howto_container}>
-                <p className={styles.welcome_message}>おかえりなさい</p>
+                <p className={styles.welcome_message}>気持ちを言葉にしてみませんか？</p>
                 <div className={styles.login_display}>
                     <button
                         className={styles.login_button}
