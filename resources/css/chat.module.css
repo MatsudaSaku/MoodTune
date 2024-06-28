@@ -26,8 +26,10 @@ body {
 
 .form {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .chat_input {
@@ -54,35 +56,34 @@ body {
     background-color: #0056b3;
 }
 
-.form {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
 .api_message {
     text-align: left;
     background-color: #ffecac;
-    width: 50%;
+    width: 40%;
     border-radius: 20px;
     animation: fadeInUp 0.8s ease-out forwards;
-    margin-left: 30px;
+    margin-left: 12%;
 }
 
 .user_message {
     text-align: left;
     background-color: #d6ecf5;
-    width: 50%;
+    width: 40%;
     border-radius: 20px;
     animation: fadeInUp 0.8s ease-out forwards;
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 12%;
 }
 
 .loading {
     color: #0000004d;
     font-weight: 200;
     padding-top: 30px;
+}
+
+.tone_select {
+    font-size: large;
+    margin-left: 10px;
 }
 
 @keyframes fadeInUp {
@@ -95,3 +96,4 @@ body {
         transform: translateY(0);
     }
 }
+

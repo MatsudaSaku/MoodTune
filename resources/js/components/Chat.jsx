@@ -1,13 +1,12 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import Layout from "./Layout";
 import styles from "../../css/chat.module.css";
-
 
 function Chat() {
     const [messageInput, setMessageInput] = useState("");
     const [conversationHistory, setConversationHistory] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [tone, setTone] = useState("敬語");
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
@@ -19,19 +18,34 @@ function Chat() {
         scrollToBottom();
     }, [conversationHistory]);
 
-    const sendInitialMessage = async () => {
+    const sendInitialMessage = async (selectedTone) => {
         setIsLoading(true);
         try {
+            const toneMessageMap = {
+                敬語: "敬語で会話してください。",
+                丁寧侍: "礼儀正しい侍口調で会話してください。",
+                豪放侍: "粗野で豪快な侍口調で会話してください。",
+                ギャル: "ギャル口調で会話してください。",
+                関西弁: "関西弁で会話してください。",
+                博多弁: "博多弁で会話してください",
+            };
+
             const initialSystemMessage = {
                 role: "system",
-                content:
-                    "あなたがユーザーに対して五つの質問を一つ一つしてください。あなたが五つ質問をしてユーザーが五つ回答したら、それまでのユーザーの回答を振り返り解析して、四つの感情である、ストレス、リラックス、ポジティブ、ネガティブ、をそれぞれ最大で100として現在の感情を数値で表してください。侍口調で会話してください。ユーザーの答えに対してはコメントしてください。質問はある程度の長さで、一つずつおこなってください",
+                content: `
+                    あなたがユーザーに対して五つの質問を一つ一つしてください。
+                    あなたが五つ質問をしてユーザーが五つ回答したら、
+                    それまでのユーザーの回答を振り返り解析して、
+                    四つの感情である、ストレス、リラックス、ポジティブ、ネガティブ、
+                    をそれぞれ最大で100として現在の感情を数値で表してください。
+                    ${toneMessageMap[selectedTone]}
+                    ユーザーの答えに対してはコメントしてください。
+                    質問はある程度の長さで、一つずつおこなってください
+                `,
             };
-            const updatedHistory = [
-                ...conversationHistory,
-                initialSystemMessage,
-            ];
-            setConversationHistory(updatedHistory);
+
+            const updatedHistory = [initialSystemMessage];
+            await setConversationHistory(updatedHistory);
             await sendMessageToAPI(updatedHistory);
         } catch (error) {
             console.error("Error:", error);
@@ -47,7 +61,7 @@ function Chat() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-		"X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+		 "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
                 body: JSON.stringify({ messages }),
             });
@@ -82,6 +96,21 @@ function Chat() {
         setConversationHistory(updatedHistory);
         setMessageInput("");
         await sendMessageToAPI(updatedHistory);
+    };
+
+    const handleToneChange = async (event) => {
+        const newTone = event.target.value;
+        setTone(newTone);
+        setMessageInput("");
+        await resetConversation();
+        await sendInitialMessage(newTone);
+    };
+
+    const resetConversation = () => {
+        return new Promise((resolve) => {
+            setConversationHistory([]);
+            resolve();
+        });
     };
 
     const scrollToBottom = () => {
@@ -132,6 +161,18 @@ function Chat() {
                     placeholder="Type your message here..."
                     className={styles.chat_input}
                 />
+                <select
+                    value={tone}
+                    onChange={handleToneChange}
+                    className={styles.tone_select}
+                >
+                    <option value="敬語">敬語</option>
+                    <option value="丁寧侍">丁寧侍</option>
+                    <option value="豪放侍">豪放侍</option>
+                    <option value="ギャル">ギャル</option>
+                    <option value="関西弁">関西弁</option>
+                    <option value="博多弁">博多弁</option>
+                </select>
             </form>
         </Layout>
     );
