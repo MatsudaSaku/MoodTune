@@ -604,7 +604,7 @@ export function Journaling() {
                         <option value="url('/rain.jpg')">雨跡</option>
 			<option value="url('/hydrangea.jpg')">紫陽花</option>
 			<option value="url('/summer_night.jpg')">夏の夜</option>
-			<option value="url('/firework5.jpg')">花火</option>
+			<option value="url('/firework6.jpg')">花火</option>
 			<option value="url('/ocean4.jpg')">海</option>
 			<option value="url('/ocean2.jpg')">夕暮れ</option>
 			<option value="url('/mtfuji2.jpg')">雪嶺</option>

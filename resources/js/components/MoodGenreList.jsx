@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
 import { GenreButton, GenreList } from "./GenreList";
 import { MoodList } from "./MoodList";
 import RecommendList from "./RecommendList";
 import styles from "../../css/app.module.css";
 import Layout from "./Layout";
-import { BrowserRouter as Router } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export function MoodGenreList() {
@@ -23,10 +21,26 @@ export function MoodGenreList() {
         }
     };
 
+    const handleMoodSelect = (mood) => {
+        setSelectedMood(mood);
+    };
+
+    const handleGenreSelect = (genre) => {
+        setSelectedGenres((prevSelectedGenres) => {
+            let updatedGenres = [...prevSelectedGenres];
+            if (updatedGenres.includes(genre)) {
+                updatedGenres = updatedGenres.filter((g) => g !== genre);
+            } else {
+                if (updatedGenres.length >= 5) {
+                    updatedGenres.shift();
+                }
+                updatedGenres.push(genre);
+            }
+            return updatedGenres;
+        });
+    };
+
     if (showResults) {
-        /*navigate("/recommend", {
-            state: { mood: selectedMood, genres: selectedGenres },
-        });*/
         return (
             <Layout>
                 <RecommendList mood={selectedMood} genres={selectedGenres} />
@@ -41,12 +55,16 @@ export function MoodGenreList() {
                     <h2 className={styles.headline}>
                         なりたい気分を選んでください<small>(※１つ)</small>
                     </h2>
-                    <MoodList onMoodSelect={setSelectedMood} />
+                    <MoodList
+                        onMoodSelect={handleMoodSelect}
+                        selectedMood={selectedMood}
+                    />
                     <h2 className={styles.headline}>
-                        ジャンルを選んでください<small>(※複数可)</small>
+                        ジャンルを選んでください<small>(※５つまで)</small>
                     </h2>
                     <GenreList
-                        onGenreSelect={(genres) => setSelectedGenres(genres)}
+                        onGenreSelect={handleGenreSelect}
+                        selectedGenres={selectedGenres}
                     />
                     <button
                         className={styles.doneButton}
@@ -71,3 +89,4 @@ export function MoodGenreList() {
         </Layout>
     );
 }
+

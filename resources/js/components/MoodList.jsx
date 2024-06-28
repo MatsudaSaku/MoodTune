@@ -1,20 +1,19 @@
 import { useState } from "react";
 import styles from "../../css/app.module.css";
 
-export function MoodButton({ defaultClass, selectedClass, label, onClick }) {
-    const [isSelected, setIsSelected] = useState(false);
-
-    const handleClick = () => {
-        setIsSelected(!isSelected);
-        onClick(label);
-    };
-
+export function MoodButton({
+    defaultClass,
+    selectedClass,
+    label,
+    isSelected,
+    onClick,
+}) {
     return (
         <button
             className={`${isSelected ? selectedClass : defaultClass} ${
                 styles.buttonStyle
             }`}
-            onClick={handleClick}
+            onClick={() => onClick(label)}
         >
             <span>{label}</span>
             <img
@@ -28,81 +27,74 @@ export function MoodButton({ defaultClass, selectedClass, label, onClick }) {
     );
 }
 
-export function MoodList({ onMoodSelect }) {
-    const [selectedMood, setSelectedMood] = useState("");
-
-    const handleMoodSelect = (mood) => {
-        setSelectedMood(mood);
-        onMoodSelect(mood);
-    };
-
+export function MoodList({ onMoodSelect, selectedMood }) {
     return (
         <div className={styles.moodListWrapper}>
             <MoodButton
-                onClick={handleMoodSelect}
+                onClick={onMoodSelect}
                 isSelected={selectedMood === "元気"}
                 defaultClass={styles.moodListYellow}
                 selectedClass={styles.selectedMoodListYellow}
                 label="元気"
             />
             <MoodButton
-                onClick={handleMoodSelect}
+                onClick={onMoodSelect}
                 isSelected={selectedMood === "おだやか"}
                 defaultClass={styles.moodListBlue}
                 selectedClass={styles.selectedMoodListBlue}
                 label="おだやか"
             />
             <MoodButton
-                onClick={handleMoodSelect}
+                onClick={onMoodSelect}
                 isSelected={selectedMood === "うれしい"}
                 defaultClass={styles.moodListPink}
                 selectedClass={styles.selectedMoodListPink}
                 label="うれしい"
             />
             <MoodButton
-                onClick={handleMoodSelect}
+                onClick={onMoodSelect}
                 isSelected={selectedMood === "しみじみ"}
                 defaultClass={styles.moodListGreen}
                 selectedClass={styles.selectedMoodListGreen}
                 label="しみじみ"
             />
             <MoodButton
-                onClick={handleMoodSelect}
+                onClick={onMoodSelect}
                 isSelected={selectedMood === "ノスタルジック"}
                 defaultClass={styles.moodListPurple}
                 selectedClass={styles.selectedMoodListPurple}
                 label="ノスタルジック"
             />
             <MoodButton
-                onClick={handleMoodSelect}
+                onClick={onMoodSelect}
                 isSelected={selectedMood === "前向き"}
                 defaultClass={styles.moodListOrange}
                 selectedClass={styles.selectedMoodListOrange}
                 label="前向き"
             />
             <MoodButton
-                onClick={handleMoodSelect}
+                onClick={onMoodSelect}
                 isSelected={selectedMood === "泣ける"}
                 defaultClass={styles.moodListPink}
                 selectedClass={styles.selectedMoodListPink}
                 label="泣ける"
             />
             <MoodButton
-                onClick={handleMoodSelect}
+                onClick={onMoodSelect}
                 isSelected={selectedMood === "ワクワク"}
                 defaultClass={styles.moodListOrange}
                 selectedClass={styles.selectedMoodListOrange}
                 label="ワクワク"
             />
             <MoodButton
-                onClick={handleMoodSelect}
+                onClick={onMoodSelect}
                 isSelected={selectedMood === "落ち着く"}
                 defaultClass={styles.moodListBlue}
                 selectedClass={styles.selectedMoodListBlue}
                 label="落ち着く"
             />
             <MoodButton
-                onClick={handleMoodSelect}
+                onClick={onMoodSelect}
                 isSelected={selectedMood === "ダンス"}
                 defaultClass={styles.moodListOrange}
                 selectedClass={styles.selectedMoodListOrange}
@@ -111,3 +103,4 @@ export function MoodList({ onMoodSelect }) {
         </div>
     );
 }
+
