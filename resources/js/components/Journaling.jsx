@@ -674,21 +674,21 @@ export function Journaling() {
                         <option value="">シンプル</option>
                         <option value="url('/background1.jpg')">opera</option>
                         <option value="url('/background2.jpg')">空</option>
-                        <option value="url('/summer_night.jpg')">夏の夜</option>
-                        <option value="url('/bonfire.jpg')">焚火</option>
-                        <option value="url('/dog2.jpg')">犬</option>
-                        <option value="url('/cat.jpg')">猫</option>
-                        <option value="url('/ocean.jpg')">焚火</option>
-                        <option value="url('/ocean2.jpg')">焚火</option>
-                        <option value="url('/ocean3.jpg')">焚火</option>
-                        <option value="url('/ocean4.jpg')">焚火</option>
-                        <option value="url('/cat_window2.jpg')">焚火</option>
-                        <option value="url('/desk.jpg')">焚火</option>
-                        <option value="url('/firefly.jpg')">焚火</option>
-                        <option value="url('/mtfuji2.jpg')">焚火</option>
-                        <option value="url('/mtfuji3.jpg')">焚火</option>
-                        <option value="url('/firework6.jpg')">焚火</option>
-                        <option value="url('/firework5.jpg')">焚火</option>
+			<option value="url('/background2.jpg')">薄明</option>
+			<option value="url('/bonfire.jpg')">焚火</option>
+                        <option value="url('/rain.jpg')">雨跡</option>
+			<option value="url('/hydrangea.jpg')">紫陽花</option>
+			<option value="url('/summer_night.jpg')">夏の夜</option>
+			<option value="url('/firework6.jpg')">花火</option>
+			<option value="url('/ocean4.jpg')">海</option>
+			<option value="url('/ocean2.jpg')">夕暮れ</option>
+			<option value="url('/mtfuji2.jpg')">雪嶺</option>
+			<option value="url('/dog2.jpg')">犬</option>
+			<option value="url('/cat_window2.jpg')">猫</option>
+			<option value="url('/desk.jpg')">デスク</option>
+			<option value="url('/room.jpg')">リビング</option>
+			<option value="url('/building.jpg')">ビル</option>
+			<option value="url('/background1.jpg')">opera</option>
                     </select>
                     <Modal
                         isOpen={isModalOpen}
