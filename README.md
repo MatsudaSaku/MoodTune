@@ -2,7 +2,7 @@
 「**書く瞑想**」と呼ばれるジャーナリングを用いて、
 
 **楽しみながら自身の目標や不安を言語化できる**。というコンセプトを掲げたアプリです。
-![moodtune1](https://github.com/MatsudaSaku/MoodTune/assets/149235059/265f42cb-1361-4d16-bfa0-cad1506e7507)
+![moodtune11](https://github.com/MatsudaSaku/MoodTune/assets/149235059/9c2b7db0-5906-44ff-9ae7-a96c2c2a8275)
 
 URL: https://mood-tune.com/
  (ログインにはSpotifyアカウントが必要です)
@@ -31,36 +31,40 @@ URL: https://mood-tune.com/
 ## 使用方法
 
 - 1.好きな背景を設定し、ジャーナリングをする
-  ![moodtune2](https://github.com/MatsudaSaku/MoodTune/assets/149235059/ad7901bd-aa55-4f06-b955-fe116fe40de8)
+ ![moodtune13](https://github.com/MatsudaSaku/MoodTune/assets/149235059/66568f09-3590-4ae3-ad43-ab5245ed03de)
 
 - 2.「保存して解析」をクリック。保存したくない場合は「解析のみ」をクリック
-- 3.現在の気分が数値化される。そこからおススメされる文字をクリック
- ![moodtune3](https://github.com/MatsudaSaku/MoodTune/assets/149235059/36745f87-274c-4d98-be7d-bb1e767b40af)
+- 3.現在の気分が数値化される。そこからオススメされる文字をクリック
+ ![moodtune14](https://github.com/MatsudaSaku/MoodTune/assets/149235059/f1843d90-e944-4164-9bc3-735d0bca718d)
   
-- 4.レコメンド画面が表示される。「更新」をクリックで先ほどと同じ指定の曲解析情報に一致した別の曲が表示。音楽の視聴
+- 4.レコメンド画面が表示される。「更新」をクリックで同じオススメの曲解析情報に一致した別の曲が表示。音楽の視聴
 
-![moodtune5](https://github.com/MatsudaSaku/MoodTune/assets/149235059/2b454e33-2eaa-4e47-bdb0-58bbce2a7937)
+![moodtune15](https://github.com/MatsudaSaku/MoodTune/assets/149235059/6827f6a7-4e0a-4726-ad85-354d4c2da495)
+
 ![moodtune7](https://github.com/MatsudaSaku/MoodTune/assets/149235059/458788b9-4d96-4340-a6c7-0665ce44f232)
 
 - 5.ジャーナリング画面の履歴で今までの文章を読み返し、自分自身を振り返る
-![moodtune9](https://github.com/MatsudaSaku/MoodTune/assets/149235059/ba7e8ca7-4378-4aaa-9471-88af96620df9)
+![moodtune16](https://github.com/MatsudaSaku/MoodTune/assets/149235059/d515727b-7709-4fd8-bd2a-3b6c6a31d9ee)
+
+
 ＊ChatGPTからの質問に答え、ストレスなどの解析をしてもらいながら、自身の答えを振り返る。
 
-![moodtune8](https://github.com/MatsudaSaku/MoodTune/assets/149235059/a6832424-cbd0-45be-bafa-c2d0087505a8)
+![moodtune17](https://github.com/MatsudaSaku/MoodTune/assets/149235059/2b02f469-1645-4ef3-82db-a9289a855614)
+
 ＊気分とジャンルを選択して音楽の推薦だけを手早く受ける。などもできます。
 
-![moodtune4](https://github.com/MatsudaSaku/MoodTune/assets/149235059/2f433f01-7bf4-4503-ad49-8c7ee1e94629)
+![moodtune18](https://github.com/MatsudaSaku/MoodTune/assets/149235059/b1dc50d9-bff3-409a-9ee3-13b89724675a)
 ## 機能一覧
 ### ユーザー利用機能
 - Spotifyアカウントを利用したユーザー登録(OAuth認証)
 
 ### ジャーナリング機能
 - ジャーナリングをする際の背景画像を選択する機能
-- ジャーナル(ジャーナリングで作成した文章)の保存、履歴機能
+- ジャーナル(ジャーナリングで作成した文章)の保存、閲覧、削除機能
 
 ### ChatGPT
 - ChatGPT機能を用いたジャーナル内容から解析した気分の評価
-- 質問から現在のストレスなどの解析をする、ChatGPTとの会話機能
+- 質問から現在のストレスなどの解析をする、ChatGPTとの会話機能、口調の選択機能
 
 ### 音楽提供機能
 - クリックのみで気分とジャンルを選択し、音楽のオススメのみ受ける機能
