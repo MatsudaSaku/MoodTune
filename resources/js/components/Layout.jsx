@@ -1,5 +1,5 @@
 import styles from "../../css/app.module.css";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Chat from "./Chat";
 import { MoodGenreList } from "./MoodGenreList";
 import { Journaling } from "./Journaling";
@@ -17,6 +17,8 @@ export default function RootLayout({ children }) {
     const [showMusic, setShowMusic] = useState(false);
     const [showJournaling, setShowJournaling] = useState(false);
     const navigate = useNavigate();
+    const menuRef = useRef(null);
+    const toggleRef = useRef(null);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -43,6 +45,29 @@ export default function RootLayout({ children }) {
         }
     };
 
+    const handleClickOutside = (event) => {
+        if (
+            menuRef.current &&
+            !menuRef.current.contains(event.target) &&
+            toggleRef.current &&
+            !toggleRef.current.contains(event.target)
+        ) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen]);
+
     if (showChat) {
         return <Chat />;
     }
@@ -58,7 +83,6 @@ export default function RootLayout({ children }) {
     return (
         <div>
             <header>
-                {/* FOT-UD角ゴ_ラージ Pr6N Adobe font */}
                 <script
                     dangerouslySetInnerHTML={{
                         __html: `
@@ -78,7 +102,6 @@ export default function RootLayout({ children }) {
             </header>
             <nav className={styles.navWrapper}>
                 <div className={styles.navInner}>
-                    {/* <div></div> 左端の空の要素 */}
                     <h1 className={styles.navTitle}>
                         <button
                             onClick={toggleJournaling}
@@ -94,11 +117,20 @@ export default function RootLayout({ children }) {
                         </button>
                     </h1>
                     <div className={styles.toggleWrapper}>
-                        <button className={styles.toggle} onClick={toggleMenu}>
-                            <span>☰</span>
+                        <button
+                            className={`${styles.toggle} ${
+                                isOpen ? styles.active : ""
+                            }`}
+                            onClick={toggleMenu}
+                            ref={toggleRef}
+                        >
+                            <span></span>
                         </button>
                         {isOpen && (
-                            <div className="menu">
+                            <div
+                                className={`${styles.menu} ${styles.open}`}
+                                ref={menuRef}
+                            >
                                 <button onClick={toggleJournaling}>
                                     Journaling
                                 </button>

@@ -20,18 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::post('/refresh-token', [AuthController::class, 'refreshToken']);
-
-/*Route::middleware('auth')->group(function () {
-    Route::post('/refresh-token', [AuthController::class, 'refreshToken']);
-});*/
-
-//Route::post('/login', [AuthController::class, 'login']);
-
 Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/saveJournaling', [JournalingController::class, 'store']);
     Route::get('/showJournaling/{id}', [JournalingController::class, 'show']);
     Route::get('/showJournaling', [JournalingController::class, 'index']);
+    Route::delete('/deleteJournaling/{id}',[JournalingController::class, 'destroy']);
 });

@@ -67,4 +67,21 @@ class JournalingController extends Controller
 
         return response()->json($journalings);
     }
+
+    public function destroy($id)
+    {
+        try {
+            $journal = Journaling::findOrFail($id);
+
+            if ($journal->user_id !== Auth::id()) {
+                return response()->json(['error' => '許可されていない操作です'], 403);
+            }
+
+            $journal->delete();
+
+            return response()->json(['message' => 'ジャーナルエントリが削除されました'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'ジャーナルエントリの削除中にエラーが発生しました'], 500);
+        }
+    }
 }

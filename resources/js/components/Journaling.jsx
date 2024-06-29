@@ -34,6 +34,7 @@ export function Journaling() {
     const [selectedJournalingTitle, setSelectedJournalingTitle] = useState("");
     const [selectedJournalingCreatedAt, setSelectedJournalingCreatedAt] =
         useState("");
+    const [selectedJournalingId, setSelectedJournalingId] = useState(null);
 
     useEffect(() => {
         if (isConversationHistoryUpdated) {
@@ -255,7 +256,8 @@ export function Journaling() {
             const initialSystemMessage = {
                 role: "system",
                 content:
-                    "ユーザーの言葉を解析して、四つの感情である、興奮、不安、悲しみ、楽しみ、を四つ全部で100としてそれぞれの現在の感情を数値で表してください。書き方は、　興奮: 25 不安: 25 悲しみ: 25 楽しみ: 25　とだけ書いてください。短ければERRORとだけ表示してください。",
+                    //"ユーザーの言葉を解析して、四つの感情である、興奮、不安、悲しみ、楽しみ、を四つ全部で100としてそれぞれの現在の感情を数値で表してください。書き方は、　興奮: 25 不安: 25 悲しみ: 25 楽しみ: 25　とだけ書いてください。短ければERRORとだけ表示してください。",
+                    "ユーザーの言葉を解析して、四つの感情である、興奮、不安、悲しみ、楽しみ、をそれぞれ現在の感情を最大100として数値で表してください。書き方は、　興奮:100 不安:100 悲しみ:100 楽しみ:100　とだけ書いてください。短ければERRORとだけ表示してください。",
             };
             const updatedHistory = [
                 ...conversationHistory,
@@ -282,7 +284,7 @@ export function Journaling() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": csrfToken,
+                     "X-CSRF-TOKEN": csrfToken,
                 },
                 body: JSON.stringify({ messages: validMessages }),
             });
@@ -293,9 +295,6 @@ export function Journaling() {
             }
 
             const data = await response.json();
-
-	console.log("API Response:", data);
-
             const newMessage = {
                 role: "assistant",
                 content: data.choices[0].message.content,
@@ -351,7 +350,7 @@ export function Journaling() {
         try {
             const token = sessionStorage.getItem("token");
 
-	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+	 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
             console.log("Token:", token);
             const response = await fetch("/api/saveJournaling", {
@@ -359,7 +358,7 @@ export function Journaling() {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
-		"X-CSRF-TOKEN": csrfToken,
+		 "X-CSRF-TOKEN": csrfToken,
                 },
                 body: JSON.stringify({ title, content }),
             });
@@ -376,11 +375,10 @@ export function Journaling() {
     const fetchJournalingTitles = async () => {
         try {
             const token = sessionStorage.getItem("token");
-	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
             const response = await fetch(`/api/showJournaling`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
-		"X-CSRF-TOKEN": csrfToken,
                 },
             });
             if (!response.ok) {
@@ -397,11 +395,9 @@ export function Journaling() {
     const fetchJournalingContent = async (id) => {
         try {
             const token = sessionStorage.getItem("token");
-	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const response = await fetch(`/api/showJournaling/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
-		"X-CSRF-TOKEN": csrfToken,
                 },
             });
             if (!response.ok) {
@@ -414,6 +410,7 @@ export function Journaling() {
             setSelectedJournalingContent(data.content);
             setSelectedJournalingTitle(data.title);
             setSelectedJournalingCreatedAt(data.created_at);
+            setSelectedJournalingId(id);
             setIsTitleModalOpen(true);
         } catch (error) {
             console.error("Error fetching journaling content:", error);
@@ -456,7 +453,32 @@ export function Journaling() {
         ));
     };
 
-    const TitleModal = ({ isOpen, onClose, content, createdAt, title }) => {
+    const TitleModal = ({
+        isOpen,
+        onClose,
+        content,
+        createdAt,
+        title,
+        onDelete,
+    }) => {
+        const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
+        const handleDeleteClick = () => {
+            event.stopPropagation();
+            setIsConfirmOpen(true);
+        };
+
+        const handleConfirmDelete = () => {
+            event.stopPropagation();
+            setIsConfirmOpen(false);
+            onDelete();
+        };
+
+        const handleCancelDelete = () => {
+            event.stopPropagation();
+            setIsConfirmOpen(false);
+        };
+
         if (!isOpen) return null;
         return (
             <div className="titlemodal">
@@ -476,8 +498,60 @@ export function Journaling() {
                         {convertNewlinesToBreaks(content)}
                     </div>
                 </div>
+                <button className="delete-button" onClick={handleDeleteClick}>
+                    Delete
+                </button>
+                {isConfirmOpen && (
+                    <div className="confirm-modal">
+                        <div className="confirm-modal-content">
+                            <p>本当に削除してもよろしいですか？</p>
+                            <div className="button-group">
+                                <button
+                                    className="YES"
+                                    onClick={handleConfirmDelete}
+                                >
+                                    はい
+                                </button>
+                                <button
+                                    className="NO"
+                                    onClick={handleCancelDelete}
+                                >
+                                    いいえ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         );
+    };
+
+    const handleDeleteJournaling = async (id) => {
+        try {
+            const token = sessionStorage.getItem("token");
+	  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const response = await fetch(`/api/deleteJournaling/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+		 "X-CSRF-TOKEN": csrfToken,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error("ジャーナルの削除に失敗しました");
+            }
+
+            setIsTitleModalOpen(false);
+            setJournalingTitles(
+                journalingTitles.filter((journaling) => journaling.id !== id)
+            );
+            setSelectedJournalingContent("");
+            setSelectedJournalingTitle("");
+            setSelectedJournalingCreatedAt("");
+        } catch (error) {
+            console.error("ジャーナルの削除に失敗しました:", error);
+        }
     };
 
     const handleInputChange = (event) => {
@@ -580,8 +654,7 @@ export function Journaling() {
                         onChange={handleTitleChange}
                     >
                         <option value="">Journaling History</option>
-			{journalingTitles && journalingTitles.length > 0 && 
-                        journalingTitles.map((journaling) => (
+                        {journalingTitles.map((journaling) => (
                             <option key={journaling.id} value={journaling.id}>
                                 {truncateTitle(journaling.title, 7)} |{" "}
                                 {new Date(
@@ -599,6 +672,8 @@ export function Journaling() {
                         onChange={handleBackgroundChange}
                     >
                         <option value="">シンプル</option>
+                        <option value="url('/background1.jpg')">opera</option>
+                        <option value="url('/background2.jpg')">空</option>
 			<option value="url('/background2.jpg')">薄明</option>
 			<option value="url('/bonfire.jpg')">焚火</option>
                         <option value="url('/rain.jpg')">雨跡</option>
@@ -629,6 +704,9 @@ export function Journaling() {
                         content={selectedJournalingContent}
                         createdAt={selectedJournalingCreatedAt}
                         title={selectedJournalingTitle}
+                        onDelete={() =>
+                            handleDeleteJournaling(selectedJournalingId)
+                        }
                     />
                 </div>
             ) : (
@@ -637,3 +715,4 @@ export function Journaling() {
         </Layout>
     );
 }
+
