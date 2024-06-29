@@ -672,8 +672,6 @@ export function Journaling() {
                         onChange={handleBackgroundChange}
                     >
                         <option value="">シンプル</option>
-                        <option value="url('/background1.jpg')">opera</option>
-                        <option value="url('/background2.jpg')">空</option>
 			<option value="url('/background2.jpg')">薄明</option>
 			<option value="url('/bonfire.jpg')">焚火</option>
                         <option value="url('/rain.jpg')">雨跡</option>
