@@ -15,7 +15,7 @@ const modals = [
         ],
         media: {
             type: "video",
-            src: "/MoodTune - Google Chrome 2024-06-26 19-58-18.mp4",
+            src: "/MovieMoodTune1.mp4",
         },
     },
     {
@@ -32,7 +32,7 @@ const modals = [
             "書き綴った文章を見直し、自分の本心から出た言葉と向き合うことで、自分でも気づかなかった不安や望みを言葉にする。",
             "それがジャーナリングの目的です。",
         ],
-        media: { type: "image", src: "/moodtune2.png" },
+        media: { type: "image", src: "/moodtune13.png" },
     },
     {
         number: "1.",
@@ -45,7 +45,7 @@ const modals = [
             "もし現在Spotifyにログインされている場合は認証ページには遷移されず、認可画面が表示されます。",
             "「承認」を選択して進んでください。",
         ],
-        media: { type: "image", src: "/moodtune1.png" },
+        media: { type: "image", src: "/moodtune10.png" },
     },
     {
         number: "2.",
@@ -58,7 +58,7 @@ const modals = [
             "一番書きやすい環境で、気持ちのままにジャーナリングを行ってください。",
             "タイトルは入力せずとも次に進むことができます。",
         ],
-        media: { type: "image", src: "/moodtune1.png" },
+        media: { type: "image", src: "/moodtune12.png" },
     },
     {
         number: "3.",
@@ -71,7 +71,7 @@ const modals = [
             "解析が終了すると、現在の気分の数値と、その数値から割り出した音楽レコメンドリンクが生成されます。",
             "リンクをクリックでレコメンド画面へ遷移します。",
         ],
-        media: { type: "image", src: "/moodtune1.png" },
+        media: { type: "image", src: "/moodtune14.png" },
     },
     {
         number: "4.",
@@ -83,7 +83,7 @@ const modals = [
             "",
             "もし気に入った音楽がなければ下の更新ボタンをクリックで、同じレコメンド内容の違った音楽が表示され直します。",
         ],
-        media: { type: "image", src: "/moodtune1.png" },
+        media: { type: "image", src: "/moodtune15.png" },
     },
     {
         number: "5.",
@@ -97,7 +97,7 @@ const modals = [
             "",
             "自動で作成した日時が保存されるので、その時間とジャーナルの内容を見て自身の変化を実感することができます。",
         ],
-        media: { type: "image", src: "/moodtune1.png" },
+        media: { type: "image", src: "/moodtune16.png" },
     },
     {
         number: "",
@@ -111,7 +111,7 @@ const modals = [
             "右下にあるメニューから会話相手を選択できます。好きな相手と会話を楽しむことができます。",
             "ジャーナリングと合わせて、自らの振り返りに使用してみてください。",
         ],
-        media: { type: "image", src: "/moodtune1.png" },
+        media: { type: "image", src: "/moodtune17.png" },
     },
     {
         number: "",
@@ -126,7 +126,7 @@ const modals = [
             "",
             "今の気分にあった音楽を探したいときに使用してみてください。",
         ],
-        media: { type: "image", src: "/moodtune1.png" },
+        media: { type: "image", src: "/moodtune18.png" },
     },
 ];
 
