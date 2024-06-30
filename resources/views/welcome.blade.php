@@ -49,7 +49,6 @@
         const spotifyAccessToken = "{{ session('spotify_access_token') }}";
         if (spotifyAccessToken) {
             sessionStorage.setItem('spotify_access_token', spotifyAccessToken);
- 		console.log("Spotify Access Token set:", spotifyAccessToken);
    	} else {
        		console.log("Spotify Access Token not found in session.");
     	}
@@ -57,7 +56,6 @@
         const laravelToken = "{{ session('token') }}";
         if (laravelToken) {
             sessionStorage.setItem('token', laravelToken);
-        	console.log("Laravel Token set:", laravelToken);
     	} else {
         	console.log("Laravel Token not found in session.");
 	}
@@ -65,7 +63,6 @@
         const userId = "{{ session('user_id')}}";
         if (userId){
             sessionStorage.setItem('user_id', userId);
-        	console.log("User ID set:", userId);
     	} else {
         	console.log("User ID not found in session.");
     	}

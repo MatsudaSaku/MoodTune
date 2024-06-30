@@ -51,21 +51,9 @@ export function Journaling() {
         const laravelToken = sessionStorage.getItem("token");
         const userId = sessionStorage.getItem("user_id");
 
-        if (spotifyAccessToken) {
-            console.log("Spotify Access Token:", spotifyAccessToken);
-        }
-        if (laravelToken) {
-            console.log("Laravel Token:", laravelToken);
-        }
-        if (userId) {
-            console.log("User ID:", userId);
-        }
         handleHistoryClick();
     }, []);
 
-    useEffect(() => {
-        console.log("Updated conversation history:", conversationHistory);
-    }, [conversationHistory]);
 
     useEffect(() => {
         if (backgroundImage) {
@@ -352,7 +340,6 @@ export function Journaling() {
 
 	 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            console.log("Token:", token);
             const response = await fetch("/api/saveJournaling", {
                 method: "POST",
                 headers: {

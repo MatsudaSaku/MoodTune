@@ -23,14 +23,12 @@ class AuthController extends Controller
 
     public function handleSpotifyCallback()
     {
-        Log::info('Spotify callback handler started');
 
         try {
             /** @var SocialiteProviders\Spotify\Provider $driver */
             $driver = Socialite::driver('spotify');
             $spotifyUser = $driver ->stateless()->user();
 
-            Log::info('Spotify user retrieved', ['user' => $spotifyUser]);
 
 	    $validatedData = $this->validateSpotifyUser($spotifyUser);
 
@@ -45,16 +43,11 @@ class AuthController extends Controller
                     'spotify_token_expires_at' => now()->addSeconds($spotifyUser->expiresIn),
                 ]
             );
-            Log::info('Before Auth::login: ', ['user' => $user]);
             Auth::login($user, true);
 
             $userId = $user->id;
-            Log::info('User ID ', [$userId]);
             $tokenResult = $user->createToken('Laravel Token');
             $token = $tokenResult->accessToken;
-            Log::info('Generated Laravel Token: ' . $token);
-            Log::info('User authenticated: ' . Auth::check());
-            Log::info('Authenticated User: ', ['user' => Auth::user()]);
 
             session(['spotify_access_token' => $spotifyUser->token,
 			'token' => $tokenResult->accessToken,
@@ -73,7 +66,6 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             Log::error('Spotify認証エラー: ' . $e->getMessage());
             Log::error('例外の詳細: ' . $e);
-            //return redirect('/error')->withErrors('認証に失敗しました: ' . $e->getMessage());
         }
     }
 
@@ -96,7 +88,6 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Log::info('Logout method called');
 
         $user = Auth::user();
 
@@ -106,7 +97,6 @@ class AuthController extends Controller
             $user->spotify_token_expires_at = null;
             $user->save();
     
-            Log::info('Spotify tokens cleared for user ID: ' . $user->id);
         }
     
         Auth::logout();
@@ -114,7 +104,6 @@ class AuthController extends Controller
         $request->session()->flush();
         $request->session()->regenerateToken();
 
-        Log::info('User logged out successfully');
 
         return response()->json(['message' => 'Logged out successfully']);
     }
@@ -122,8 +111,6 @@ class AuthController extends Controller
     public function refreshToken(Request $request)
     {
         $user = Auth::user();
-        Log::info('User data:', ['user' => $user]);
-        dd($user);
         $refreshToken = $user->spotify_refresh_token;
     
         if (!$refreshToken) {
@@ -144,68 +131,11 @@ class AuthController extends Controller
         $data = $response->json();
         $user->spotify_access_token = $data['access_token'];
         
-        //$user->update(['spotify_access_token' => $data['access_token']]);
         $user->spotify_access_token = $data['access_token'];
-        //$user->save();
         session(['spotify_access_token' => $data['access_token']]);
     
         return response()->json([
             'access_token' => $data['access_token'],
         ]);
     }
-    /*public function refreshToken(Request $request)
-    {
-        $refreshToken = $request->input('refresh_token');
-
-        $response = Http::asForm()->post('https://accounts.spotify.com/api/token', [
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $refreshToken,
-            'client_id' => env('SPOTIFY_CLIENT_ID'),
-            'client_secret' => env('SPOTIFY_CLIENT_SECRET'),
-        ]);
-
-        if ($response->failed()) {
-            return response()->json(['error' => 'Unable to refresh token'], 400);
-        }
-
-        $data = $response->json();
-
-        return response()->json([
-            'access_token' => $data['access_token'],
-        ]);
-    }*/
-/*
-    public function refreshToken(Request $request)
-    {
-        $user = Auth::user();
-
-        if (!$user) {
-            return response()->json(['error' => 'User not authenticated'], 401);
-        }
-
-        $refreshToken = $user->spotify_refresh_token;
-
-        if (!$refreshToken) {
-            return response()->json(['error' => 'Refresh token not found'], 400);
-        }
-
-        $response = Http::asForm()->post('https://accounts.spotify.com/api/token', [
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $refreshToken,
-            'client_id' => env('SPOTIFY_CLIENT_ID'),
-            'client_secret' => env('SPOTIFY_CLIENT_SECRET'),
-        ]);
-
-        if ($response->failed()) {
-            return response()->json(['error' => 'Unable to refresh token'], 400);
-        }
-
-        $data = $response->json();
-
-        $user->update(['spotify_access_token' => $data['access_token']]);
-
-        return response()->json([
-            'access_token' => $data['access_token'],
-        ]);
-    }*/
 }
