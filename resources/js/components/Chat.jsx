@@ -121,7 +121,7 @@ function Chat() {
         <Layout>
             <div className={styles.chat_container}>
                 <h3 className={styles.explanation}>
-                    五つの質問の答えから「ストレス」「リラックス」「ポジティブ」「ネガティブ」の計測をします。
+                    ５つの質問の答えから「ストレス」「リラックス」「ポジティブ」「ネガティブ」の計測をします。
                 </h3>
                 {conversationHistory
                     .filter((item) => item.role !== "system")

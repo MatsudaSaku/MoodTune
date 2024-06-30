@@ -429,6 +429,7 @@ export function Journaling() {
             setIsLoadingHistory(true);
             fetchJournalingContent(journalingId);
         }
+        event.target.selectedIndex = 0;
     };
 
     const truncateTitle = (title, maxLength) => {
