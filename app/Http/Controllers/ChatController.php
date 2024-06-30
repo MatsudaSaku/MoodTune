@@ -15,7 +15,6 @@ class ChatController extends Controller
         $messages[] = $userMessage;
 
         $apiKey = env('OPENAI_API_KEY');
-        Log::info('API Key: ' . $apiKey);
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $apiKey,

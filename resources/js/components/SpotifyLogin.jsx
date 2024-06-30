@@ -140,12 +140,10 @@ const SpotifyLogin = () => {
     };
 
     const openModal = () => {
-        console.log("openModal called");
         setIsModalOpen(true);
     };
 
     const closeModal = () => {
-        console.log("closeModal called");
         setIsModalOpen(false);
         setSlideDirection("");
     };

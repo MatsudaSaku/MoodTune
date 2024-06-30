@@ -13,8 +13,6 @@ class JournalingController extends Controller
 {
     public function store(Request $request)
     {
-        Log::info('Store method called');
-        Log::info('Request data: ', $request->all());
 
         if (!Auth::check()) {
             Log::error('User is not authenticated');
@@ -22,7 +20,6 @@ class JournalingController extends Controller
         }
 
         $userId = Auth::id();
-        Log::info('Authenticated User ID: ' . $userId);
 
         try {
 	$title = trim($request->title) ?: "無題";
@@ -34,7 +31,6 @@ class JournalingController extends Controller
             $journal->updated_at = Carbon::now();
             $journal->save();
 
-            Log::info('Journal entry saved successfully');
 
             return response()->json(["message" => "Journal entry saved successfully"], 200);
         }catch (\Exception $e){

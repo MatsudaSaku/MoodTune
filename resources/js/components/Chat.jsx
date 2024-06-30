@@ -14,7 +14,6 @@ function Chat() {
     }, []);
 
     useEffect(() => {
-        console.log("Updated conversation history:", conversationHistory);
         scrollToBottom();
     }, [conversationHistory]);
 
