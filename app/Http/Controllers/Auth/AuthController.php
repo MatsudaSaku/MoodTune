@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -30,6 +31,8 @@ class AuthController extends Controller
             $spotifyUser = $driver ->stateless()->user();
 
             Log::info('Spotify user retrieved', ['user' => $spotifyUser]);
+
+	    $validatedData = $this->validateSpotifyUser($spotifyUser);
 
             $user = User::updateOrCreate(
                 ['spotify_id' => $spotifyUser->getId()],
@@ -72,6 +75,23 @@ class AuthController extends Controller
             Log::error('例外の詳細: ' . $e);
             //return redirect('/error')->withErrors('認証に失敗しました: ' . $e->getMessage());
         }
+    }
+
+    private function validateSpotifyUser($spotifyUser)
+    {
+        $validator = Validator::make([
+            'id' => $spotifyUser->getId(),
+            'name' => $spotifyUser->getName(),
+        ], [
+            'id' => 'required|string',
+            'name' => 'required|string',
+        ]);
+    
+        if ($validator->fails()) {
+            throw new \Exception('Spotifyユーザーデータのバリデーションに失敗しました: ' . implode(', ', $validator->errors()->all()));
+        }
+    
+        return $validator->validated();
     }
 
     public function logout(Request $request)

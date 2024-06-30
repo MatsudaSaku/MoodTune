@@ -11,11 +11,11 @@ Route::get('/auth/spotify/callback', [AuthController::class, 'handleSpotifyCallb
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('login');
 
 Route::get('/Top', function () {
     return view('welcome');
-});
+})->middleware('auth');
 
 Route::get('/chatgpt', function () {
     return view('chatgpt');

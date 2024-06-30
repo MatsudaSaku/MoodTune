@@ -33,6 +33,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 75px;
     margin-top: 20px;
     width: 100%;
 }
