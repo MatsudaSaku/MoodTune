@@ -156,7 +156,7 @@ export function GenreList({ onGenreSelect, selectedGenres }) {
                 isSelected={selectedGenres.includes("全ジャンル")}
                 defaultClass={styles.moodListPurple}
                 selectedClass={styles.selectedMoodListPurple}
-                label="全ジャンル"
+                label="おまかせ"
                 value="全ジャンル"
             />
         </div>
