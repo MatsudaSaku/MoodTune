@@ -134,7 +134,7 @@ function Chat() {
                             }
                             style={{
                                 marginBottom: "10px",
-                                padding: "5px",
+                                padding: "25px",
                                 borderBottom: "1px solid #ccc",
                             }}
                         >

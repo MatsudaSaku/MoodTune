@@ -110,7 +110,7 @@ export default function RootLayout({ children }) {
                             <img
                                 src={"/logo_dev2.png"}
                                 width={250}
-                                height={100}
+                                height={98}
                                 alt="Icon"
                                 className="plusIcon"
                             />

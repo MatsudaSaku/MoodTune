@@ -15,7 +15,7 @@ export function Journaling() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [placeholder_Text, setPlaceholder_Text] =
-        useState("気持ちのままに書いてみてください");
+        useState("気持ちのままに書いてみてください\n\n例 (※今日は散歩に行って楽しかったです)");
     const [placeholder_Title, setPlaceholder_Title] = useState("No Title");
     const [backgroundImage, setBackgroundImage] = useState("");
     const [animationClass, setAnimationClass] = useState("");
@@ -531,12 +531,8 @@ export function Journaling() {
             }
 
             setIsTitleModalOpen(false);
-            setJournalingTitles(
-                journalingTitles.filter((journaling) => journaling.id !== id)
-            );
-            setSelectedJournalingContent("");
-            setSelectedJournalingTitle("");
-            setSelectedJournalingCreatedAt("");
+            
+            handleBlur();
         } catch (error) {
             console.error("ジャーナルの削除に失敗しました:", error);
         }

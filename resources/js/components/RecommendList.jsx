@@ -132,14 +132,6 @@ export default function RecommendList({ mood, genres }) {
         fetchTracks();
     }, [fetchTracks]);
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setGradientAngle((prevAngle) => (prevAngle + 2) % 360);
-        }, 100);
-
-        return () => clearInterval(intervalId);
-    }, []);
-
     const openModal = (track) => {
         setActiveTrack(track);
         setShowModal(true);
