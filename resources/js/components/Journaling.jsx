@@ -656,18 +656,23 @@ export function Journaling() {
                         onChange={handleBackgroundChange}
                     >
                         <option value="">シンプル</option>
+			<option value="url('/dark2.jpg')">ダーク</option>
 			<option value="url('/background2.jpg')">薄明</option>
 			<option value="url('/bonfire.jpg')">焚火</option>
+			<option value="url('/okunoto.jpg')">千枚田</option>
                         <option value="url('/rain.jpg')">雨跡</option>
 			<option value="url('/hydrangea.jpg')">紫陽花</option>
 			<option value="url('/summer_night.jpg')">夏の夜</option>
 			<option value="url('/firework6.jpg')">花火</option>
 			<option value="url('/ocean4.jpg')">海</option>
+			<option value="url('/yakushimax1.jpg')">屋久島</option>
 			<option value="url('/ocean2.jpg')">夕暮れ</option>
+			<option value="url('/moon2.jpg')">満月</option>
 			<option value="url('/mtfuji2.jpg')">雪嶺</option>
 			<option value="url('/dog2.jpg')">犬</option>
 			<option value="url('/cat_window2.jpg')">猫</option>
 			<option value="url('/desk.jpg')">デスク</option>
+			<option value="url('/coffee3.jpg')">珈琲</option>
 			<option value="url('/room.jpg')">リビング</option>
 			<option value="url('/building.jpg')">ビル</option>
 			<option value="url('/background1.jpg')">opera</option>
