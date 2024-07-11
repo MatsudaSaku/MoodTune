@@ -672,7 +672,7 @@ export function Journaling() {
 			<option value="url('/dog2.jpg')">犬</option>
 			<option value="url('/cat_window2.jpg')">猫</option>
 			<option value="url('/desk.jpg')">デスク</option>
-			<option value="url('/coffee3.jpg')">珈琲</option>
+			<option value="url('/coffee.jpg')">珈琲</option>
 			<option value="url('/room.jpg')">リビング</option>
 			<option value="url('/building.jpg')">ビル</option>
 			<option value="url('/background1.jpg')">opera</option>
