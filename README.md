@@ -2,7 +2,7 @@
 「**書く瞑想**」と呼ばれるジャーナリングを用いて、
 
 **楽しみながら自身の目標や不安を言語化できる**。というコンセプトを掲げたアプリです。
-![moodtune11](https://github.com/MatsudaSaku/MoodTune/assets/149235059/9c2b7db0-5906-44ff-9ae7-a96c2c2a8275)
+<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/9c2b7db0-5906-44ff-9ae7-a96c2c2a8275" width="80%">
 
 URL: https://mood-tune.com/ ※ログインの前に以下をお読みください
 
@@ -36,32 +36,6 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 
 このプロダクトは、**音楽推薦や感情解析という小さな目的を重ねていくことで、ジャーナリングを楽しみながら継続していくことを目標としたプロダクト**です。
 
-## 使用方法
-
-- 1.好きな背景を設定し、ジャーナリングをする
- ![moodtune13](https://github.com/MatsudaSaku/MoodTune/assets/149235059/66568f09-3590-4ae3-ad43-ab5245ed03de)
-
-- 2.「保存して解析」をクリック。保存したくない場合は「解析のみ」をクリック
-- 3.現在の気分が数値化される。そこからオススメされる文字をクリック
- ![moodtune14](https://github.com/MatsudaSaku/MoodTune/assets/149235059/f1843d90-e944-4164-9bc3-735d0bca718d)
-  
-- 4.レコメンド画面が表示される。「更新」をクリックで同じオススメの曲解析情報に一致した別の曲が表示。音楽の視聴
-
-![moodtune15](https://github.com/MatsudaSaku/MoodTune/assets/149235059/6827f6a7-4e0a-4726-ad85-354d4c2da495)
-
-![moodtune7](https://github.com/MatsudaSaku/MoodTune/assets/149235059/458788b9-4d96-4340-a6c7-0665ce44f232)
-
-- 5.ジャーナリング画面の履歴で今までの文章を読み返し、自分自身を振り返る
-![moodtune16](https://github.com/MatsudaSaku/MoodTune/assets/149235059/d515727b-7709-4fd8-bd2a-3b6c6a31d9ee)
-
-
-＊ChatGPTからの質問に答え、ストレスなどの解析をしてもらいながら、自身の答えを振り返る。
-
-![moodtune17](https://github.com/MatsudaSaku/MoodTune/assets/149235059/2b02f469-1645-4ef3-82db-a9289a855614)
-
-＊気分とジャンルを選択して音楽の推薦だけを手早く受ける。などもできます。
-
-![moodtune18](https://github.com/MatsudaSaku/MoodTune/assets/149235059/b1dc50d9-bff3-409a-9ee3-13b89724675a)
 ## 機能一覧
 ### ユーザー利用機能
 - Spotifyアカウントを利用したユーザー登録(OAuth認証)
@@ -82,6 +56,38 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 - SPA
 - ジャーナリング内容とタイトルの暗号化
 - Route53による独自ドメイン、SSL化
+
+## 使用方法
+### ジャーナリング機能（メイン機能）
+
+- 1.好きな背景を設定し、ジャーナリングをする
+<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/66568f09-3590-4ae3-ad43-ab5245ed03de" width="80%">
+
+
+- 2.「保存して解析」をクリック。保存したくない場合は「解析のみ」をクリック
+- 3.現在の気分が数値化される。そこからオススメされる文字をクリック
+<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/f1843d90-e944-4164-9bc3-735d0bca718d" width="80%">
+
+  
+- 4.レコメンド画面が表示される。「更新」をクリックで同じオススメの曲解析情報に一致した別の曲が表示。音楽の視聴
+<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/6827f6a7-4e0a-4726-ad85-354d4c2da495" width="80%">
+
+<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/458788b9-4d96-4340-a6c7-0665ce44f232" width="80%">
+
+
+- 5.ジャーナリング画面の履歴で今までの文章を読み返し、自分自身を振り返る
+<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/d515727b-7709-4fd8-bd2a-3b6c6a31d9ee" width="80%">
+
+
+### Chat機能
+- ChatGPTからの質問に答え、ストレスなどの解析をしてもらいながら、自身の振り返りを行うことができます。
+<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/2b02f469-1645-4ef3-82db-a9289a855614" width="80%">
+
+### Music機能
+- 気分とジャンルを選択するだけで音楽の推薦を手早く受けることができます。
+<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/b1dc50d9-bff3-409a-9ee3-13b89724675a" width="80%">
+
+
 
 ## クラウドアーキテクチャー
 ![アーキテクチャ図2 drawio](https://github.com/MatsudaSaku/MoodTune/assets/149235059/eaf106ca-b424-4e85-b4d1-56935d816582)
