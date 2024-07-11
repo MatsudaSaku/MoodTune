@@ -531,12 +531,8 @@ export function Journaling() {
             }
 
             setIsTitleModalOpen(false);
-            setJournalingTitles(
-                journalingTitles.filter((journaling) => journaling.id !== id)
-            );
-            setSelectedJournalingContent("");
-            setSelectedJournalingTitle("");
-            setSelectedJournalingCreatedAt("");
+            
+            handleBlur();
         } catch (error) {
             console.error("ジャーナルの削除に失敗しました:", error);
         }
