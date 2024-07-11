@@ -15,7 +15,7 @@ export function Journaling() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [placeholder_Text, setPlaceholder_Text] =
-        useState("気持ちのままに書いてみてください\n\n例 (※今日は散歩に行って楽しかったです)");
+        useState("気持ちのままに書いてみてください\n\n※例「今日は散歩に行って楽しかったです」");
     const [placeholder_Title, setPlaceholder_Title] = useState("No Title");
     const [backgroundImage, setBackgroundImage] = useState("");
     const [animationClass, setAnimationClass] = useState("");
