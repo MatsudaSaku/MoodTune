@@ -18,7 +18,6 @@ body {
     animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
     overflow: hidden;
-    background-position: center;
 }
 
 .background-overlay {
@@ -188,6 +187,10 @@ body {
 
     .save_button {
         margin: 5px 5px 5px 30px;
+    }
+
+    .journaling_container {
+        background-position: center;
     }
 }
 
