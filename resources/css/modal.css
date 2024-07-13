@@ -146,3 +146,37 @@ p {
     background-color: #ff1a1a;
 }
 
+
+@media (max-width: 1280px) {
+    .titlemodal-content {
+        width: 80%;
+    }
+
+    .delete-button {
+        position: absolute;
+        top: 35px;
+        right: auto;
+        left: 5%;
+        padding: 10px 20px;
+        background-color: #adadad;
+        color: white;
+    }
+}
+
+@media (max-width: 960px) {
+    .modal-content {
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        font-size: 15px;
+        background-color: rgba(87, 87, 87, 0.8);
+        border-radius: 4px;
+        color: rgb(255, 255, 255);
+    }
+
+    .titlemodal-content {
+        width: 80%;
+        font-size: 15px;
+    }
+}

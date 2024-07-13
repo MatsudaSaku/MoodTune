@@ -188,3 +188,36 @@
     overflow: hidden;
     text-indent: 100%;
 }
+
+@media (max-width: 960px) {
+    .heading {
+        margin: 5px 0 5px;
+        text-align: center;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .recommend {
+        padding-top: 30px;
+    }
+
+    .recommendList li {
+        max-width: 90px;
+        margin-left: 0;
+        padding: 10px 13px;
+        background-color: #eaeaea;
+        border-radius: 10px;
+    }
+
+    .recommendList li img {
+        max-width: 90px;
+    }
+}
+
+@media (max-width: 620px) {
+    .recommendList {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+    }
+}
+
