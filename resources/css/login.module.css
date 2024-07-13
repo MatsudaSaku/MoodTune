@@ -188,3 +188,20 @@ body {
     }
 }
 
+@media (max-width: 960px) {
+    .welcome_message {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .slide_button_left,
+    .slide_button_right {
+        color: #d3d3d3;
+        font-size: 34px;
+    }
+
+    .slide_button_left:hover,
+    .slide_button_right:hover {
+        color: #616161;
+    }
+}

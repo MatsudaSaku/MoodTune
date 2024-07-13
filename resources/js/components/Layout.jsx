@@ -112,7 +112,7 @@ export default function RootLayout({ children }) {
                                 width={250}
                                 height={98}
                                 alt="Icon"
-                                className="plusIcon"
+                                className={styles.plusIcon}
                             />
                         </button>
                     </h1>
