@@ -372,3 +372,70 @@ body {
     opacity: 0.9;
 }
 
+@media (max-width: 960px) {
+    .navWrapper {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+        justify-content: space-between;
+        display: flex;
+        width: 100%;
+        height: 30px;
+        align-items: center;
+        padding: 0 0px;
+        box-shadow: 0px 10px 10px -6px rgba(71, 71, 71, 0.1);
+        background-color: #fff;
+    }
+
+    .navTitle {
+        display: flex;
+        background-color: #fff;
+        border-style: none;
+        margin-left: 20%;
+        cursor: pointer;
+    }
+
+    .toggle {
+        margin-right: 150px;
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 20px;
+        background-color: #acbcc7;
+        text-align: center;
+        justify-content: center;
+        font-size: 14px;
+    }
+
+    .navInner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        font-size: 1.5rem;
+    }
+
+    .plusIcon {
+        width: 50px;
+        height: 24px;
+    }
+
+    .home {
+        padding-top: 20px;
+    }
+
+    .buttonStyle {
+        width: auto;
+    }
+}
+
+@media (max-width: 440px) {
+    .circles {
+        height: 170vh;
+    }
+}
+

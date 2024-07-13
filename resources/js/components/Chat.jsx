@@ -37,6 +37,7 @@ function Chat() {
                     それまでのユーザーの回答を振り返り解析して、
                     四つの感情である、ストレス、リラックス、ポジティブ、ネガティブ、
                     をそれぞれ最大で100として現在の感情を数値で表してください。
+		    その数値を元におススメの音楽のジャンルを挙げてください。
                     ${toneMessageMap[selectedTone]}
                     ユーザーの答えに対してはコメントしてください。
                     質問はある程度の長さで、一つずつおこなってください
@@ -160,6 +161,9 @@ function Chat() {
                     placeholder="Type your message here..."
                     className={styles.chat_input}
                 />
+	       <button type="submit" className={styles.send_button}>
+                    ↑
+                </button>
                 <select
                     value={tone}
                     onChange={handleToneChange}
