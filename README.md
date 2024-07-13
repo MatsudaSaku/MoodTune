@@ -73,7 +73,7 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 - 4.レコメンド画面が表示される。「更新」をクリックで同じオススメの曲解析情報に一致した別の曲が表示。音楽の視聴
 <img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/6827f6a7-4e0a-4726-ad85-354d4c2da495" width="80%">
 
-<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/458788b9-4d96-4340-a6c7-0665ce44f232" width="80%">
+<img src="https://github.com/user-attachments/assets/c89f12e6-6aef-43a7-bc97-6ad544676126" width="80%">
 
 
 - 5.ジャーナリング画面の履歴で今までの文章を読み返し、自分自身を振り返る
@@ -82,7 +82,7 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 
 ### Chat機能
 - ChatGPTからの質問に答え、ストレスなどの解析をしてもらいながら、自身の振り返りを行うことができます。
-<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/2b02f469-1645-4ef3-82db-a9289a855614" width="80%">
+<img src="https://github.com/user-attachments/assets/880ab7f2-cdce-4130-9bab-9b9246ff6832" width="80%">
 
 ### Music機能
 - 気分とジャンルを選択するだけで音楽の推薦を手早く受けることができます。
