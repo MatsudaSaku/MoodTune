@@ -169,9 +169,9 @@ body {
 
 .media {
     display: block;
-    max-width: 100%;
+    max-width: 95%;
     height: auto;
-    margin: 20px 0;
+    margin: 20px auto;
     border: 2px solid #ccc;
     padding: 5px;
     border-radius: 10px;

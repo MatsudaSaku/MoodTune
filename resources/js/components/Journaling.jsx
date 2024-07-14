@@ -538,6 +538,12 @@ export function Journaling() {
         }
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+        }
+    };
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         if (name === "title") {
@@ -590,6 +596,7 @@ export function Journaling() {
                                 className={styles.journaling_title}
                                 onFocus={handleFocus_title}
                                 onBlur={handleBlur}
+				onKeyDown={handleKeyDown}
                             />
                             <textarea
                                 type="text"
