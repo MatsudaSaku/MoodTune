@@ -353,7 +353,6 @@ export function Journaling() {
             if (!response.ok) {
                 throw new Error("レスポンス取得失敗");
             }
-            console.log("レスポンス取得成功");
         } catch (error) {
             console.error("saveJournaling失敗:", error);
         }

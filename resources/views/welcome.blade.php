@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link rel="icon" href="https://mood-tune.com/logo_dev5.png" type="image/png">
         <title>MoodTune</title>
 
  <!-- CSRF Token -->
@@ -49,22 +49,14 @@
         const spotifyAccessToken = "{{ session('spotify_access_token') }}";
         if (spotifyAccessToken) {
             sessionStorage.setItem('spotify_access_token', spotifyAccessToken);
-   	} else {
-       		console.log("Spotify Access Token not found in session.");
-    	}
-
+   	}
         const laravelToken = "{{ session('token') }}";
         if (laravelToken) {
             sessionStorage.setItem('token', laravelToken);
-    	} else {
-        	console.log("Laravel Token not found in session.");
-	}
-
+    	}
         const userId = "{{ session('user_id')}}";
         if (userId){
             sessionStorage.setItem('user_id', userId);
-    	} else {
-        	console.log("User ID not found in session.");
     	}
     </script>
 

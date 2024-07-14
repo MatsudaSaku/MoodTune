@@ -89,8 +89,6 @@ export default function RecommendList({ mood, genres }) {
         setIsLoading(true);
 
         try {
-            console.log("Fetching tracks with URL:", url);
-
             let response = await fetch(url, {
                 method: "GET",
                 headers: {
@@ -118,7 +116,6 @@ export default function RecommendList({ mood, genres }) {
             }
 
             const data = await response.json();
-            console.log("Fetched data:", data);
 
             setTracks(data.tracks);
             setIsLoading(false);
