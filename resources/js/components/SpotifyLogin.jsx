@@ -111,7 +111,7 @@ const modals = [
             "右下にあるメニューから会話相手を選択できます。好きな相手と会話を楽しむことができます。",
             "ジャーナリングと合わせて、自らの振り返りに使用してみてください。",
         ],
-        media: { type: "image", src: "/moodtune17.png" },
+        media: { type: "image", src: "/moodtune20.png" },
     },
     {
         number: "",

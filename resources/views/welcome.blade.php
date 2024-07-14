@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="{{ asset('logo_dev5.png') }}" type="image/x-icon">
+	<link rel="icon" href="https://mood-tune.com/logo_dev5.png" type="image/png">
         <title>MoodTune</title>
 
  <!-- CSRF Token -->
