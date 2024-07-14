@@ -91,6 +91,12 @@ function Chat() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (!messageInput) {
+            alert("メッセージを入力してください。");
+            return;
+        }
+
         const userMessage = { role: "user", content: messageInput };
         const updatedHistory = [...conversationHistory, userMessage];
         setConversationHistory(updatedHistory);
