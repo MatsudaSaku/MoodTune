@@ -154,7 +154,7 @@ p {
 
     .delete-button {
         position: absolute;
-        top: 35px;
+        top: 125px;
         right: auto;
         left: 5%;
         padding: 10px 20px;
@@ -178,5 +178,15 @@ p {
     .titlemodal-content {
         width: 80%;
         font-size: 15px;
+    }
+
+    .delete-button {
+        position: absolute;
+        top: 55px;
+        right: auto;
+        left: 5%;
+        padding: 10px 20px;
+        background-color: #adadad;
+        color: white;
     }
 }
