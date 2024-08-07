@@ -55,7 +55,7 @@ body {
     height: 78vh;
     text-align: center;
     justify-content: center;
-    padding-top: 120px;
+    padding-top: 190px;
 }
 
 .headline {
@@ -172,7 +172,7 @@ body {
 .area {
     position: relative;
     width: 100%;
-    padding-top: 70px;
+    height: 100vh;
 }
 
 .circles {
@@ -181,7 +181,7 @@ body {
     top: 0;
     left: 0;
     width: 97%;
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -314,6 +314,7 @@ body {
     height: 3px;
     background: #000;
     transition: all 0.3s ease;
+    left: 0;
 }
 
 .toggle span::before {
@@ -329,7 +330,7 @@ body {
 }
 
 .toggle.active span::before {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg) translate(-5px, -5px);
 }
 
 .toggle.active span::after {
@@ -425,17 +426,42 @@ body {
     }
 
     .home {
-        padding-top: 20px;
+        padding-top: 60px;
     }
 
     .buttonStyle {
         width: auto;
     }
+
+    .circles {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 97%;
+        height: 100%;
+        overflow: hidden;
+    }
 }
 
 @media (max-width: 440px) {
+    .toggle {
+        margin-right: 120px;
+    }
+
     .circles {
-        height: 170vh;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 97%;
+        height: 140%;
+        overflow: hidden;
+    }
+
+    .headline small {
+        display: block;
+        margin-top: 0.5em;
     }
 }
 

@@ -144,9 +144,6 @@ export default function RootLayout({ children }) {
             </nav>
 
             <main className={styles.mainWrapper}>{children}</main>
-            <footer className={styles.footer}>
-                <p> © 2024 MoodTune All Rights Reserved.</p>
-            </footer>
         </div>
     );
 }
