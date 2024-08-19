@@ -61,7 +61,9 @@ function Chat() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-		 "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    "X-CSRF-TOKEN": document
+                        .querySelector('meta[name="csrf-token"]')
+                        .getAttribute("content"),
                 },
                 body: JSON.stringify({ messages }),
             });
@@ -125,67 +127,74 @@ function Chat() {
 
     return (
         <Layout>
-            <div className={styles.chat_container}>
-                <h3 className={styles.explanation}>
-                    ５つの質問の答えから「ストレス」「リラックス」「ポジティブ」「ネガティブ」の計測をします。
-                </h3>
-                {conversationHistory
-                    .filter((item) => item.role !== "system")
-                    .map((item, index) => (
-                        <div
-                            key={index}
-                            className={
-                                item.role === "user"
-                                    ? styles.user_message
-                                    : styles.api_message
-                            }
-                            style={{
-                                marginBottom: "10px",
-                                padding: "25px",
-                                borderBottom: "1px solid #ccc",
-                            }}
-                        >
-                            {item.content
-                                .split(/(?<=[。？！])/)
-                                .map((line, index) => (
-                                    <React.Fragment key={index}>
-                                        <div className="fadeInUp">{line}</div>
-                                        <br />
-                                    </React.Fragment>
-                                ))}
-                        </div>
-                    ))}
-                {isLoading && <div className={styles.loading}>Loading...</div>}
-                <div ref={messagesEndRef} />
-            </div>
+            <div className={styles.root}>
+                <div className={styles.chat}>
+                    <div className={styles.chat_container}>
+                        <h3 className={styles.explanation}>
+                            ５つの質問の答えから「ストレス」「リラックス」「ポジティブ」「ネガティブ」の計測をします。
+                        </h3>
+                        {conversationHistory
+                            .filter((item) => item.role !== "system")
+                            .map((item, index) => (
+                                <div
+                                    key={index}
+                                    className={
+                                        item.role === "user"
+                                            ? styles.user_message
+                                            : styles.api_message
+                                    }
+                                    style={{
+                                        marginBottom: "10px",
+                                        padding: "25px",
+                                        borderBottom: "1px solid #ccc",
+                                    }}
+                                >
+                                    {item.content
+                                        .split(/(?<=[。？！])/)
+                                        .map((line, index) => (
+                                            <React.Fragment key={index}>
+                                                <div className="fadeInUp">
+                                                    {line}
+                                                </div>
+                                                <br />
+                                            </React.Fragment>
+                                        ))}
+                                </div>
+                            ))}
+                        {isLoading && (
+                            <div className={styles.loading}>Loading...</div>
+                        )}
+                        <div ref={messagesEndRef} />
+                    </div>
 
-            <form className={styles.form} onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={messageInput}
-                    onChange={handleInputChange}
-                    placeholder="Type your message here..."
-                    className={styles.chat_input}
-                />
-	       <button type="submit" className={styles.send_button}>
-                    ↑
-                </button>
-                <select
-                    value={tone}
-                    onChange={handleToneChange}
-                    className={styles.tone_select}
-                >
-                    <option value="敬語">敬語</option>
-                    <option value="丁寧侍">丁寧侍</option>
-                    <option value="豪放侍">豪放侍</option>
-                    <option value="ギャル">ギャル</option>
-                    <option value="関西弁">関西弁</option>
-                    <option value="博多弁">博多弁</option>
-                </select>
-            </form>
+                    <form className={styles.form} onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            value={messageInput}
+                            onChange={handleInputChange}
+                            placeholder="Type your message here..."
+                            className={styles.chat_input}
+                        />
+                        <button type="submit" className={styles.send_button}>
+                            ↑
+                        </button>
+                        <select
+                            value={tone}
+                            onChange={handleToneChange}
+                            className={styles.tone_select}
+                        >
+                            <option value="敬語">敬語</option>
+                            <option value="丁寧侍">丁寧侍</option>
+                            <option value="豪放侍">豪放侍</option>
+                            <option value="ギャル">ギャル</option>
+                            <option value="関西弁">関西弁</option>
+                            <option value="博多弁">博多弁</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
         </Layout>
     );
 }
 
 export default Chat;
-

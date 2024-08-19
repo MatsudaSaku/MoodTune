@@ -102,20 +102,7 @@ export default function RootLayout({ children }) {
             </header>
             <nav className={styles.navWrapper}>
                 <div className={styles.navInner}>
-                    <h1 className={styles.navTitle}>
-                        <button
-                            onClick={toggleJournaling}
-                            className={styles.navTitle}
-                        >
-                            <img
-                                src={"/logo_dev2.png"}
-                                width={250}
-                                height={98}
-                                alt="Icon"
-                                className={styles.plusIcon}
-                            />
-                        </button>
-                    </h1>
+                    <h1 className={styles.navTitle}></h1>
                     <div className={styles.toggleWrapper}>
                         <button
                             className={`${styles.toggle} ${
