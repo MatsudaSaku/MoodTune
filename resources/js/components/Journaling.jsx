@@ -14,8 +14,9 @@ export function Journaling() {
     const [isLoadingHistory, setIsLoadingHistory] = useState(false);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [placeholder_Text, setPlaceholder_Text] =
-        useState("気持ちのままに書いてみてください\n\n※例「今日は散歩に行って楽しかったです」");
+    const [placeholder_Text, setPlaceholder_Text] = useState(
+        "気持ちのままに書いてみてください\n\n※例「今日は散歩に　　　　　　　\n　　　　行って楽しかったです」"
+    );
     const [placeholder_Title, setPlaceholder_Title] = useState("No Title");
     const [backgroundImage, setBackgroundImage] = useState("");
     const [animationClass, setAnimationClass] = useState("");
@@ -44,6 +45,24 @@ export function Journaling() {
     }, [isConversationHistoryUpdated]);
 
     useEffect(() => {
+        const updatePlaceholderText = () => {
+            if (window.innerWidth <= 460) {
+                setPlaceholder_Text(
+                    "気持ちのままに書いてみてください\n\n※例「今日は散歩に行って楽しかったです」"
+                );
+            } else if (window.innerWidth <= 960) {
+                setPlaceholder_Text(
+                    "気持ちのまま書いてみてください\n\n※例「今日は散歩に　　　　　　　\n　　　　行って楽しかったです」"
+                );
+            } else {
+                setPlaceholder_Text(
+                    "気持ちのままに書いてみてください\n\n※例「今日は散歩に　　　　　　　\n　　　　行って楽しかったです」"
+                );
+            }
+        };
+
+        updatePlaceholderText();
+
         sendJournalingMessage();
         const spotifyAccessToken = sessionStorage.getItem(
             "spotify_access_token"
@@ -53,7 +72,6 @@ export function Journaling() {
 
         handleHistoryClick();
     }, []);
-
 
     useEffect(() => {
         if (backgroundImage) {
@@ -262,7 +280,9 @@ export function Journaling() {
     const sendMessageToAPI = async (messages) => {
         setIsLoading(true);
         try {
-	 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const csrfToken = document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content");
 
             const validMessages = messages.filter(
                 (msg) => msg.content !== null && msg.content !== undefined
@@ -272,7 +292,7 @@ export function Journaling() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                     "X-CSRF-TOKEN": csrfToken,
+                    "X-CSRF-TOKEN": csrfToken,
                 },
                 body: JSON.stringify({ messages: validMessages }),
             });
@@ -338,14 +358,16 @@ export function Journaling() {
         try {
             const token = sessionStorage.getItem("token");
 
-	 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const csrfToken = document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content");
 
             const response = await fetch("/api/saveJournaling", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
-		 "X-CSRF-TOKEN": csrfToken,
+                    "X-CSRF-TOKEN": csrfToken,
                 },
                 body: JSON.stringify({ title, content }),
             });
@@ -516,12 +538,14 @@ export function Journaling() {
     const handleDeleteJournaling = async (id) => {
         try {
             const token = sessionStorage.getItem("token");
-	  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const csrfToken = document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content");
             const response = await fetch(`/api/deleteJournaling/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
-		 "X-CSRF-TOKEN": csrfToken,
+                    "X-CSRF-TOKEN": csrfToken,
                 },
             });
 
@@ -530,7 +554,7 @@ export function Journaling() {
             }
 
             setIsTitleModalOpen(false);
-            
+
             handleBlur();
         } catch (error) {
             console.error("ジャーナルの削除に失敗しました:", error);
@@ -595,7 +619,7 @@ export function Journaling() {
                                 className={styles.journaling_title}
                                 onFocus={handleFocus_title}
                                 onBlur={handleBlur}
-				onKeyDown={handleKeyDown}
+                                onKeyDown={handleKeyDown}
                             />
                             <textarea
                                 type="text"
@@ -662,26 +686,26 @@ export function Journaling() {
                         onChange={handleBackgroundChange}
                     >
                         <option value="">シンプル</option>
-			<option value="url('/dark2.jpg')">ダーク</option>
-			<option value="url('/background2.jpg')">薄明</option>
-			<option value="url('/bonfire.jpg')">焚火</option>
-			<option value="url('/okunoto.jpg')">千枚田</option>
+                        <option value="url('/dark2.jpg')">ダーク</option>
+                        <option value="url('/background2.jpg')">薄明</option>
+                        <option value="url('/bonfire.jpg')">焚火</option>
+                        <option value="url('/okunoto.jpg')">千枚田</option>
                         <option value="url('/rain.jpg')">雨跡</option>
-			<option value="url('/hydrangea.jpg')">紫陽花</option>
-			<option value="url('/summer_night.jpg')">夏の夜</option>
-			<option value="url('/firework6.jpg')">花火</option>
-			<option value="url('/ocean4.jpg')">海</option>
-			<option value="url('/yakushimax1.jpg')">屋久島</option>
-			<option value="url('/ocean2.jpg')">夕暮れ</option>
-			<option value="url('/moon2.jpg')">満月</option>
-			<option value="url('/mtfuji2.jpg')">雪嶺</option>
-			<option value="url('/dog2.jpg')">犬</option>
-			<option value="url('/cat_window2.jpg')">猫</option>
-			<option value="url('/desk.jpg')">デスク</option>
-			<option value="url('/coffee.jpg')">珈琲</option>
-			<option value="url('/room.jpg')">リビング</option>
-			<option value="url('/building.jpg')">ビル</option>
-			<option value="url('/background1.jpg')">opera</option>
+                        <option value="url('/hydrangea.jpg')">紫陽花</option>
+                        <option value="url('/summer_night.jpg')">夏の夜</option>
+                        <option value="url('/firework6.jpg')">花火</option>
+                        <option value="url('/ocean4.jpg')">海</option>
+                        <option value="url('/yakushimax1.jpg')">屋久島</option>
+                        <option value="url('/ocean2.jpg')">夕暮れ</option>
+                        <option value="url('/moon2.jpg')">満月</option>
+                        <option value="url('/mtfuji2.jpg')">雪嶺</option>
+                        <option value="url('/dog2.jpg')">犬</option>
+                        <option value="url('/cat_window2.jpg')">猫</option>
+                        <option value="url('/desk.jpg')">デスク</option>
+                        <option value="url('/coffee.jpg')">珈琲</option>
+                        <option value="url('/room.jpg')">リビング</option>
+                        <option value="url('/building.jpg')">ビル</option>
+                        <option value="url('/background1.jpg')">opera</option>
                     </select>
                     <Modal
                         isOpen={isModalOpen}
@@ -708,4 +732,3 @@ export function Journaling() {
         </Layout>
     );
 }
-

@@ -42,7 +42,7 @@
 }
 
 .titlemodal-content {
-    margin: 10% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 30%;
@@ -146,10 +146,10 @@ p {
     background-color: #ff1a1a;
 }
 
-
 @media (max-width: 1280px) {
     .titlemodal-content {
         width: 80%;
+        margin: 10% auto;
     }
 
     .delete-button {
