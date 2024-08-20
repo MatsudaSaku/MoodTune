@@ -144,78 +144,83 @@ export default function RecommendList({ mood, genres }) {
     }
 
     return (
-       <>
+        <div className={styles.root}>
             {backToMusic ? (
                 <Layout>
                     <MoodGenreList />
                 </Layout>
             ) : (
-        <div className={styles.recommend}>
-            <h2 className={styles.heading}>レコメンド一覧</h2>
-            <ul className={styles.recommendList}>
-                {tracks.map((track) => (
-                    <li key={track.id} onClick={() => openModal(track)}>
-                        <img src={track.album.images[0].url} alt={track.name} />
-                        <div>
-                            <h2>{track.name}</h2>
-                            <p>
-                                {track.artists
-                                    .map((artist) => artist.name)
-                                    .join(", ")}
-                            </p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-            <div className={styles.buttonLinks}>
-                <button onClick={() => setBackToMusic(true)}>戻る</button>
-
-                <button onClick={fetchTracks}>更新</button>
-            </div>
-            {showModal && (
-                <>
-                    <div
-                        className={styles.modal}
-                        style={{
-                            background: modalBackground,
-                        }}
-                    >
-                        <iframe
-                            src={`https://open.spotify.com/embed/track/${activeTrack?.id}`}
-                            width="300"
-                            height="380"
-                            frameBorder="0"
-                            allowtransparency="true"
-                            allow="encrypted-media"
-                        ></iframe>
-                        <button
-                            className={styles.closeButton}
-                            onClick={() => setShowModal(false)}
-                        >
-                            閉じる
+                <div className={styles.recommend}>
+                    <h2 className={styles.heading}>レコメンド一覧</h2>
+                    <ul className={styles.recommendList}>
+                        {tracks.map((track) => (
+                            <li key={track.id} onClick={() => openModal(track)}>
+                                <img
+                                    src={track.album.images[0].url}
+                                    alt={track.name}
+                                />
+                                <div>
+                                    <h2>{track.name}</h2>
+                                    <p>
+                                        {track.artists
+                                            .map((artist) => artist.name)
+                                            .join(", ")}
+                                    </p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className={styles.buttonLinks}>
+                        <button onClick={() => setBackToMusic(true)}>
+                            戻る
                         </button>
-                    </div>
-                    <Palette
-                        src={activeTrack?.album.images[0].url}
-                        crossOrigin="anonymous"
-                        format="hex"
-                        colorCount={3}
-                    >
-                        {({ data, loading }) => {
-                            if (!loading && data) {
-                                const gradient = `linear-gradient(${gradientAngle}deg, ${data.join(
-                                    ","
-                                )})`;
 
-                                setModalBackground(gradient);
-                            }
-                            return null;
-                        }}
-                    </Palette>
-                </>
+                        <button onClick={fetchTracks}>更新</button>
+                    </div>
+                    {showModal && (
+                        <>
+                            <div
+                                className={styles.modal}
+                                style={{
+                                    background: modalBackground,
+                                }}
+                            >
+                                <iframe
+                                    src={`https://open.spotify.com/embed/track/${activeTrack?.id}`}
+                                    width="300"
+                                    height="380"
+                                    frameBorder="0"
+                                    allowtransparency="true"
+                                    allow="encrypted-media"
+                                ></iframe>
+                                <button
+                                    className={styles.closeButton}
+                                    onClick={() => setShowModal(false)}
+                                >
+                                    閉じる
+                                </button>
+                            </div>
+                            <Palette
+                                src={activeTrack?.album.images[0].url}
+                                crossOrigin="anonymous"
+                                format="hex"
+                                colorCount={3}
+                            >
+                                {({ data, loading }) => {
+                                    if (!loading && data) {
+                                        const gradient = `linear-gradient(${gradientAngle}deg, ${data.join(
+                                            ","
+                                        )})`;
+
+                                        setModalBackground(gradient);
+                                    }
+                                    return null;
+                                }}
+                            </Palette>
+                        </>
+                    )}
+                </div>
             )}
         </div>
-	)}
-      </>
     );
 }

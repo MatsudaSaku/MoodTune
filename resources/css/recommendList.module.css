@@ -5,6 +5,16 @@
     font-weight: 700;
 }
 
+.root {
+    background: linear-gradient(
+        to right,
+        rgb(250, 245, 235) 0%,
+        rgb(255, 253, 246) 50%,
+        rgb(248, 242, 227) 100%
+    );
+    height: 100vh;
+}
+
 .recommend {
     padding-bottom: 80px;
     padding-top: 80px;
@@ -123,11 +133,15 @@
 }
 
 .load {
-    padding: 300px auto 0;
     text-align: center;
     padding-top: 30%;
     font-size: 50px;
-    background-color: rgba(255, 0, 0, 0);
+    background: linear-gradient(
+        to right,
+        rgb(250, 245, 235) 0%,
+        rgb(255, 253, 246) 50%,
+        rgb(248, 242, 227) 100%
+    );
 }
 
 @-moz-keyframes spinnerLoader {
