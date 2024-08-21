@@ -36,6 +36,8 @@ export function Journaling() {
     const [selectedJournalingCreatedAt, setSelectedJournalingCreatedAt] =
         useState("");
     const [selectedJournalingId, setSelectedJournalingId] = useState(null);
+    const [feedbackHistory, setFeedbackHistory] = useState("");
+    const [feedback, setFeedback] = useState("");
 
     useEffect(() => {
         if (isConversationHistoryUpdated) {
@@ -64,6 +66,7 @@ export function Journaling() {
         updatePlaceholderText();
 
         sendJournalingMessage();
+
         const spotifyAccessToken = sessionStorage.getItem(
             "spotify_access_token"
         );
@@ -158,6 +161,17 @@ export function Journaling() {
                         {selectedGenres}
                         　」です。
                     </button>
+                    <h2 className="feedback_title">=AIからのフィードバック=</h2>
+                    <p className="feedback_content">
+                        「
+                        {feedback.split("\n").map((line, index) => (
+                            <React.Fragment key={index}>
+                                {line}
+                                <br />
+                            </React.Fragment>
+                        ))}
+                        」
+                    </p>
                 </div>
             </div>
         );
@@ -262,7 +276,6 @@ export function Journaling() {
             const initialSystemMessage = {
                 role: "system",
                 content:
-                    //"ユーザーの言葉を解析して、四つの感情である、興奮、不安、悲しみ、楽しみ、を四つ全部で100としてそれぞれの現在の感情を数値で表してください。書き方は、　興奮: 25 不安: 25 悲しみ: 25 楽しみ: 25　とだけ書いてください。短ければERRORとだけ表示してください。",
                     "ユーザーの言葉を解析して、四つの感情である、興奮、不安、悲しみ、楽しみ、をそれぞれ現在の感情を最大100として数値で表してください。書き方は、　興奮:100 不安:100 悲しみ:100 楽しみ:100　とだけ書いてください。短ければERRORとだけ表示してください。",
             };
             const updatedHistory = [
@@ -270,6 +283,14 @@ export function Journaling() {
                 initialSystemMessage,
             ];
             setConversationHistory(updatedHistory);
+
+            const initialSystemFeedback = {
+                role: "system",
+                content:
+                    "ユーザーのジャーナリングに対してフィードバックを返してください。",
+            };
+            const updatedFeedback = [...feedbackHistory, initialSystemFeedback];
+            setFeedbackHistory(updatedFeedback);
         } catch (error) {
             console.error("Error:", error);
         } finally {
@@ -277,7 +298,7 @@ export function Journaling() {
         }
     };
 
-    const sendMessageToAPI = async (messages) => {
+    const sendMessageToAPI = async (messages, feedbackMessages) => {
         setIsLoading(true);
         try {
             const csrfToken = document
@@ -288,7 +309,7 @@ export function Journaling() {
                 (msg) => msg.content !== null && msg.content !== undefined
             );
 
-            const response = await fetch("/api/journaling", {
+            const emotionResponse = await fetch("/api/journaling", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -297,12 +318,42 @@ export function Journaling() {
                 body: JSON.stringify({ messages: validMessages }),
             });
 
-            if (!response.ok) {
-                console.error("Response Error:", await response.text());
+            if (!emotionResponse.ok) {
+                console.error(
+                    "emotionResponse Error:",
+                    await emotionResponse.text()
+                );
                 throw new Error("Network response was not ok");
             }
 
-            const data = await response.json();
+            const feedbackResponse = await fetch("/api/journaling-feedback", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken,
+                },
+                body: JSON.stringify({ messages: feedbackMessages }),
+            });
+
+            if (!feedbackResponse.ok) {
+                console.error("Response Error:", await feedbackResponse.text());
+                throw new Error("Network response was not ok");
+            }
+
+            const [emotionResult, feedbackResult] = await Promise.all([
+                emotionResponse,
+                feedbackResponse,
+            ]);
+
+            if (!emotionResult.ok || !feedbackResult.ok) {
+                console.error(
+                    "Response Error:",
+                    await emotionResult.text(),
+                    await feedbackResult.text()
+                );
+                throw new Error("Network response was not ok");
+            }
+            const data = await emotionResult.json();
             const newMessage = {
                 role: "assistant",
                 content: data.choices[0].message.content,
@@ -312,6 +363,12 @@ export function Journaling() {
             setConversationHistory(updatedHistory);
 
             updateChatDisplay(newMessage.content);
+
+            const feedbackData = await feedbackResult.json();
+            const newFeedBackMessage = feedbackData.choices[0].message.content;
+            setFeedback(newFeedBackMessage);
+
+            console.log("Feedback:", feedback);
         } catch (error) {
             console.error("Error:", error);
         } finally {
@@ -329,8 +386,10 @@ export function Journaling() {
         const userMessage = { role: "user", content: content };
         const updatedHistory = [...conversationHistory, userMessage];
         setConversationHistory(updatedHistory);
+        const updatedFeedback = [...feedbackHistory, userMessage];
+        setFeedbackHistory(updatedFeedback);
         await saveJournaling(title, content);
-        await sendMessageToAPI(updatedHistory);
+        await sendMessageToAPI(updatedHistory, updatedFeedback);
         setContent("");
         setTitle("");
         handleFocus_title();

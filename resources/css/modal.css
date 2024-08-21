@@ -12,10 +12,10 @@
 }
 
 .modal-content {
-    margin: 10% auto;
+    margin: 4% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 30%;
+    width: 50%;
     font-size: large;
     background-color: rgba(87, 87, 87, 0.8);
     border-radius: 4px;
@@ -80,12 +80,24 @@ p {
     font-weight: bold;
     font-family: "Times New Roman", Times, serif;
     background-color: rgb(255, 239, 196);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .recommend:hover {
-    color: black;
+    background-color: rgb(255, 241, 176);
     text-decoration: none;
     cursor: pointer;
+}
+
+.feedback_title {
+    background-color: rgba(102, 105, 248, 0.836);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+    font-family: "Times New Roman", Times, serif;
+}
+
+.feedback_content {
 }
 
 .delete-button {

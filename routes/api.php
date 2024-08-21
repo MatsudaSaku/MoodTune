@@ -16,6 +16,8 @@ Route::post('/chat', [ChatController::class, 'sendMessage']);
 
 Route::post('/journaling', [AnalysisController::class, 'analysisMessage']);
 
+Route::post('/journaling-feedback', [AnalysisController::class, 'feedbackMessage']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
