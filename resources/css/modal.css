@@ -11,21 +11,61 @@
     text-align: center;
 }
 
+@keyframes modalOpen {
+    0% {
+        transform: scale(0);
+    }
+    80% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .modal-content {
     margin: 4% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
     font-size: large;
-    background-color: rgba(87, 87, 87, 0.8);
-    border-radius: 4px;
+    background: linear-gradient(
+        to right,
+        rgba(87, 87, 87, 0.9) 0%,
+        rgba(104, 104, 104, 0.9) 50%,
+        rgba(116, 116, 116, 0.9) 100%
+    );
+    border-radius: 40% 40% 5% 5%;
     color: rgb(255, 255, 255);
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
-.content {
+.history-title {
+    font-size: 22px;
+}
+
+.history-date {
+    font-size: 20px;
+}
+
+.history-content {
     line-height: 1.5;
     letter-spacing: 3px;
     text-align: left;
+    margin: 20px 20px;
 }
 
 .titlemodal {
@@ -45,12 +85,18 @@
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 30%;
+    width: 50%;
     font-size: large;
-    background-color: rgba(29, 29, 29);
-    border-radius: 4px;
+    background: linear-gradient(
+        to right,
+        rgba(87, 87, 87, 0.9) 0%,
+        rgba(104, 104, 104, 0.9) 50%,
+        rgba(116, 116, 116, 0.9) 100%
+    );
+    border-radius: 10%;
     color: rgb(255, 255, 255);
     position: relative;
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
 p {
@@ -79,25 +125,39 @@ p {
     font-size: 16px;
     font-weight: bold;
     font-family: "Times New Roman", Times, serif;
-    background-color: rgb(255, 239, 196);
-    border-radius: 15px;
+    background-color: rgb(255, 241, 201);
+    border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    transition: all 0.3s ease;
 }
 
 .recommend:hover {
-    background-color: rgb(255, 241, 176);
+    background-color: rgb(252, 228, 164);
     text-decoration: none;
     cursor: pointer;
 }
 
 .feedback_title {
-    background-color: rgba(102, 105, 248, 0.836);
-    border-radius: 12px;
+    background: linear-gradient(
+        to right,
+        rgba(151, 152, 252, 0.4) 0%,
+        rgba(41, 37, 255, 0.8) 50%,
+        rgba(159, 178, 248, 0.4) 100%
+    );
+    border-radius: 50%;
     box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
     font-family: "Times New Roman", Times, serif;
+    margin-top: 70px;
 }
 
 .feedback_content {
+    text-align: left;
+    line-height: 1.6;
+}
+
+.feedback_content p {
+    font-size: 18px;
 }
 
 .delete-button {
@@ -182,8 +242,7 @@ p {
         border: 1px solid #888;
         width: 80%;
         font-size: 15px;
-        background-color: rgba(87, 87, 87, 0.8);
-        border-radius: 4px;
+        border-radius: 30% 30% 10% 10%;
         color: rgb(255, 255, 255);
     }
 

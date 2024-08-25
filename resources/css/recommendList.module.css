@@ -1,8 +1,16 @@
-.heading {
+.recommendTitle {
     margin: 45px 0 25px;
+    padding: 20px 0;
     text-align: center;
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 500;
+    background: linear-gradient(
+        to right,
+        rgba(126, 112, 252, 0.2),
+        #ffffff80,
+        rgba(129, 120, 255, 0.2)
+    );
+    font-style: italic;
 }
 
 .root {
@@ -107,6 +115,7 @@
     border-radius: 5px;
     color: white;
     background-color: #222222;
+    cursor: pointer;
 }
 
 .buttonLinks {
@@ -121,20 +130,35 @@
     padding: 10px 30px;
 }
 .buttonLinks button {
-    display: inline-block;
     margin-left: 30px;
-    border-radius: 5px;
-    border: 1px solid;
-    padding: 10px 30px;
+    background: none;
+    padding: 0;
+    border: none;
 }
 
 .buttonLinks button:hover {
     cursor: pointer;
 }
 
+.buttonLinks button img {
+    width: 70px;
+    height: 70px;
+    margin-top: 10px;
+    background: none;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.buttonLinks button img:hover {
+    width: 80px;
+    height: 80px;
+    opacity: 0.8;
+    margin-top: 0;
+}
+
 .load {
     text-align: center;
-    padding-top: 30%;
+    padding-top: 20%;
     font-size: 50px;
     background: linear-gradient(
         to right,

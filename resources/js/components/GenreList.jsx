@@ -153,13 +153,12 @@ export function GenreList({ onGenreSelect, selectedGenres }) {
             />
             <GenreButton
                 onClick={onGenreSelect}
-                isSelected={selectedGenres.includes("全ジャンル")}
+                isSelected={selectedGenres.includes("おまかせ")}
                 defaultClass={styles.moodListPurple}
                 selectedClass={styles.selectedMoodListPurple}
                 label="おまかせ"
-                value="全ジャンル"
+                value="おまかせ"
             />
         </div>
     );
 }
-

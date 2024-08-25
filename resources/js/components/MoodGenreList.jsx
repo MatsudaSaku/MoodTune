@@ -5,6 +5,7 @@ import RecommendList from "./RecommendList";
 import styles from "../../css/app.module.css";
 import Layout from "./Layout";
 import { useNavigate } from "react-router-dom";
+import decisionIcon from "../../../public/kkrn_icon_saisei_3.png";
 
 export function MoodGenreList() {
     const [selectedMood, setSelectedMood] = useState("");
@@ -53,14 +54,14 @@ export function MoodGenreList() {
             <div className={styles.area}>
                 <div className={styles.home}>
                     <h2 className={styles.headline}>
-                        なりたい気分を選んでください<small>(※１つ)</small>
+                        なりたい気分を選んでください　<small>※１つ</small>
                     </h2>
                     <MoodList
                         onMoodSelect={handleMoodSelect}
                         selectedMood={selectedMood}
                     />
                     <h2 className={styles.headline}>
-                        ジャンルを選んでください<small>(※５つまで)</small>
+                        ジャンルを選んでください　<small>※５つまで</small>
                     </h2>
                     <GenreList
                         onGenreSelect={handleGenreSelect}
@@ -70,7 +71,11 @@ export function MoodGenreList() {
                         className={styles.doneButton}
                         onClick={handleDecisionClick}
                     >
-                        決定
+                        <img
+                            src={decisionIcon}
+                            alt="決定"
+                            className={styles.decisionIcon}
+                        />
                     </button>
                 </div>
                 <ul className={styles.circles}>
@@ -89,4 +94,3 @@ export function MoodGenreList() {
         </Layout>
     );
 }
-

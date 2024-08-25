@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import "../../css/modal.css";
 import "../../css/loading_Modal.css";
 import RecommendList from "./RecommendList";
-import { useNavigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 
 export function Journaling() {
     const [conversationHistory, setConversationHistory] = useState([]);
@@ -114,6 +114,8 @@ export function Journaling() {
         setPlaceholder_Title("No Title");
         setConversationHistory([]);
         setIsConversationHistoryUpdated(true);
+        setFeedback("");
+        setFeedbackHistory("");
     };
 
     const handleCloseModal2 = () => {
@@ -125,6 +127,8 @@ export function Journaling() {
         setPlaceholder_Title("No Title");
         setConversationHistory([]);
         setIsConversationHistoryUpdated(true);
+        setFeedback("");
+        setFeedbackHistory("");
     };
 
     const Modal = ({ isOpen, scores, message }) => {
@@ -158,20 +162,13 @@ export function Journaling() {
                     <h3>という解析をしました！</h3>
                     <button className="recommend" onClick={handleClick}>
                         今のあなたにおススメの音楽は　「{selectedMood}、
-                        {selectedGenres}
+                        {selectedGenres.join(" ")}
                         　」です。
                     </button>
-                    <h2 className="feedback_title">=AIからのフィードバック=</h2>
-                    <p className="feedback_content">
-                        「
-                        {feedback.split("\n").map((line, index) => (
-                            <React.Fragment key={index}>
-                                {line}
-                                <br />
-                            </React.Fragment>
-                        ))}
-                        」
-                    </p>
+                    <h2 className="feedback_title">AIからのフィードバック</h2>
+                    <div className="feedback_content">
+                        <ReactMarkdown>{feedback}</ReactMarkdown>
+                    </div>
                 </div>
             </div>
         );
@@ -241,31 +238,32 @@ export function Journaling() {
             setSelectedMood("うれしい");
         }
 
-        const genres = scores.sadness - scores.joy;
+        const genresScore = scores.sadness - scores.joy;
+        let genresArray = [];
 
-        if (genres >= 80) {
-            setSelectedGenres("j-pop,k-pop,happy,comedy");
-        } else if (genres >= 60) {
-            setSelectedGenres("sleep,movie,soundtracks");
-        } else if (genres >= 40) {
-            setSelectedGenres("jazz,classical,ambient");
-        } else if (genres >= 20) {
-            setSelectedGenres("country,anime,chill");
-        } else if (genres >= 0) {
-            setSelectedGenres("study,folk,emo");
-        } else if (genres >= -20) {
-            setSelectedGenres("rock,soul,rainy-day");
-        } else if (genres >= -40) {
-            setSelectedGenres("pop,work-out,romance");
-        } else if (genres >= -60) {
-            setSelectedGenres("world-music,swedish,tango");
-        } else if (genres >= -60) {
-            setSelectedGenres("summer,movies,party");
-        } else if (genres >= -80) {
-            setSelectedGenres("dance,gospel,groove");
+        if (genresScore >= 80) {
+            genresArray = ["j-pop", "k-pop", "happy", "acoustic"];
+        } else if (genresScore >= 60) {
+            genresArray = ["sleep", "movie", "soundtracks"];
+        } else if (genresScore >= 40) {
+            genresArray = ["jazz", "classical", "ambient"];
+        } else if (genresScore >= 20) {
+            genresArray = ["country", "anime", "chill"];
+        } else if (genresScore >= 0) {
+            genresArray = ["study", "folk", "emo"];
+        } else if (genresScore >= -20) {
+            genresArray = ["rock", "soul", "rainy-day"];
+        } else if (genresScore >= -40) {
+            genresArray = ["pop", "work-out", "romance"];
+        } else if (genresScore >= -60) {
+            genresArray = ["world-music", "swedish", "tango"];
+        } else if (genresScore >= -80) {
+            genresArray = ["dance", "gospel", "groove"];
         } else {
-            setSelectedGenres("romance,punk,party");
+            genresArray = ["romance", "punk", "party"];
         }
+
+        setSelectedGenres(genresArray);
 
         setIsModalOpen(true);
     };
@@ -362,13 +360,14 @@ export function Journaling() {
 
             setConversationHistory(updatedHistory);
 
-            updateChatDisplay(newMessage.content);
-
             const feedbackData = await feedbackResult.json();
             const newFeedBackMessage = feedbackData.choices[0].message.content;
             setFeedback(newFeedBackMessage);
 
+            updateChatDisplay(newMessage.content);
+
             console.log("Feedback:", feedback);
+            console.log("FeedbackHistory:", feedbackHistory);
         } catch (error) {
             console.error("Error:", error);
         } finally {
@@ -406,7 +405,9 @@ export function Journaling() {
         const userMessage = { role: "user", content: content };
         const updatedHistory = [...conversationHistory, userMessage];
         setConversationHistory(updatedHistory);
-        await sendMessageToAPI(updatedHistory);
+        const updatedFeedback = [...feedbackHistory, userMessage];
+        setFeedbackHistory(updatedFeedback);
+        await sendMessageToAPI(updatedHistory, updatedFeedback);
         setContent("");
         setTitle("");
         handleFocus_title();
@@ -495,6 +496,7 @@ export function Journaling() {
         if (journalingId) {
             setIsLoadingHistory(true);
             fetchJournalingContent(journalingId);
+            handleHistoryClick();
         }
         event.target.selectedIndex = 0;
     };
@@ -554,15 +556,15 @@ export function Journaling() {
                     <span className="close" onClick={handleCloseModal3}>
                         &times;
                     </span>
-                    <p>{title}</p>
-                    <p>
+                    <p className="history-title">{title}</p>
+                    <p className="history-date">
                         {new Date(createdAt).toLocaleDateString("ja-JP", {
                             year: "numeric",
                             month: "2-digit",
                             day: "2-digit",
                         })}
                     </p>
-                    <div className="content">
+                    <div className="history-content">
                         {convertNewlinesToBreaks(content)}
                     </div>
                 </div>
@@ -723,7 +725,6 @@ export function Journaling() {
                     </div>
                     <select
                         className={styles.history}
-                        onClick={handleHistoryClick}
                         onChange={handleTitleChange}
                     >
                         <option value="">Journaling History</option>
