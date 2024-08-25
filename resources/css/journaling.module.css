@@ -73,7 +73,6 @@ body {
     resize: none;
     padding-top: 10px;
     line-height: 1.5;
-
     margin: 40px 0 30px 0;
 }
 
@@ -98,6 +97,8 @@ body {
     padding: 10px 20px;
     margin: 20px;
     opacity: 0.5;
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
 .save_button:hover,
@@ -116,6 +117,16 @@ body {
     text-align: right;
     animation: fadeInUp 0.8s ease-out forwards;
     font-family: "M PLUS Rounded 1c", sans-serif;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.history:hover {
+    background-color: rgba(255, 255, 255);
+    color: rgba(0, 0, 0);
 }
 
 .select_background {
@@ -126,6 +137,16 @@ body {
     text-align: right;
     animation: fadeInUp 0.8s ease-out forwards;
     font-family: "M PLUS Rounded 1c", sans-serif;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.select_background:hover {
+    background-color: rgba(255, 255, 255);
+    color: rgba(0, 0, 0);
 }
 
 .select_background option {

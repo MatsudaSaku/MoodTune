@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import styles from "../../css/recommendList.module.css";
 import Color, { Palette } from "color-thief-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Layout from "./Layout";
 import axios from "axios";
 import { MoodGenreList } from "./MoodGenreList";
+import refreshIcon from "../../../public/kkrn_icon_koushin_10.png";
 
 export default function RecommendList({ mood, genres }) {
     const [tracks, setTracks] = useState([]);
@@ -39,7 +39,7 @@ export default function RecommendList({ mood, genres }) {
 
     let url = `https://api.spotify.com/v1/recommendations?limit=12&seed_genres=${genres}`;
 
-    if (genres.includes("全ジャンル")) {
+    if (genres.includes("おまかせ")) {
         url = `https://api.spotify.com/v1/recommendations?limit=12&seed_genres=country,anime,pop,jazz,rock`;
     }
 
@@ -137,85 +137,94 @@ export default function RecommendList({ mood, genres }) {
 
     if (isLoading) {
         return (
-            <div className={styles.load}>
-                <span className={styles.spinnerLoader}></span>
+            <div className={styles.root}>
+                <div className={styles.load}>
+                    <span className={styles.spinnerLoader}></span>
+                </div>
             </div>
         );
     }
 
     return (
-       <>
+        <div className={styles.root}>
             {backToMusic ? (
-                <Layout>
-                    <MoodGenreList />
-                </Layout>
+                <MoodGenreList />
             ) : (
-        <div className={styles.recommend}>
-            <h2 className={styles.heading}>レコメンド一覧</h2>
-            <ul className={styles.recommendList}>
-                {tracks.map((track) => (
-                    <li key={track.id} onClick={() => openModal(track)}>
-                        <img src={track.album.images[0].url} alt={track.name} />
-                        <div>
-                            <h2>{track.name}</h2>
-                            <p>
-                                {track.artists
-                                    .map((artist) => artist.name)
-                                    .join(", ")}
-                            </p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-            <div className={styles.buttonLinks}>
-                <button onClick={() => setBackToMusic(true)}>戻る</button>
-
-                <button onClick={fetchTracks}>更新</button>
-            </div>
-            {showModal && (
-                <>
-                    <div
-                        className={styles.modal}
-                        style={{
-                            background: modalBackground,
-                        }}
-                    >
-                        <iframe
-                            src={`https://open.spotify.com/embed/track/${activeTrack?.id}`}
-                            width="300"
-                            height="380"
-                            frameBorder="0"
-                            allowtransparency="true"
-                            allow="encrypted-media"
-                        ></iframe>
-                        <button
-                            className={styles.closeButton}
-                            onClick={() => setShowModal(false)}
-                        >
-                            閉じる
+                <div className={styles.recommend}>
+                    <h2 className={styles.recommendTitle}>
+                        {mood}　+　{genres.join(" ")}
+                    </h2>
+                    <ul className={styles.recommendList}>
+                        {tracks.map((track) => (
+                            <li key={track.id} onClick={() => openModal(track)}>
+                                <img
+                                    src={track.album.images[0].url}
+                                    alt={track.name}
+                                />
+                                <div>
+                                    <h2>{track.name}</h2>
+                                    <p>
+                                        {track.artists
+                                            .map((artist) => artist.name)
+                                            .join(", ")}
+                                    </p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className={styles.buttonLinks}>
+                        <button onClick={fetchTracks}>
+                            <img
+                                src={refreshIcon}
+                                alt="更新"
+                                className={styles.refreshIcon}
+                            />
                         </button>
                     </div>
-                    <Palette
-                        src={activeTrack?.album.images[0].url}
-                        crossOrigin="anonymous"
-                        format="hex"
-                        colorCount={3}
-                    >
-                        {({ data, loading }) => {
-                            if (!loading && data) {
-                                const gradient = `linear-gradient(${gradientAngle}deg, ${data.join(
-                                    ","
-                                )})`;
+                    {showModal && (
+                        <>
+                            <div
+                                className={styles.modal}
+                                style={{
+                                    background: modalBackground,
+                                }}
+                            >
+                                <iframe
+                                    src={`https://open.spotify.com/embed/track/${activeTrack?.id}`}
+                                    width="300"
+                                    height="380"
+                                    frameBorder="0"
+                                    allowtransparency="true"
+                                    allow="encrypted-media"
+                                ></iframe>
+                                <button
+                                    className={styles.closeButton}
+                                    onClick={() => setShowModal(false)}
+                                >
+                                    C l o s e
+                                </button>
+                            </div>
+                            <Palette
+                                src={activeTrack?.album.images[0].url}
+                                crossOrigin="anonymous"
+                                format="hex"
+                                colorCount={3}
+                            >
+                                {({ data, loading }) => {
+                                    if (!loading && data) {
+                                        const gradient = `linear-gradient(${gradientAngle}deg, ${data.join(
+                                            ","
+                                        )})`;
 
-                                setModalBackground(gradient);
-                            }
-                            return null;
-                        }}
-                    </Palette>
-                </>
+                                        setModalBackground(gradient);
+                                    }
+                                    return null;
+                                }}
+                            </Palette>
+                        </>
+                    )}
+                </div>
             )}
         </div>
-	)}
-      </>
     );
 }

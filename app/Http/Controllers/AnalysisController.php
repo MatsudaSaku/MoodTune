@@ -37,4 +37,33 @@ class AnalysisController extends Controller
 
         return response()->json($apiResponse);
     }
+
+    public function feedbackMessage(Request $request)
+    {
+        
+        $userMessage = ['role' => 'user', 'content' => $request->input('message')];
+        $messages[] = $userMessage;
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+            'Content-Type' => 'application/json'
+
+        ])->post('https://api.openai.com/v1/chat/completions', [
+            'model' => 'gpt-4o',
+            'messages' => $request->input('messages')
+        ]);
+
+        if ($response->failed()) {
+            return response()->json([
+                'error' => 'API request failed',
+                'details' => $response->json()
+            ], 500);
+        }
+
+        $apiResponse = $response->json();
+        $botMessage = ['role' => 'assistant', 'content' => $apiResponse['choices'][0]['message']['content']];
+        $messages[] = $botMessage;
+
+        return response()->json($apiResponse);
+    }
 }

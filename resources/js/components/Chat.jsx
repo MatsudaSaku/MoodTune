@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Layout from "./Layout";
 import styles from "../../css/chat.module.css";
+import ReactMarkdown from "react-markdown";
 
 function Chat() {
     const [messageInput, setMessageInput] = useState("");
@@ -149,16 +150,11 @@ function Chat() {
                                         borderBottom: "1px solid #ccc",
                                     }}
                                 >
-                                    {item.content
-                                        .split(/(?<=[。？！])/)
-                                        .map((line, index) => (
-                                            <React.Fragment key={index}>
-                                                <div className="fadeInUp">
-                                                    {line}
-                                                </div>
-                                                <br />
-                                            </React.Fragment>
-                                        ))}
+                                    <div className={styles.markdown_content}>
+                                        <ReactMarkdown>
+                                            {item.content}
+                                        </ReactMarkdown>
+                                    </div>
                                 </div>
                             ))}
                         {isLoading && (
