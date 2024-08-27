@@ -5,12 +5,35 @@
     font-size: 24px;
     font-weight: 500;
     background: linear-gradient(
-        to right,
-        rgba(126, 112, 252, 0.2),
-        #ffffff80,
-        rgba(129, 120, 255, 0.2)
+        to bottom right,
+        rgba(112, 201, 252, 0.2),
+        #3292ff80,
+        rgba(120, 201, 255, 0.2)
     );
     font-style: italic;
+    color: #ffffff;
+}
+
+.moodBackground {
+    background: linear-gradient(
+        to top right,
+        rgba(206, 156, 252, 0.6),
+        #ffffff80,
+        rgba(255, 223, 163, 0.6)
+    );
+    padding: 4px 12px;
+    border-radius: 50%;
+}
+
+.genresBackground {
+    background: linear-gradient(
+        to top right,
+        rgba(255, 215, 163, 0.6),
+        #ffffff80,
+        rgba(206, 156, 252, 0.6)
+    );
+    padding: 4px 12px;
+    border-radius: 50%;
 }
 
 .root {

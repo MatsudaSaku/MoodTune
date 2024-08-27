@@ -34,7 +34,7 @@ body {
 }
 
 .explanation {
-    color: #5ffca0;
+    color: #020202;
     font-weight: 300;
     margin: 0 auto 20px;
     width: 80%;
@@ -44,9 +44,9 @@ body {
     line-height: 1.5;
     background: linear-gradient(
         to right,
-        rgba(247, 250, 91, 0.2),
+        rgba(254, 255, 199, 0.2),
         #ffffff80,
-        rgba(250, 253, 86, 0.2)
+        rgba(254, 255, 180, 0.2)
     );
     border-radius: 40%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

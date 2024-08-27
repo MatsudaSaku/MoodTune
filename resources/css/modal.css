@@ -37,7 +37,7 @@
 }
 
 .modal-content {
-    margin: 4% auto;
+    margin: 2% auto 4% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
@@ -48,9 +48,10 @@
         rgba(104, 104, 104, 0.9) 50%,
         rgba(116, 116, 116, 0.9) 100%
     );
-    border-radius: 40% 40% 5% 5%;
+    border-radius: 5% 5% 5% 5%;
     color: rgb(255, 255, 255);
     animation: fadeInUp 0.8s ease-out forwards;
+    animation: modalOpen 0.3s ease-out forwards;
 }
 
 .history-title {
@@ -136,6 +137,7 @@ p {
     background-color: rgb(252, 228, 164);
     text-decoration: none;
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .feedback_title {
