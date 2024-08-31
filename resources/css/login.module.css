@@ -12,12 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(
-        to right,
-        rgb(250, 245, 235) 0%,
-        rgb(255, 253, 246) 50%,
-        rgb(248, 242, 227) 100%
-    );
+    background: var(--background);
 }
 
 .howto_container {

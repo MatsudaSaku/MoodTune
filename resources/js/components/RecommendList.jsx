@@ -40,7 +40,7 @@ export default function RecommendList({ mood, genres }) {
     let url = `https://api.spotify.com/v1/recommendations?limit=12&seed_genres=${genres}`;
 
     if (genres.includes("おまかせ")) {
-        url = `https://api.spotify.com/v1/recommendations?limit=12&seed_genres=country,anime,pop,jazz,rock`;
+        url = `https://api.spotify.com/v1/recommendations?limit=12&seed_genres=country,anime,pop,soundtrack,rock`;
     }
 
     switch (mood) {
@@ -152,7 +152,10 @@ export default function RecommendList({ mood, genres }) {
             ) : (
                 <div className={styles.recommend}>
                     <h2 className={styles.recommendTitle}>
-                        {mood}　+　{genres.join(" ")}
+                        <span className={styles.moodBackground}>{mood}</span>+{" "}
+                        <span className={styles.genresBackground}>
+                            {genres.join(" ")}
+                        </span>
                     </h2>
                     <ul className={styles.recommendList}>
                         {tracks.map((track) => (

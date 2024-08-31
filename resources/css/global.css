@@ -1,0 +1,95 @@
+:root {
+    --background: linear-gradient(
+        to right,
+        rgb(250, 245, 235) 0%,
+        rgb(255, 253, 246) 50%,
+        rgb(248, 242, 227) 100%
+    );
+    --text-color: #333333;
+    --explanation-color: linear-gradient(
+        to bottom right,
+        rgba(252, 203, 112, 0.2),
+        #fabb6880,
+        rgba(255, 208, 120, 0.2)
+    );
+    --hover-color: #f8eca4;
+    --hover-text-color: #525252;
+    --api_message-color: #ffecac;
+    --user_message-color: #d6ecf5;
+    --hover-menu-color: #fd933c;
+}
+
+.theme-dark {
+    --background: linear-gradient(
+        to right,
+        rgb(61, 60, 58) 0%,
+        rgb(54, 54, 52) 50%,
+        rgb(61, 60, 58) 100%
+    );
+    --text-color: #ffffff;
+    --explanation-color: linear-gradient(
+        to right,
+        rgba(247, 249, 250, 0.4) 0%,
+        rgb(148, 148, 148) 50%,
+        rgba(248, 249, 250, 0.4) 100%
+    );
+    --hover-color: #333333;
+    --hover-text-color: #ffffff;
+    --api_message-color: #464646;
+    --user_message-color: #222222;
+}
+
+.theme-blue {
+    --background: linear-gradient(
+        to bottom right,
+        rgb(191, 238, 250) 0%,
+        rgb(173, 243, 252) 50%,
+        rgb(175, 233, 248) 100%
+    );
+    --text-color: #ffffff;
+    --explanation-color: linear-gradient(
+        to right,
+        rgb(106, 217, 245, 0.2) 0%,
+        rgb(53, 141, 255) 50%,
+        rgb(128, 226, 250, 0.2) 100%
+    );
+    --hover-color: #56a4fd;
+    --hover-text-color: #ececec;
+    --api_message-color: #6cd5ff;
+    --user_message-color: #ffd06c;
+}
+
+.theme-light {
+    --background: linear-gradient(
+        to right,
+        rgb(250, 245, 235) 0%,
+        rgb(255, 253, 246) 50%,
+        rgb(248, 242, 227) 100%
+    );
+    --text-color: #444444;
+    --explanation-color: linear-gradient(
+        to bottom right,
+        rgba(252, 203, 112, 0.2),
+        #fabb6880,
+        rgba(255, 208, 120, 0.2)
+    );
+    --hover-color: #fcf3c4;
+    --hover-text-color: #525252;
+    --api_message-color: #ffecac;
+    --user_message-color: #d6ecf5;
+}
+
+.theme-white {
+    --background: #ffffff;
+    --text-color: #000000;
+    --explanation-color: linear-gradient(
+        to right,
+        rgba(219, 219, 219, 0.4) 0%,
+        rgb(194, 194, 194) 50%,
+        rgba(206, 206, 206, 0.4) 100%
+    );
+    --hover-color: #ffffff;
+    --hover-text-color: #6b6b6b;
+    --api_message-color: #ffffff;
+    --user_message-color: #adadad;
+}
