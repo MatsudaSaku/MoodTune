@@ -5,6 +5,7 @@ import { MoodGenreList } from "./MoodGenreList";
 import { Journaling } from "./Journaling";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ThemeProvider, useTheme } from "../context/ThemeContext";
 
 export const metadata = {
     title: "Mood Tune",
@@ -19,6 +20,8 @@ export default function RootLayout({ children }) {
     const navigate = useNavigate();
     const menuRef = useRef(null);
     const toggleRef = useRef(null);
+    const { theme, changeTheme } = useTheme();
+    console.log("RootLayout rendered with theme:", theme);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -81,7 +84,19 @@ export default function RootLayout({ children }) {
     }
 
     return (
-        <div>
+        <div
+            className={`${styles.mainWrapper || ""} ${
+                theme
+                    ? theme === "dark"
+                        ? "theme-dark"
+                        : theme === "blue"
+                        ? "theme-blue"
+                        : theme === "white"
+                        ? "theme-white"
+                        : "theme-light"
+                    : "theme-light"
+            }`}
+        >
             <header>
                 <script
                     dangerouslySetInnerHTML={{
@@ -124,13 +139,37 @@ export default function RootLayout({ children }) {
                                 <button onClick={toggleChat}>Chat</button>
                                 <button onClick={toggleMusic}>Music</button>
                                 <button onClick={toggleLogout}>Log out</button>
+                                <button
+                                    className={styles.menu_Light}
+                                    onClick={() => changeTheme("light")}
+                                >
+                                    Light
+                                </button>
+                                <button
+                                    className={styles.menu_Dark}
+                                    onClick={() => changeTheme("dark")}
+                                >
+                                    Dark
+                                </button>
+                                <button
+                                    className={styles.menu_White}
+                                    onClick={() => changeTheme("white")}
+                                >
+                                    Monotone
+                                </button>
+                                <button
+                                    className={styles.menu_Blue}
+                                    onClick={() => changeTheme("blue")}
+                                >
+                                    Sky
+                                </button>
                             </div>
                         )}
                     </div>
                 </div>
             </nav>
 
-            <main className={styles.mainWrapper}>{children}</main>
+            {children}
         </div>
     );
 }

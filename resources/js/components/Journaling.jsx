@@ -155,8 +155,8 @@ export function Journaling() {
                         &times;
                     </span>
                     <h2>あなたの気分は…</h2>
-                    <p>興奮: {scores.excitement}</p>
-                    <p>不安: {scores.anxiety}</p>
+                    <p>興奮　: {scores.excitement}</p>
+                    <p>不安　: {scores.anxiety}</p>
                     <p>悲しみ: {scores.sadness}</p>
                     <p>楽しみ: {scores.joy}</p>
                     <h3>という解析をしました！</h3>
@@ -285,7 +285,7 @@ export function Journaling() {
             const initialSystemFeedback = {
                 role: "system",
                 content:
-                    "ユーザーのジャーナリングに対してフィードバックを返してください。",
+                    "ユーザーのジャーナリングに対してフィードバックを日本語で返してください。",
             };
             const updatedFeedback = [...feedbackHistory, initialSystemFeedback];
             setFeedbackHistory(updatedFeedback);
@@ -746,7 +746,6 @@ export function Journaling() {
                         onChange={handleBackgroundChange}
                     >
                         <option value="">シンプル</option>
-                        <option value="url('/dark2.jpg')">ダーク</option>
                         <option value="url('/background2.jpg')">薄明</option>
                         <option value="url('/bonfire.jpg')">焚火</option>
                         <option value="url('/okunoto.jpg')">千枚田</option>

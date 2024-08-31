@@ -19,6 +19,9 @@ export function MoodGenreList() {
         if (selectedMood && selectedGenres.length > 0) {
             genresQueryParam = selectedGenres.join(",");
             setShowResults(true);
+        } else {
+            alert("なりたい気分とジャンルを選択してください。");
+            return;
         }
     };
 
@@ -78,18 +81,6 @@ export function MoodGenreList() {
                         />
                     </button>
                 </div>
-                <ul className={styles.circles}>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
             </div>
         </Layout>
     );
