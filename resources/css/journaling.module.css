@@ -32,7 +32,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 170%;
-    overflow-y: auto;
+    overflow-y: visible;
 }
 
 .form {
@@ -55,10 +55,12 @@ body {
     padding-left: 20px;
     letter-spacing: 0.1em;
     font-family: "M PLUS Rounded 1c", sans-serif;
+    box-shadow: 0 0 8px var(--text-color);
 }
 
 .journaling_title {
     height: 40px;
+    margin-top: 50px;
 }
 
 .journaling_text {
@@ -219,5 +221,20 @@ body {
 
     .journaling_container {
         background-position: center;
+    }
+}
+
+@media (max-height: 620px) {
+    .history {
+        bottom: 30px;
+    }
+
+    .select_background {
+        bottom: 60px;
+    }
+
+    .save_button,
+    .analysis_button {
+        padding: 5px;
     }
 }

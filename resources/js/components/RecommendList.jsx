@@ -4,7 +4,10 @@ import Color, { Palette } from "color-thief-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { MoodGenreList } from "./MoodGenreList";
-import refreshIcon from "../../../public/kkrn_icon_koushin_10.png";
+import refreshIconBlue from "../../../public/kkrn_icon_koushin_10.png";
+import refreshIconDark from "../../../public/kkrn_icon_koushin_20.png";
+import refreshIconLight from "../../../public/kkrn_icon_koushin_5.png";
+import { useTheme } from "../context/ThemeContext";
 
 export default function RecommendList({ mood, genres }) {
     const [tracks, setTracks] = useState([]);
@@ -14,6 +17,7 @@ export default function RecommendList({ mood, genres }) {
     const [gradientAngle, setGradientAngle] = useState(45);
     const [isLoading, setIsLoading] = useState(true);
     const [backToMusic, setBackToMusic] = useState(false);
+    const { theme } = useTheme();
     const location = useLocation();
     let navigate = useNavigate();
 
@@ -34,6 +38,22 @@ export default function RecommendList({ mood, genres }) {
                 console.error("Logout failed:", error);
             }
             return null;
+        }
+    };
+
+    const getRefreshIcon = () => {
+        switch (theme) {
+            case "light":
+                return refreshIconLight;
+            case "blue":
+                return refreshIconBlue;
+            case "green":
+                return refreshIconBlue;
+            case "peach":
+                return refreshIconBlue;
+            case "dark":
+            default:
+                return refreshIconDark;
         }
     };
 
@@ -178,7 +198,7 @@ export default function RecommendList({ mood, genres }) {
                     <div className={styles.buttonLinks}>
                         <button onClick={fetchTracks}>
                             <img
-                                src={refreshIcon}
+                                src={getRefreshIcon()}
                                 alt="更新"
                                 className={styles.refreshIcon}
                             />
