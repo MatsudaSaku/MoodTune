@@ -6,6 +6,7 @@ import { Journaling } from "./Journaling";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider, useTheme } from "../context/ThemeContext";
+import ImageGrid from "./ImageGrid";
 
 export const metadata = {
     title: "Mood Tune",
@@ -93,6 +94,10 @@ export default function RootLayout({ children }) {
                         ? "theme-blue"
                         : theme === "white"
                         ? "theme-white"
+                        : theme === "green"
+                        ? "theme-green"
+                        : theme === "peach"
+                        ? "theme-peach"
                         : "theme-light"
                     : "theme-light"
             }`}
@@ -115,60 +120,23 @@ export default function RootLayout({ children }) {
                     }}
                 />
             </header>
-            <nav className={styles.navWrapper}>
-                <div className={styles.navInner}>
-                    <h1 className={styles.navTitle}></h1>
-                    <div className={styles.toggleWrapper}>
-                        <button
-                            className={`${styles.toggle} ${
-                                isOpen ? styles.active : ""
-                            }`}
-                            onClick={toggleMenu}
-                            ref={toggleRef}
-                        >
-                            <span></span>
-                        </button>
-                        {isOpen && (
-                            <div
-                                className={`${styles.menu} ${styles.open}`}
-                                ref={menuRef}
-                            >
-                                <button onClick={toggleJournaling}>
-                                    Journaling
-                                </button>
-                                <button onClick={toggleChat}>Chat</button>
-                                <button onClick={toggleMusic}>Music</button>
-                                <button onClick={toggleLogout}>Log out</button>
-                                <button
-                                    className={styles.menu_Light}
-                                    onClick={() => changeTheme("light")}
-                                >
-                                    Light
-                                </button>
-                                <button
-                                    className={styles.menu_Dark}
-                                    onClick={() => changeTheme("dark")}
-                                >
-                                    Dark
-                                </button>
-                                <button
-                                    className={styles.menu_White}
-                                    onClick={() => changeTheme("white")}
-                                >
-                                    Monotone
-                                </button>
-                                <button
-                                    className={styles.menu_Blue}
-                                    onClick={() => changeTheme("blue")}
-                                >
-                                    Sky
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </nav>
 
+            <button
+                className={`${styles.toggle} ${isOpen ? styles.active : ""}`}
+                onClick={toggleMenu}
+                ref={toggleRef}
+            >
+                <span></span>
+            </button>
+            {isOpen && (
+                <div className={`${styles.menu} ${styles.open}`} ref={menuRef}>
+                    <button onClick={toggleJournaling}>Journaling</button>
+                    <button onClick={toggleChat}>Chat</button>
+                    <button onClick={toggleMusic}>Music</button>
+                    <button onClick={toggleLogout}>Log out</button>
+                    <ImageGrid />
+                </div>
+            )}
             {children}
         </div>
     );

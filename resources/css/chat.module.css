@@ -39,7 +39,6 @@ body {
     margin-bottom: 75px;
     margin-top: 20px;
     width: 100%;
-    background: none;
 }
 
 .chat_input {
@@ -59,6 +58,7 @@ body {
     animation: fadeInUp 0.8s ease-out forwards;
     margin-left: 12%;
     color: var(--text-color);
+    box-shadow: 0 0 8px var(--shadow-color);
 }
 
 .user_message {
@@ -70,6 +70,7 @@ body {
     margin-left: auto;
     margin-right: 12%;
     color: var(--text-color);
+    box-shadow: 0 0 8px var(--shadow-color);
 }
 
 .markdown_content p {
@@ -97,7 +98,7 @@ body {
     color: var(--text-color);
     font-weight: 200;
     padding-top: 30px;
-    text-shadow: 5px 1px 5px rgba(0, 0, 0, 0.2);
+    text-shadow: 5px 1px 5px var(--shadow-color);
 }
 
 .tone_select {
@@ -122,7 +123,7 @@ body {
         font-size: 15px;
         font-weight: 400;
         padding: 55px 10px 35px 10px;
-        height: 90vh;
+        height: 70vh;
         overflow-y: auto;
     }
 

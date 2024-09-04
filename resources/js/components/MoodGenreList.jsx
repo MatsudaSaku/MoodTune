@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GenreButton, GenreList } from "./GenreList";
 import { MoodList } from "./MoodList";
 import RecommendList from "./RecommendList";
@@ -11,9 +11,19 @@ export function MoodGenreList() {
     const [selectedMood, setSelectedMood] = useState("");
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [showResults, setShowResults] = useState(false);
+    const [textVisible, setTextVisible] = useState(false);
     const navigate = useNavigate();
 
     let genresQueryParam = "";
+
+    useEffect(() => {
+        if (selectedMood || selectedGenres.length > 0) {
+            setTextVisible(false);
+            setTimeout(() => setTextVisible(true), 200);
+        } else {
+            setTextVisible(false);
+        }
+    }, [selectedMood, selectedGenres]);
 
     const handleDecisionClick = () => {
         if (selectedMood && selectedGenres.length > 0) {
@@ -74,11 +84,31 @@ export function MoodGenreList() {
                         className={styles.doneButton}
                         onClick={handleDecisionClick}
                     >
-                        <img
-                            src={decisionIcon}
-                            alt="決定"
-                            className={styles.decisionIcon}
-                        />
+                        <span
+                            className={`${styles.decisionText} ${
+                                textVisible ? styles.decisionTextAppear : ""
+                            }`}
+                        >
+                            {selectedMood && (
+                                <>
+                                    <span className={styles.selectedMood}>
+                                        {selectedMood}
+                                    </span>
+                                    <span className={styles.separator}>
+                                        {" "}
+                                        +{" "}
+                                    </span>
+                                </>
+                            )}
+                            {selectedGenres.map((genre, index) => (
+                                <React.Fragment key={index}>
+                                    <span className={styles.selectedGenre}>
+                                        {genre}
+                                    </span>
+                                    {index < selectedGenres.length - 1 && "   "}
+                                </React.Fragment>
+                            ))}
+                        </span>
                     </button>
                 </div>
             </div>

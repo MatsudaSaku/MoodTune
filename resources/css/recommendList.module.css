@@ -5,6 +5,7 @@
     font-size: 24px;
     font-weight: 500;
     background: var(--explanation-color);
+    box-shadow: 0 0 8px var(--shadow-color);
     font-style: italic;
     color: #ffffff;
 }
@@ -26,7 +27,6 @@
 .recommend {
     padding-bottom: 80px;
     padding-top: 80px;
-    background: var(--background);
 }
 
 .recommendList {
@@ -47,10 +47,13 @@
     border-radius: 10px;
     color: #222222;
     list-style-type: none;
+    box-shadow: 4px 4px 4px var(--shadow-color);
+    transition: transform 0.3s ease;
 }
 
 .recommendList li:hover {
     cursor: pointer;
+    transform: scale(1.1);
 }
 
 .recommendList li h2 {

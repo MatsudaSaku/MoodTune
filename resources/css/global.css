@@ -16,15 +16,18 @@
     --hover-text-color: #525252;
     --api_message-color: #ffecac;
     --user_message-color: #d6ecf5;
+    --shadow-color: #ffffff;
     --hover-menu-color: #fd933c;
+    --recommend-color: #f8d4a4;
+    --color-theme-background: #fffae2;
 }
 
 .theme-dark {
     --background: linear-gradient(
-        to right,
-        rgb(61, 60, 58) 0%,
+        to bottom right,
+        rgb(97, 97, 97) 0%,
         rgb(54, 54, 52) 50%,
-        rgb(61, 60, 58) 100%
+        rgb(73, 73, 71) 100%
     );
     --text-color: #ffffff;
     --explanation-color: linear-gradient(
@@ -37,14 +40,17 @@
     --hover-text-color: #ffffff;
     --api_message-color: #464646;
     --user_message-color: #222222;
+    --shadow-color: #ffffff;
+    --recommend-color: #757575;
+    --color-theme-background: #5a5a5a;
 }
 
 .theme-blue {
     --background: linear-gradient(
         to bottom right,
-        rgb(191, 238, 250) 0%,
+        rgb(211, 246, 255) 0%,
         rgb(173, 243, 252) 50%,
-        rgb(175, 233, 248) 100%
+        rgb(164, 221, 235) 100%
     );
     --text-color: #ffffff;
     --explanation-color: linear-gradient(
@@ -53,16 +59,19 @@
         rgb(53, 141, 255) 50%,
         rgb(128, 226, 250, 0.2) 100%
     );
-    --hover-color: #56a4fd;
-    --hover-text-color: #ececec;
+    --hover-color: #70cafd;
+    --hover-text-color: #ffffff;
     --api_message-color: #6cd5ff;
     --user_message-color: #ffd06c;
+    --shadow-color: #ffffff;
+    --recommend-color: #1962ff;
+    --color-theme-background: #caf3ff;
 }
 
 .theme-light {
     --background: linear-gradient(
-        to right,
-        rgb(250, 245, 235) 0%,
+        to bottom right,
+        rgb(255, 251, 243) 0%,
         rgb(255, 253, 246) 50%,
         rgb(248, 242, 227) 100%
     );
@@ -76,7 +85,10 @@
     --hover-color: #fcf3c4;
     --hover-text-color: #525252;
     --api_message-color: #ffecac;
-    --user_message-color: #d6ecf5;
+    --user_message-color: #e0f8fc;
+    --shadow-color: #ffae44;
+    --recommend-color: #f8d4a4;
+    --color-theme-background: #fffae2;
 }
 
 .theme-white {
@@ -92,4 +104,54 @@
     --hover-text-color: #6b6b6b;
     --api_message-color: #ffffff;
     --user_message-color: #adadad;
+    --shadow-color: #727272;
+    --recommend-color: #c4c4c4;
+    --color-theme-background: #ececec;
+}
+
+.theme-green {
+    --background: linear-gradient(
+        to bottom right,
+        rgb(175, 224, 129) 0%,
+        rgb(118, 211, 90) 50%,
+        rgb(112, 202, 142) 100%
+    );
+    --text-color: #ffffff;
+    --explanation-color: linear-gradient(
+        to bottom right,
+        rgba(250, 183, 145, 0.2),
+        #a56df0,
+        rgba(253, 184, 156, 0.2)
+    );
+    --hover-color: #acf5a5;
+    --hover-text-color: #ff0000;
+    --api_message-color: #45d632;
+    --user_message-color: #f5b34f;
+    --shadow-color: #faa94d;
+    --recommend-color: #2bd814;
+    --color-theme-background: #e7fadb;
+}
+
+.theme-peach {
+    --background: linear-gradient(
+        to bottom right,
+        rgb(250, 246, 249) 0%,
+        rgb(255, 245, 254) 50%,
+        rgb(248, 227, 246) 100%
+    );
+    --text-color: #666666;
+    --explanation-color: linear-gradient(
+        to bottom right,
+        rgba(168, 252, 234, 0.2),
+        #60ffea80,
+        rgba(155, 248, 233, 0.2)
+    );
+    --hover-color: #fcdffc;
+    --hover-text-color: #1a8f1a;
+    --api_message-color: #fbecfd;
+    --user_message-color: #e2f8e1;
+    --shadow-color: #f18bcf;
+    --hover-menu-color: #fa62fa;
+    --recommend-color: #f8aec7;
+    --color-theme-background: #faf1f9;
 }
