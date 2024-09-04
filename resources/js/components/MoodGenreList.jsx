@@ -5,7 +5,6 @@ import RecommendList from "./RecommendList";
 import styles from "../../css/app.module.css";
 import Layout from "./Layout";
 import { useNavigate } from "react-router-dom";
-import decisionIcon from "../../../public/kkrn_icon_saisei_3.png";
 
 export function MoodGenreList() {
     const [selectedMood, setSelectedMood] = useState("");
