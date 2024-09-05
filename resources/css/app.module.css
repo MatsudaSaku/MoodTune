@@ -390,6 +390,8 @@ ul {
 
 .imageGrid img:hover {
     transform: scale(1.2);
+    background: var(--hover-color);
+    border-radius: 5px;
 }
 
 @media (max-width: 960px) {

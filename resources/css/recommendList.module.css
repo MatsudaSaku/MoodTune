@@ -22,11 +22,13 @@
 
 .root {
     height: 100vh;
+    background: none;
 }
 
 .recommend {
     padding-bottom: 80px;
     padding-top: 80px;
+    background: var(--background);
 }
 
 .recommendList {

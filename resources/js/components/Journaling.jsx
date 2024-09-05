@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "./Layout";
 import styles from "../../css/journaling.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../../css/modal.css";
 import "../../css/loading_Modal.css";
 import RecommendList from "./RecommendList";
@@ -38,6 +38,7 @@ export function Journaling() {
     const [selectedJournalingId, setSelectedJournalingId] = useState(null);
     const [feedbackHistory, setFeedbackHistory] = useState("");
     const [feedback, setFeedback] = useState("");
+    const fileInputRef = useRef(null);
 
     useEffect(() => {
         if (isConversationHistoryUpdated) {
@@ -67,12 +68,6 @@ export function Journaling() {
 
         sendJournalingMessage();
 
-        const spotifyAccessToken = sessionStorage.getItem(
-            "spotify_access_token"
-        );
-        const laravelToken = sessionStorage.getItem("token");
-        const userId = sessionStorage.getItem("user_id");
-
         handleHistoryClick();
     }, []);
 
@@ -87,7 +82,23 @@ export function Journaling() {
     }, [backgroundImage]);
 
     const handleBackgroundChange = (event) => {
-        setBackgroundImage(event.target.value);
+        if (event.target.value === "upload") {
+            fileInputRef.current.click();
+            event.target.selectedIndex = 0;
+        } else {
+            setBackgroundImage(event.target.value);
+        }
+    };
+
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setBackgroundImage(`url(${e.target.result})`);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const parseEmotionScores = (responseText) => {
@@ -749,23 +760,41 @@ export function Journaling() {
                         <option value="url('/background2.jpg')">薄明</option>
                         <option value="url('/bonfire.jpg')">焚火</option>
                         <option value="url('/okunoto.jpg')">千枚田</option>
-                        <option value="url('/rain.jpg')">雨跡</option>
-                        <option value="url('/hydrangea.jpg')">紫陽花</option>
+                        <option value="url('/biei.jpg')">花畑</option>
                         <option value="url('/summer_night.jpg')">夏の夜</option>
+                        <option value="url('/okinawa ishigakijima.jpg')">
+                            石垣島
+                        </option>
                         <option value="url('/firework6.jpg')">花火</option>
-                        <option value="url('/ocean4.jpg')">海</option>
-                        <option value="url('/yakushimax1.jpg')">屋久島</option>
+                        <option value="url('/ocean4.jpg')">水平線</option>
+                        <option value="url('/nachi2.jpg')">那智の滝</option>
                         <option value="url('/ocean2.jpg')">夕暮れ</option>
                         <option value="url('/moon2.jpg')">満月</option>
-                        <option value="url('/mtfuji2.jpg')">雪嶺</option>
+                        <option value="url('/building.jpg')">ビル</option>
                         <option value="url('/dog2.jpg')">犬</option>
                         <option value="url('/cat_window2.jpg')">猫</option>
+                        <option value="url('/jerryfish.jpg')">海月</option>
                         <option value="url('/desk.jpg')">デスク</option>
                         <option value="url('/coffee.jpg')">珈琲</option>
-                        <option value="url('/room.jpg')">リビング</option>
-                        <option value="url('/building.jpg')">ビル</option>
-                        <option value="url('/background1.jpg')">opera</option>
+                        <option value="url('/lemon.jpg')">氷菓</option>
+                        <option
+                            value="upload"
+                            style={{
+                                background: "var(--hover-color)",
+                                color: "var(--hover-text-color)",
+                                fontWeight: "bolder",
+                            }}
+                        >
+                            Upload
+                        </option>
                     </select>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        onChange={handleImageUpload}
+                        style={{ display: "none" }}
+                    />
                     <Modal
                         isOpen={isModalOpen}
                         onClose={handleCloseModal}
