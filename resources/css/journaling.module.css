@@ -117,11 +117,17 @@ body {
     border: none;
     border-radius: 3px;
     transition: all 0.3s ease;
+    font-weight: bolder;
 }
 
+.history option:hover,
 .history:hover {
     background-color: rgba(255, 255, 255);
     color: rgba(0, 0, 0);
+}
+
+.history option {
+    font-weight: bolder;
 }
 
 .select_background {
@@ -137,8 +143,10 @@ body {
     border: none;
     border-radius: 3px;
     transition: all 0.3s ease;
+    font-weight: bolder;
 }
 
+.select_background option:hover,
 .select_background:hover {
     background-color: rgba(255, 255, 255);
     color: rgba(0, 0, 0);
@@ -146,6 +154,7 @@ body {
 
 .select_background option {
     text-align: left;
+    font-weight: bolder;
 }
 
 @keyframes fadeInUp {

@@ -153,11 +153,11 @@ export function GenreList({ onGenreSelect, selectedGenres }) {
             />
             <GenreButton
                 onClick={onGenreSelect}
-                isSelected={selectedGenres.includes("おまかせ")}
+                isSelected={selectedGenres.includes("alternative")}
                 defaultClass={styles.moodListPurple}
                 selectedClass={styles.selectedMoodListPurple}
-                label="おまかせ"
-                value="おまかせ"
+                label="alternative"
+                value="alternative"
             />
         </div>
     );
