@@ -776,7 +776,7 @@ export function Journaling() {
                         <option value="url('/jerryfish.jpg')">海月</option>
                         <option value="url('/desk.jpg')">デスク</option>
                         <option value="url('/coffee.jpg')">珈琲</option>
-                        <option value="url('/lemon.jpg')">氷菓</option>
+                        <option value="url('/lemon.jpg')">氷水</option>
                         <option
                             value="upload"
                             style={{
