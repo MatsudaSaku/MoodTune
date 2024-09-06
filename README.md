@@ -91,7 +91,7 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 
 
 ## クラウドアーキテクチャー
-![アーキテクチャ図2 drawio](https://github.com/MatsudaSaku/MoodTune/assets/149235059/eaf106ca-b424-4e85-b4d1-56935d816582)
+![アーキテクチャ図 drawio (1)](https://github.com/user-attachments/assets/ebf5aa2e-cc14-41f7-bcf3-c579c78d8888)
 
 ## 使用した技術
 - フロントエンド
