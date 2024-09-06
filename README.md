@@ -65,12 +65,12 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 ## 使用方法
 
 ### ログイン (OAuth認証)
-- アカウントはSpotifyアカウントにログインすることで可能です。
+- アカウントはSpotifyアカウントにログインすることで可能です
 <img src="https://github.com/user-attachments/assets/2292552a-34fa-4e89-bec4-40f5e37f14e2" width="80%">
 
 ### ジャーナリング機能（メイン機能）
 
-- 1.用意された背景を選択するか、カラーテーマ、画像のアップロードなどで好きな背景を設定し、ジャーナリングをする
+- 1.用意された背景を選択するか、カラーテーマ、画像のアップロードなどで好きな背景を設定し、ジャーナリングを行う
 <img src="https://github.com/user-attachments/assets/0d8ee7fb-aed3-401c-a1b0-62d73e7e0411" width="80%">
 
 
