@@ -2,14 +2,15 @@
 「**書く瞑想**」と呼ばれるジャーナリングを用いて、
 
 **楽しみながら自身の目標や不安を言語化できる**。というコンセプトを掲げたアプリです。
-<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/9c2b7db0-5906-44ff-9ae7-a96c2c2a8275" width="80%">
+<img src="https://github.com/user-attachments/assets/f24fc356-9167-4b42-aabb-76564245d775" width="80%">
 
 URL: https://mood-tune.com/ ※ログインの前に以下をお読みください
 
- (※ログインにはSpotifyアカウントが必要なのですが、**現在Spotifyの拡張モード申請の審査中ですので、登録したアカウントのみがログインできます。**
+ (※ログインにはSpotifyアカウントを使用しますが、**現在Spotifyの拡張モード申請の審査中ですので、登録したアカウントのみがログインできます。**
+ 
  お手数ですが、以下のゲストアカウントを入力してログインしてください。
  
- ※また同じアカウントを使用するので履歴は共有されます。履歴の削除は履歴閲覧中の右側にあるDeleteボタンでできます。)
+ ※また同じアカウントを使用するので文章を作成し、「保存する」を選択した場合、履歴は共有されます。履歴の削除は履歴閲覧中の右側にあるDeleteボタンでできます。)
 
  メールアドレス：t4kwo0sekglowg@gmail.com
 
@@ -18,7 +19,9 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 ## ジャーナリングとは
 プロダクトの説明をする前に、このプロダクトのコア機能であり、書く瞑想と呼ばれるジャーナリングについてお話します。
 
-ジャーナリングとは自らの内面を知り、明確な言葉とする。メンタルヘルスやマインドフルネスの方法として注目されている方法です。
+**ジャーナリング**を一言で表すと、**内面を言語化すること**です。
+
+ジャーナリングとは自らの内面を知り、明確な言葉とする。メンタルヘルスやマインドフルネスの方法として注目されている方法であり、
 
 やり方は単純明快で、**紙などに今現在の自分の正直な気持ちを、バーッと書き綴ります**。
 
@@ -34,24 +37,27 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 
 また期間を置いて、何度も行うことで自身の変化を理解することもできます。
 
-このプロダクトは、**音楽推薦や感情解析という小さな目的を重ねていくことで、ジャーナリングを楽しみながら継続していくことを目標としたプロダクト**です。
+このプロダクトは、**音楽推薦やAIからのフィードバックという小さな目的を重ねていくことで、ジャーナリングを楽しみながら継続していくことを目標としたプロダクト**です。
 
 ## 機能一覧
 ### ユーザー利用機能
 - Spotifyアカウントを利用したユーザー登録(OAuth認証)
 - スマホ、タブレットへのレスポンシブ対応
+- カラーテーマ機能
 
 ### ジャーナリング機能
 - ジャーナリングをする際の背景画像を選択する機能
+- デバイスに保存してある画像をアップロードし、背景画像として使用する機能
 - ジャーナル(ジャーナリングで作成した文章)の保存、閲覧、削除機能
 
 ### ChatGPT
-- ChatGPT機能を用いたジャーナル内容から解析した気分の評価
+- ChatGPTのAIを用いたジャーナル内容から解析した気分の評価
+- ChatGPTのAIによるジャーナルへのフィードバック機能
 - 質問から現在のストレスなどの解析をする、ChatGPTとの会話機能、口調の選択機能
 
 ### 音楽提供機能
-- クリックのみで気分とジャンルを選択し、音楽のオススメのみ受ける機能
-- ジャーナルを解析し、Spotifyの曲解析情報を指定してオススメの曲を表示、視聴
+- なりたい気分とジャンルを選択し、音楽のオススメのみ受ける機能
+- ジャーナルの解析を基に、Spotifyの曲解析情報を指定してオススメの曲を表示、視聴
 
 ### 非ユーザー利用機能
 - SPA
@@ -59,34 +65,42 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 - Route53による独自ドメイン、SSL化
 
 ## 使用方法
+
+### ログイン (OAuth認証)
+- アカウントはSpotifyアカウントにログインすることで可能です。
+<img src="https://github.com/user-attachments/assets/2292552a-34fa-4e89-bec4-40f5e37f14e2" width="80%">
+
 ### ジャーナリング機能（メイン機能）
 
-- 1.好きな背景を設定し、ジャーナリングをする
-<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/66568f09-3590-4ae3-ad43-ab5245ed03de" width="80%">
+- 1.好きな背景を選択、カラーテーマや画像のアップロードなどで設定し、ジャーナリングをする
+<img src="https://github.com/user-attachments/assets/0d8ee7fb-aed3-401c-a1b0-62d73e7e0411" width="80%">
 
 
 - 2.「保存して解析」をクリック。保存したくない場合は「解析のみ」をクリック
-- 3.現在の気分が数値化される。そこからオススメされる文字をクリック
-<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/f1843d90-e944-4164-9bc3-735d0bca718d" width="80%">
+
+
+- 3.AIからのフィードバックの文章と共に、現在の気分が数値化され、そこからオススメされる音楽ジャンルをクリック
+
+<img src="https://github.com/user-attachments/assets/795f74c3-401d-436e-a369-9f62d271abfe" width="80%">
 
   
-- 4.レコメンド画面が表示される。「更新」をクリックで同じオススメの曲解析情報に一致した別の曲が表示。音楽の視聴
-<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/6827f6a7-4e0a-4726-ad85-354d4c2da495" width="80%">
+- 4.レコメンド画面が表示される。クリックで音楽の視聴
+<img src="https://github.com/user-attachments/assets/450237b3-d6c2-4bcb-9fce-44d2e25b52bb" width="80%">
 
-<img src="https://github.com/user-attachments/assets/c89f12e6-6aef-43a7-bc97-6ad544676126" width="80%">
+<img src="https://github.com/user-attachments/assets/f1632162-da75-41aa-91c2-e3d4b9e0135d" width="80%">
 
 
 - 5.ジャーナリング画面の履歴で今までの文章を読み返し、自分自身を振り返る
-<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/d515727b-7709-4fd8-bd2a-3b6c6a31d9ee" width="80%">
+<img src="https://github.com/user-attachments/assets/5da90397-a9aa-44b0-adc1-14f66accfc05" width="80%">
 
 
 ### Chat機能
-- ChatGPTからの質問に答え、ストレスなどの解析をしてもらいながら、自身の振り返りを行うことができます。
-<img src="https://github.com/user-attachments/assets/880ab7f2-cdce-4130-9bab-9b9246ff6832" width="80%">
+- AIからの質問に答え、ストレスなどの解析をしてもらい、自身の振り返りを行うことができます。
+<img src="https://github.com/user-attachments/assets/4b754fb5-d454-4aef-821a-a5e5b3b1c254" width="80%">
 
 ### Music機能
-- 気分とジャンルを選択するだけで音楽の推薦を手早く受けることができます。
-<img src="https://github.com/MatsudaSaku/MoodTune/assets/149235059/b1dc50d9-bff3-409a-9ee3-13b89724675a" width="80%">
+- 気分とジャンルを選択するだけでなりたい気分に適した音楽の推薦を手早く受けることができます。
+<img src="https://github.com/user-attachments/assets/ed96890e-7188-40db-98c9-094263b52e35" width="80%">
 
 
 
