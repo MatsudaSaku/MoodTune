@@ -100,7 +100,20 @@ export function MoodList({ onMoodSelect, selectedMood }) {
                 selectedClass={styles.selectedMoodListOrange}
                 label="ダンス"
             />
+            <MoodButton
+                onClick={onMoodSelect}
+                isSelected={selectedMood === "優雅"}
+                defaultClass={styles.moodListGreen}
+                selectedClass={styles.selectedMoodListGreen}
+                label="優雅"
+            />
+            <MoodButton
+                onClick={onMoodSelect}
+                isSelected={selectedMood === "指定なし"}
+                defaultClass={styles.moodListYellow}
+                selectedClass={styles.selectedMoodListYellow}
+                label="（指定なし）"
+            />
         </div>
     );
 }
-

@@ -114,6 +114,11 @@
     color: white;
     background-color: #222222;
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.closeButton:hover {
+    transform: scale(1.1);
 }
 
 .buttonLinks {

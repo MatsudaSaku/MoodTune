@@ -57,11 +57,7 @@ export default function RecommendList({ mood, genres }) {
         }
     };
 
-    let url = `https://api.spotify.com/v1/recommendations?limit=12&seed_genres=${genres}`;
-
-    if (genres.includes("おまかせ")) {
-        url = `https://api.spotify.com/v1/recommendations?limit=12&seed_genres=country,anime,pop,soundtrack,rock`;
-    }
+    let url = `https://api.spotify.com/v1/recommendations?limit=100&seed_genres=${genres}`;
 
     switch (mood) {
         case "元気":
@@ -93,6 +89,11 @@ export default function RecommendList({ mood, genres }) {
             break;
         case "ダンス":
             url += `&danceability=1.0`;
+            break;
+        case "優雅":
+            url += `&time_signature=3&time_signature=12`;
+            break;
+        case "指定なし":
             break;
     }
 
@@ -148,6 +149,14 @@ export default function RecommendList({ mood, genres }) {
     useEffect(() => {
         fetchTracks();
     }, [fetchTracks]);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setGradientAngle((prevAngle) => (prevAngle + 2) % 360);
+        }, 100);
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     const openModal = (track) => {
         setActiveTrack(track);
