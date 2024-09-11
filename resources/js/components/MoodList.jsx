@@ -109,10 +109,10 @@ export function MoodList({ onMoodSelect, selectedMood }) {
             />
             <MoodButton
                 onClick={onMoodSelect}
-                isSelected={selectedMood === "指定なし"}
+                isSelected={selectedMood === "【 選択しない 】"}
                 defaultClass={styles.moodListYellow}
                 selectedClass={styles.selectedMoodListYellow}
-                label="（指定なし）"
+                label="【 選択しない 】"
             />
         </div>
     );
