@@ -93,7 +93,7 @@ export default function RecommendList({ mood, genres }) {
         case "優雅":
             url += `&time_signature=3&time_signature=12`;
             break;
-        case "指定なし":
+        case "【 選択しない 】":
             break;
     }
 
