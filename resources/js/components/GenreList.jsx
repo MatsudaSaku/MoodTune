@@ -89,11 +89,11 @@ export function GenreList({ onGenreSelect, selectedGenres }) {
             />
             <GenreButton
                 onClick={onGenreSelect}
-                isSelected={selectedGenres.includes("country")}
+                isSelected={selectedGenres.includes("ambient")}
                 defaultClass={styles.moodListYellow}
                 selectedClass={styles.selectedMoodListYellow}
-                label="country"
-                value="country"
+                label="ambient"
+                value="ambient"
             />
             <GenreButton
                 onClick={onGenreSelect}
