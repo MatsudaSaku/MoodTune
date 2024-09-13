@@ -101,7 +101,7 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 <img src="https://github.com/user-attachments/assets/f1632162-da75-41aa-91c2-e3d4b9e0135d" width="80%">
 
 
-- 5.ジャーナリング画面の履歴で、保存した文章を読み返し自分自身を振り返る。Dleteで文章を削除できます。
+- 5.ジャーナリング画面の履歴で、保存した文章を読み返し自分自身を振り返る。Deleteで文章を削除できます。
 <img src="https://github.com/user-attachments/assets/5da90397-a9aa-44b0-adc1-14f66accfc05" width="80%">
 
 
