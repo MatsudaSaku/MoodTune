@@ -101,6 +101,8 @@ export function Journaling() {
                 setBackgroundImage(`url(${e.target.result})`);
             };
             reader.readAsDataURL(file);
+
+            fileInputRef.current.value = "";
         }
     };
 
