@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Layout from "./Layout";
+import Layout from "./Layouts/Layout";
 import styles from "../../css/chat.module.css";
 import ReactMarkdown from "react-markdown";
 

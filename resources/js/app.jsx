@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import SpotifyLogin from "./components/SpotifyLogin";
 import { ThemeProvider } from "./context/ThemeContext";
-import Layout from "./components/Layout";
+import Layout from "./components/Layouts/Layout";
 import "../css/global.css";
 
 function App() {

@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "../../css/app.module.css";
-import { useTheme } from "../context/ThemeContext";
-import lightThemeImg from "../../../public//theme-light.png";
-import skyThemeImg from "../../../public//theme-sky.png";
-import darkThemeImg from "../../../public//theme-dark.png";
-import whiteThemeImg from "../../../public//theme-white.png";
-import greenThemeImg from "../../../public//theme-green.png";
-import peachThemeImg from "../../../public//theme-peach.png";
+import styles from "../../../css/app.module.css";
+import { useTheme } from "../../context/ThemeContext";
+import lightThemeImg from "../../../../public//theme-light.png";
+import skyThemeImg from "../../../../public//theme-sky.png";
+import darkThemeImg from "../../../../public//theme-dark.png";
+import whiteThemeImg from "../../../../public//theme-white.png";
+import greenThemeImg from "../../../../public//theme-green.png";
+import peachThemeImg from "../../../../public//theme-peach.png";
 
 export default function ImageGrid() {
     const { changeTheme } = useTheme();
