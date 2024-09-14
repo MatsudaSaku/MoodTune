@@ -1,11 +1,11 @@
-import styles from "../../css/app.module.css";
+import styles from "../../../css/app.module.css";
 import React, { useState, useRef, useEffect } from "react";
-import Chat from "./Chat";
-import { MoodGenreList } from "./MoodGenreList";
-import { Journaling } from "./Journaling";
+import Chat from "../Chat";
+import { MoodGenreList } from "../MoodGenreList";
+import { Journaling } from "../Journaling";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ThemeProvider, useTheme } from "../context/ThemeContext";
+import { ThemeProvider, useTheme } from "../../context/ThemeContext";
 import ImageGrid from "./ImageGrid";
 
 export const metadata = {
@@ -22,7 +22,6 @@ export default function RootLayout({ children }) {
     const menuRef = useRef(null);
     const toggleRef = useRef(null);
     const { theme, changeTheme } = useTheme();
-    console.log("RootLayout rendered with theme:", theme);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);

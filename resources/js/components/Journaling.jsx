@@ -1,11 +1,14 @@
 import React from "react";
-import Layout from "./Layout";
+import Layout from "./Layouts/Layout";
 import styles from "../../css/journaling.module.css";
 import { useState, useEffect, useRef } from "react";
 import "../../css/modal.css";
 import "../../css/loading_Modal.css";
 import RecommendList from "./RecommendList";
-import ReactMarkdown from "react-markdown";
+import Modal from "./Modal/Modal";
+import LoadingModal from "./Modal/LoadingModal";
+import LoadingModalHistory from "./Modal/LoadingModalHistory";
+import TitleModal from "./Modal/TitleModal";
 
 export function Journaling() {
     const [conversationHistory, setConversationHistory] = useState([]);
@@ -142,78 +145,9 @@ export function Journaling() {
         setFeedbackHistory("");
     };
 
-    const Modal = ({ isOpen, scores, message }) => {
-        if (!isOpen) return null;
-
-        if (!scores || message) {
-            return (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={handleCloseModal}>
-                            &times;
-                        </span>
-                        <h2>申し訳ありません！</h2>
-                        <p>感情を読み取れませんでした…</p>
-                    </div>
-                </div>
-            );
-        }
-
-        return (
-            <div className="modal">
-                <div className="modal-content">
-                    <span className="close" onClick={handleCloseModal2}>
-                        &times;
-                    </span>
-                    <h2>あなたの気分は…</h2>
-                    <p>興奮　: {scores.excitement}</p>
-                    <p>不安　: {scores.anxiety}</p>
-                    <p>悲しみ: {scores.sadness}</p>
-                    <p>楽しみ: {scores.joy}</p>
-                    <h3>という解析をしました！</h3>
-                    <button className="recommend" onClick={handleClick}>
-                        今のあなたにおススメの音楽は　「{selectedMood}、
-                        {selectedGenres.join(" ")}
-                        　」です。
-                    </button>
-                    <h2 className="feedback_title">AIからのフィードバック</h2>
-                    <div className="feedback_content">
-                        <ReactMarkdown>{feedback}</ReactMarkdown>
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
     const handleClick = () => {
         setIsModalOpen(false);
         setShowRecommend(false);
-    };
-
-    const LoadingModal = ({ isOpen }) => {
-        if (!isOpen) return null;
-
-        return (
-            <div className="modal_loading">
-                <div className="modal_content_loading">
-                    <div className="loader"></div>
-                    <h2>解析中...</h2>
-                </div>
-            </div>
-        );
-    };
-
-    const LoadingModalHistory = ({ isOpen }) => {
-        if (!isOpen) return null;
-
-        return (
-            <div className="modal_loading">
-                <div className="modal_content_loading">
-                    <div className="loader"></div>
-                    <h2>ジャーナルを表示します...</h2>
-                </div>
-            </div>
-        );
     };
 
     const updateChatDisplay = (message) => {
@@ -534,79 +468,6 @@ export function Journaling() {
         ));
     };
 
-    const TitleModal = ({
-        isOpen,
-        onClose,
-        content,
-        createdAt,
-        title,
-        onDelete,
-    }) => {
-        const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-
-        const handleDeleteClick = () => {
-            event.stopPropagation();
-            setIsConfirmOpen(true);
-        };
-
-        const handleConfirmDelete = () => {
-            event.stopPropagation();
-            setIsConfirmOpen(false);
-            onDelete();
-        };
-
-        const handleCancelDelete = () => {
-            event.stopPropagation();
-            setIsConfirmOpen(false);
-        };
-
-        if (!isOpen) return null;
-        return (
-            <div className="titlemodal">
-                <div className="titlemodal-content">
-                    <span className="close" onClick={handleCloseModal3}>
-                        &times;
-                    </span>
-                    <p className="history-title">{title}</p>
-                    <p className="history-date">
-                        {new Date(createdAt).toLocaleDateString("ja-JP", {
-                            year: "numeric",
-                            month: "2-digit",
-                            day: "2-digit",
-                        })}
-                    </p>
-                    <div className="history-content">
-                        {convertNewlinesToBreaks(content)}
-                    </div>
-                </div>
-                <button className="delete-button" onClick={handleDeleteClick}>
-                    Delete
-                </button>
-                {isConfirmOpen && (
-                    <div className="confirm-modal">
-                        <div className="confirm-modal-content">
-                            <p>本当に削除してもよろしいですか？</p>
-                            <div className="button-group">
-                                <button
-                                    className="YES"
-                                    onClick={handleConfirmDelete}
-                                >
-                                    はい
-                                </button>
-                                <button
-                                    className="NO"
-                                    onClick={handleCancelDelete}
-                                >
-                                    いいえ
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
-        );
-    };
-
     const handleDeleteJournaling = async (id) => {
         try {
             const token = sessionStorage.getItem("token");
@@ -798,20 +659,26 @@ export function Journaling() {
                     <Modal
                         isOpen={isModalOpen}
                         onClose={handleCloseModal}
+                        onClose2={handleCloseModal2}
                         scores={emotionScores}
                         message={modalMessage}
+                        selectedMood={selectedMood}
+                        selectedGenres={selectedGenres}
+                        feedback={feedback}
+                        handleClick={handleClick}
                     />
                     <LoadingModal isOpen={isLoading} />
                     <LoadingModalHistory isOpen={isLoadingHistory} />
                     <TitleModal
                         isOpen={isTitleModalOpen}
-                        onClose={() => setIsTitleModalOpen(false)}
+                        onClose={handleCloseModal3}
                         content={selectedJournalingContent}
                         createdAt={selectedJournalingCreatedAt}
                         title={selectedJournalingTitle}
                         onDelete={() =>
                             handleDeleteJournaling(selectedJournalingId)
                         }
+                        convertNewlinesToBreaks={convertNewlinesToBreaks}
                     />
                 </div>
             ) : (

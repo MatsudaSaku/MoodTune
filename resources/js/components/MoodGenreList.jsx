@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { GenreButton, GenreList } from "./GenreList";
-import { MoodList } from "./MoodList";
+import { GenreButton, GenreList } from "./MusicList/GenreList";
+import { MoodList } from "./MusicList/MoodList";
 import RecommendList from "./RecommendList";
 import styles from "../../css/app.module.css";
-import Layout from "./Layout";
-import { useNavigate } from "react-router-dom";
+import Layout from "./Layouts/Layout";
 
 export function MoodGenreList() {
     const [selectedMood, setSelectedMood] = useState("");
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [showResults, setShowResults] = useState(false);
     const [textVisible, setTextVisible] = useState(false);
-    const navigate = useNavigate();
 
     let genresQueryParam = "";
 

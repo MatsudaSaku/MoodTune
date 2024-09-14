@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../css/app.module.css";
+import styles from "../../../css/app.module.css";
 
 export function GenreButton({
     defaultClass,
