@@ -74,6 +74,8 @@ URL: https://mood-tune.com/ ※ログインの前に以下をお読みくださ�
 
 ### ジャーナリング機能（メイン機能）
 
+<img src="https://github.com/user-attachments/assets/7064def7-6218-49a8-9747-17ba766f1c36" width="80%">
+
 - 1.用意された背景を選択するか、カラーテーマ、画像のアップロードなどで好きな背景を設定し、自分好みのリラックスした状態、環境でジャーナリングを行います。
 <img src="https://github.com/user-attachments/assets/0d8ee7fb-aed3-401c-a1b0-62d73e7e0411" width="80%">
 
